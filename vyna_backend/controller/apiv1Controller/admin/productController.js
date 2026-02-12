@@ -5,7 +5,7 @@ const subCategoryModel = require("../../../models/subCategoryModel");
 const logger = require("../../../utility/coustomLogger");
 const catchAsync = require("../../../utility/catchAsync");
 // const pdf = require("html-pdf");
-const pdf = require("html-pdf-node");
+// const pdf = require("html-pdf-node");
 const axios = require('axios');
  
 

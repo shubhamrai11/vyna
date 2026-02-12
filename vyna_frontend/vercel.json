@@ -1,0 +1,13 @@
+{
+  "buildCommand": "ng build --configuration production",
+  "outputDirectory": "dist/Vyna",
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}

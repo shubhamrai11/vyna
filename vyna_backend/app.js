@@ -29,8 +29,11 @@ app.use(
 
 app.get("/images/:filename", (req, res) => {
   const filename = req.params.filename;
-  const filePath = path.join(__dirname, "/utility/uploads", filename);
-  res.sendFile(filePath);
+  // In production (Vercel), local filesystem is ephemeral — redirect to S3
+  const bucket = process.env.S3BUSCKET || "vynabucket";
+  const region = process.env.REGION || "us-east-1";
+  const s3Url = `https://${bucket}.s3.${region}.amazonaws.com/${filename}`;
+  return res.redirect(s3Url);
 });
 
 app.use(express.static(path.join(__dirname, "./public")));
