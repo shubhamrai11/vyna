@@ -1,16 +1,16 @@
-// utility/upload.js
+// utility/uploadAWS.js — AWS SDK v3 (lightweight, Vercel-compatible)
 const path = require("path");
 const multer = require("multer");
-const aws = require("aws-sdk");
+const { S3Client } = require("@aws-sdk/client-s3");
 const multerS3 = require("multer-s3");
 
-aws.config.update({
-  secretAccessKey: process.env.SECRECT_KEY,
-  accessKeyId: process.env.Access_KEY,
-  region: process.env.REGION,
+const s3 = new S3Client({
+  region: process.env.REGION || "us-east-1",
+  credentials: {
+    accessKeyId: process.env.Access_KEY,
+    secretAccessKey: process.env.SECRECT_KEY,
+  },
 });
-
-const s3 = new aws.S3();
 
 const uploadFile = (type) => {
   let bucketName = process.env.S3BUSCKET;
