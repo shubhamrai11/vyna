@@ -27,6 +27,7 @@ export const constant = {
   sustainValue: url + 'aboutusSustainbility',
   getBrochure : url + 'product/new',
   cmsBanner: url + 'cmsbanner',
+  getProductHtml: url + 'product/new',
 
 
 

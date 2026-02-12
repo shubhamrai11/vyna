@@ -113,7 +113,7 @@ export class HttpService {
 
   getProductHtml(productId: string) {
   return this.httpService.get<{ status: boolean; html: string }>(
-    `https://vynaelectric.com/vyna/api/v1/product/new/${productId}`
+    `${constant.getProductHtml}/${productId}`
   );
 }
 search(query: string) {
