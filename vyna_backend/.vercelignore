@@ -1,0 +1,10 @@
+# Exclude built frontend/admin static files — they are deployed as separate Vercel projects
+public/
+
+# Exclude local uploads directory
+utility/uploads/
+
+# Exclude development files
+.git
+node_modules
+*.md

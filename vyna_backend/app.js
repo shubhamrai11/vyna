@@ -8,9 +8,8 @@ const cookieParser = require("cookie-parser");
 const xss = require("xss-clean");
 const hpp = require("hpp");
 const dotenv = require("dotenv");
-const swaggerJsDoc = require("swagger-jsdoc");
-const swaggerUI = require("swagger-ui-express");
 const cors = require("cors");
+const mongoose = require("mongoose");
 const { DeleteTemplate } = require('./utility/email_templates/deleteUrl');
 const {confirmationMessage,notFoundMessage} = require('./utility/email_templates/template');
 const i18n = require("./translation")
@@ -36,7 +35,9 @@ app.get("/images/:filename", (req, res) => {
   return res.redirect(s3Url);
 });
 
-app.use(express.static(path.join(__dirname, "./public")));
+// Static file serving disabled for Vercel — frontend & admin are deployed separately.
+// Uncomment the line below for local development if needed:
+// app.use(express.static(path.join(__dirname, "./public")));
 
 app.use(cors());
 
@@ -98,40 +99,62 @@ app.use(hpp());
 		
 	});
 
-// app.use("/vyna/api/v1/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+// ──────────────────────────────────────────────────────────────
+// Health Check Endpoint
+// ──────────────────────────────────────────────────────────────
+// Use this to verify the backend is up and MongoDB is connected.
+// Visit: https://your-backend.vercel.app/vyna/api/v1/health
+// ──────────────────────────────────────────────────────────────
+app.get("/vyna/api/v1/health", (req, res) => {
+  const dbState = mongoose.connection.readyState;
+  const dbStatus = {
+    0: "disconnected",
+    1: "connected",
+    2: "connecting",
+    3: "disconnecting",
+  };
+
+  res.status(dbState === 1 ? 200 : 503).json({
+    status: dbState === 1 ? "healthy" : "unhealthy",
+    timestamp: new Date().toISOString(),
+    server: "vyna-backend",
+    environment: process.env.NODE_ENV || "unknown",
+    database: {
+      status: dbStatus[dbState] || "unknown",
+      host: mongoose.connection.host || "not connected",
+      name: mongoose.connection.name || "not connected",
+    },
+    uptime: process.uptime().toFixed(2) + "s",
+  });
+});
 
 app.use("/vyna/api/v1", apiRouter);
 
-app.get(
-  "/adminpanel/*",
-  express.static(path.join(__dirname, "./public", "adminpanel"), {
-    maxAge: "1y",
-  })
-);
+// ──────────────────────────────────────────────────────────────
+// Static file serving for admin panel & frontend panel
+// DISABLED for Vercel deployment — they are separate Vercel projects.
+// Uncomment below for local development where backend serves everything.
+// ──────────────────────────────────────────────────────────────
 
-// ---- SERVE APLICATION PATHS ---- //
-app.all("/adminpanel/*", function (req, res) {
-  // console.log("Path", path.join(__dirname, "./public", "panel", "index.html"));
-  res
-    .status(200)
-    .sendFile(path.join(__dirname, "./public", "adminpanel", "index.html"));
-});
+// app.get(
+//   "/adminpanel/*",
+//   express.static(path.join(__dirname, "./public", "adminpanel"), {
+//     maxAge: "1y",
+//   })
+// );
+// app.all("/adminpanel/*", function (req, res) {
+//   res.status(200).sendFile(path.join(__dirname, "./public", "adminpanel", "index.html"));
+// });
 
-
-app.get(
-  "/*",
-  express.static(path.join(__dirname, "./public", "panel"), {
-    maxAge: "1y",
-  })
-);
-
-// ---- SERVE APLICATION PATHS ---- //
-app.all("/*", function (req, res) {
-  // console.log("Path", path.join(__dirname, "./public", "panel", "index.html"));
-  res
-    .status(200)
-    .sendFile(path.join(__dirname, "./public", "panel", "index.html"));
-});
+// app.get(
+//   "/*",
+//   express.static(path.join(__dirname, "./public", "panel"), {
+//     maxAge: "1y",
+//   })
+// );
+// app.all("/*", function (req, res) {
+//   res.status(200).sendFile(path.join(__dirname, "./public", "panel", "index.html"));
+// });
 
 
 module.exports = app;
