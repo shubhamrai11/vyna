@@ -1,0 +1,160 @@
+<body class="ltr main-body leftmenu">
+    <!-- Page -->
+    <div class="page">
+        <!-- Main Header -->
+        <div class="main-header side-header sticky">
+            <div class="main-container container-fluid">
+                <div class="main-header-left">
+                    <a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
+                    <div class="hor-logo">
+                        <!-- <a class="main-logo" [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo.png" class="header-brand-img desktop-logo" alt="logo" />
+                            <img src="./assets/img/brand/logo-light.png" class="header-brand-img desktop-logo-dark"
+                                alt="logo" />
+                        </a> -->
+                    </div>
+                </div>
+                <div class="main-header-center">
+                    <div class="responsive-logo">
+                        <!-- <a [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo.png" class="mobile-logo" alt="logo" />
+                        </a>
+                        <a [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo-light.png" class="mobile-logo-dark" alt="logo" />
+                        </a> -->
+                    </div>
+                    <div class="input-group">
+                        <h3 *ngIf="!isEdit">Create Banner </h3>
+                        <h3 *ngIf="isEdit">Edit Banner </h3>
+
+                    </div>
+                </div>
+                <div class="main-header-right">
+                    <button class="navbar-toggler navresponsive-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+                    </button>
+                    <div class="navbar navbar-expand-lg nav nav-item navbar-nav-right responsive-navbar navbar-dark">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                            <div class="d-flex order-lg-2 ms-auto">
+
+                                <app-header></app-header>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Header -->
+
+        <!-- Sidemenu -->
+        <app-sidebar></app-sidebar>
+        <!-- End Sidemenu -->
+
+        <!-- Main Content -->
+        <div class="main-content side-content pt-0">
+            <div class="main-container container-fluid">
+                <div class="inner-body">
+                    <!-- Page Header -->
+                    <div class="page-header d-flex align-items-center justify-content-between mt-3 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <button class="back-button" [routerLink]="['/pages/banner']">
+                                <i class="fe fe-arrow-left me-1"></i> Back
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+                    <form [formGroup]="userAddForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card custom-card shadow-sm">
+                                    <div class="card-body">
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Upload Banner <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="file" class="form-control" (change)="onFileChange($event)"
+                                                accept="image/*, video/*" />
+                                            <div *ngIf="formSubmitted && !selectedFile && !isEdit"
+                                                class="text-danger mt-1">
+                                                Banner is required.
+                                            </div>
+
+
+                                            <div *ngIf="imageError" class="text-danger mt-1">
+                                                {{ imageError }}
+                                            </div>
+
+                                        </div>
+
+                                        <div *ngIf="imagePreview" class="mb-3">
+                                            <label class="form-label">Preview:</label><br />
+
+                                            <!-- Video Preview -->
+                                            <video *ngIf="isVideoFile(imagePreview)" controls width="300"
+                                                class="img-thumbnail">
+                                                <source [src]="imagePreview" type="video/mp4" />
+                                                Your browser does not support the video tag.
+                                            </video>
+
+                                            <!-- Image Preview -->
+                                            <img *ngIf="!isVideoFile(imagePreview)" [src]="imagePreview" alt="Preview"
+                                                width="300" class="img-thumbnail" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Banner Role <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-select" formControlName="role">
+                                                <option value="">Select Role</option>
+                                                <option value="laptop">Laptop</option>
+                                                <option value="mobile">Mobile</option>
+                                                <option value="tab">Tab</option>
+                                            </select>
+                                            <div *ngIf="userAddForm.get('role')?.touched && userAddForm.get('role')?.invalid"
+                                                class="text-danger mt-1">
+                                                Role is required.
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Sequence -->
+                                        <div class="mb-3">
+                                            <label class="form-label">Sequence <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="number" class="form-control" formControlName="sequence"
+                                                placeholder="Enter sequence number" />
+                                            <!-- <div *ngIf="formSubmitted && userAddForm.controls['sequence'].invalid"
+                                                class="text-danger mt-1">
+                                                Sequence is required.
+                                            </div> -->
+                                            <div *ngIf="userAddForm.get('sequence')?.touched && userAddForm.get('sequence')?.invalid"
+                                                class="text-danger mt-1">
+                                                Sequence is required.
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-end pt-3">
+                                            <button type="submit" class="btn btn-outline-primary"
+                                                [disabled]=" formSubmitted">
+                                                <i class="fe fe-save me-1"></i> {{ isEdit ? 'Update' : 'Add' }}
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- End Form -->
+                </div>
+            </div>
+        </div>
+        <!-- End Main Content -->
+
+        <!-- Footer -->
+        <app-footer></app-footer>
+    </div>
+</body>

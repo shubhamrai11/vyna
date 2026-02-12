@@ -1,0 +1,27 @@
+<div class="d-flex order-lg-2 ms-auto">
+    <div class="dropdown main-profile-menu" [ngClass]="{'show': isProfileDropdownOpen}">
+        <a class="d-flex" href="javascript:void(0)" (click)="toggleProfileMenuDropdown()">
+            <span *ngIf="!profile" class="main-img-user"><img alt="avatar" src="./assets/img/users/7.jpg"></span>
+            <div *ngIf="profile">
+                <span class="main-img-user"><img alt="avatar" [src]="this.profile"></span>
+            </div>
+        </a>
+        <div class="dropdown-menu" [ngClass]="{'show': isProfileDropdownOpen}">
+            <div class="header-navheading">
+                <h6 class="main-notification-title">{{username}}</h6>
+                <p class="main-notification-text">{{userEmail}}</p>
+            </div>
+            <a class="dropdown-item border-top" href="javascript:void(0)" [routerLink]="['/pages/admin-profile']">
+                <i class="fe fe-user"></i> Profile
+            </a>
+            <a class="dropdown-item border-top" href="javascript:void(0)" [routerLink]="['/pages/change-password']">
+                <i class="fe fe-lock"></i> Change Password
+            </a>
+            <a class="dropdown-item lienLogOut" style="  cursor: pointer; color: #3c4858;" (click)="logout()"
+                routerLinkActive="active">
+                <i class="fe fe-power"></i> Logout
+            </a>
+        </div>
+    </div>
+
+</div>

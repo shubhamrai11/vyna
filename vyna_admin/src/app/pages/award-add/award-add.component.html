@@ -1,0 +1,134 @@
+<body class="ltr main-body leftmenu">
+  <div class="page">
+    <!-- Header -->
+    <div class="main-header side-header sticky">
+      <div class="main-container container-fluid">
+        <div class="main-header-left">
+          <a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
+          <div class="hor-logo">
+            <!-- <a class="main-logo" [routerLink]="['/pages/dashboard']">
+              <img src="./assets/img/brand/logo.png" class="header-brand-img desktop-logo" alt="logo" />
+              <img src="./assets/img/brand/logo-light.png" class="header-brand-img desktop-logo-dark" alt="logo" />
+            </a> -->
+          </div>
+        </div>
+        <div class="main-header-center">
+          <div class="responsive-logo">
+            <!-- <a [routerLink]="['/pages/dashboard']">
+              <img src="./assets/img/brand/logo.png" class="mobile-logo" alt="logo" />
+              <img src="./assets/img/brand/logo-light.png" class="mobile-logo-dark" alt="logo" />
+            </a> -->
+          </div>
+          <div class="input-group">
+            <h3 *ngIf="!isEdit">Create Award</h3>
+            <h3 *ngIf="isEdit">Edit Award</h3>
+          </div>
+        </div>
+        <div class="main-header-right">
+          <app-header></app-header>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+
+    <!-- Main Content -->
+    <div class="main-content side-content pt-0">
+      <div class="main-container container-fluid">
+        <div class="inner-body">
+          <div class="page-header d-flex align-items-center justify-content-between mt-3 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <button class="back-button" [routerLink]="['/pages/award']">
+                <i class="fe fe-arrow-left me-1"></i> Back
+              </button>
+            </div>
+          </div>
+
+          <!-- Form Start -->
+          <div class="container mt-4" #formElement>
+            <form [formGroup]="addServiceCategory" (ngSubmit)="addCategory()" enctype="multipart/form-data">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card custom-card shadow-sm">
+                    <div class="card-body">
+                      <div class="row">
+                        <!-- Heading -->
+                        <div class="col-md-12 mb-3">
+                          <label class="form-label">Heading<span class="text-danger">*</span></label>
+                          <input type="text" formControlName="heading" class="form-control"
+                            placeholder="Enter heading" />
+                          <div
+                            *ngIf="addServiceCategory.get('heading')?.touched && addServiceCategory.get('heading')?.invalid"
+                            class="text-danger mt-1">
+                            Heading is required.
+                          </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-md-12 mb-3">
+                          <label class="form-label">Description<span class="text-danger">*</span></label>
+                          <angular-editor formControlName="description" [config]="config"></angular-editor>
+                          <div
+                            *ngIf="addServiceCategory.get('description')?.touched && addServiceCategory.get('description')?.invalid"
+                            class="text-danger mt-1">
+                            Description is required.
+                          </div>
+                        </div>
+
+                        <!-- Award Image -->
+                        <div class="col-md-12 mb-3">
+                          <label class="form-label">Award Image<span class="text-danger">*</span></label>
+                          <input type="file" (change)="onAwardImageChange($event)" class="form-control"
+                            accept="image/*" />
+                          <div *ngIf="selectedAwardPreview" class="mt-2">
+                            <img [src]="selectedAwardPreview" alt="Award Preview" width="150"
+                              class="img-thumbnail rounded shadow-sm" />
+                          </div>
+                          <!-- <div *ngIf="showAwardImageError" class="text-danger mt-1">Please upload an Award Image</div> -->
+                        </div>
+
+                        <!-- Side Images -->
+                        <div class="col-md-12 mb-3">
+                          <label class="form-label">Side Images<span class="text-danger">*</span></label>
+                          <input type="file" (change)="onSideImageChange($event)" class="form-control" accept="image/*"
+                            multiple />
+                          <div class="mt-2 d-flex flex-wrap">
+                            <img *ngFor="let img of sideImagePreviews" [src]="img" class="m-1 rounded shadow-sm"
+                              width="120" />
+                          </div>
+                          <!-- <div *ngIf="showSideImageError" class="text-danger mt-1">Please upload at least one Side Image</div> -->
+                        </div>
+
+                        <!-- Other Image -->
+                        <div class="col-md-12 mb-3">
+                          <label class="form-label">Other Image<span class="text-danger">*</span></label>
+                          <input type="file" (change)="onGeneralImageChange($event)" class="form-control"
+                            accept="image/*" />
+                          <div *ngIf="selectedGeneralPreview" class="mt-2">
+                            <img [src]="selectedGeneralPreview" alt="General Preview" width="150"
+                              class="img-thumbnail rounded shadow-sm" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="d-flex justify-content-end pt-3">
+                        <button type="submit" class="btn btn-outline-primary" [disabled]=" formSubmitted">
+                          <i class="fe fe-save me-1"></i> {{ isEdit ? 'Update Award' : 'Add Award' }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- Form End -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <app-footer></app-footer>
+  </div>
+</body>

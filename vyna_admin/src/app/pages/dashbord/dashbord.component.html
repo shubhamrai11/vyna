@@ -1,0 +1,267 @@
+<body class="ltr main-body leftmenu">
+	<div class="page">
+
+		<div class="main-header side-header sticky">
+			<div class="main-container container-fluid">
+				<div class="main-header-left">
+					<a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
+					<div class="hor-logo">
+						<!-- <a class="main-logo" href="javascript:void(0)">
+							<img src="assets/img/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
+							<img src="assets/img/brand/logo-light.png" class="header-brand-img desktop-logo-dark"
+								alt="logo">
+						</a> -->
+					</div>
+				</div>
+				<div class="main-header-center">
+					<div class="responsive-logo">
+						<!-- <a href="javascript:void(0)"><img src="assets/img/brand/logo.png" class="mobile-logo"
+								alt="logo"></a>
+						<a href="javascript:void(0)"><img src="assets/img/brand/logo-light.png" class="mobile-logo-dark"
+								alt="logo"></a> -->
+					</div>
+				</div>
+				<div class="main-header-right">
+					<button class="navbar-toggler navresponsive-toggler" type="button" data-bs-toggle="collapse"
+						data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+					</button><!-- Navresponsive closed -->
+					<div
+						class="navbar navbar-expand-lg  nav nav-item  navbar-nav-right responsive-navbar navbar-dark  ">
+						<div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+							<div class="d-flex order-lg-2 ms-auto">
+								<!-- Search -->
+								<app-header></app-header>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- Main Content-->
+		<app-sidebar></app-sidebar>
+		<div class="main-content side-content pt-0">
+
+			<div class="main-container container-fluid">
+				<div class="inner-body">
+
+					<!-- Page Header -->
+					<div class="page-header mt-1">
+
+					</div>
+					<!-- End Page Header -->
+
+					<!--Row-->
+					<div class="row row-sm">
+						<div class="col-sm-12 col-lg-12 col-xl-12">
+							<div class="row row-sm">
+								<div  routerLink="/pages/category" routerLinkActive="active"class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+									<div class="card custom-card">
+										<div class="card-body">
+											<div class="card-item">
+												<div class="card-item-icon card-icon">
+													<i class="material-icons text-primary"
+														style="font-size: 24px;">category</i>
+												</div>
+												<div class="card-item-title mb-2">
+													<label class="main-content-label tx-13 font-weight-bold mb-1">
+														Total no. of Categories
+													</label>
+													<span class="d-block tx-12 mb-0 text-muted">Total Categories</span>
+												</div>
+												<div class="card-item-body">
+													<div class="card-item-stat">
+														<h4 class="font-weight-bold">{{dataList?.categoryCount}}</h4>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div  routerLink="/pages/subcategory" routerLinkActive="active"class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+									<div class="card custom-card">
+										<div class="card-body">
+											<div class="card-item">
+												<div class="card-item-icon card-icon">
+													<i class="material-icons text-primary"
+														style="font-size: 24px;">layers</i>
+												</div>
+												<div class="card-item-title mb-2">
+													<label
+														class="main-content-label tx-13 font-weight-bold mb-1">Subcategories</label>
+													<span class="d-block tx-12 mb-0 text-muted">Total
+														subcategories</span>
+												</div>
+												<div class="card-item-body">
+													<div class="card-item-stat">
+														<h4 class="font-weight-bold">{{dataList?.subcategoryCount}}</h4>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div routerLink="/pages/product" routerLinkActive="active" class="col-sm-12 col-md-12 col-lg-12 col-xl-4">
+									<div class="card custom-card">
+										<div class="card-body">
+											<div class="card-item">
+												<div class="card-item-icon card-icon">
+													<i class="material-icons text-primary"
+														style="font-size: 24px;">shopping_bag</i>
+												</div>
+												<div class="card-item-title mb-2">
+													<label
+														class="main-content-label tx-13 font-weight-bold mb-1">Products</label>
+													<span class="d-block tx-12 mb-0 text-muted">Total products</span>
+												</div>
+												<div class="card-item-body">
+													<div class="card-item-stat">
+														<h4 class="font-weight-bold">{{dataList?.productCount}}</h4>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+
+								<div  routerLink="/pages/newsletter" routerLinkActive="active"class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+									<div class="card custom-card">
+										<div class="card-body">
+											<div class="card-item">
+												<div class="card-item-icon card-icon">
+													<i class="material-icons text-primary"
+														style="font-size: 24px;">mail_outline</i>
+												</div>
+												<div class="card-item-title mb-2">
+													<label
+														class="main-content-label tx-13 font-weight-bold mb-1">Newsletter</label>
+													<span class="d-block tx-12 mb-0 text-muted">Subscribers count</span>
+												</div>
+												<div class="card-item-body">
+													<div class="card-item-stat">
+														<h4 class="font-weight-bold">{{dataList?.newsletterCount}}</h4>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div  routerLink="/pages/promise" routerLinkActive="active"  class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+									<div class="card custom-card">
+										<div class="card-body">
+											<div class="card-item">
+												<div class="card-item-icon card-icon">
+													<i class="material-icons text-primary"
+														style="font-size: 24px;">emoji_events</i>
+												</div>
+												<div class="card-item-title mb-2">
+													<label
+														class="main-content-label tx-13 font-weight-bold mb-1">Philospy</label>
+													<span class="d-block tx-12 mb-0 text-muted">Total philospy</span>
+												</div>
+												<div class="card-item-body">
+													<div class="card-item-stat">
+														<h4 class="font-weight-bold">{{dataList?.ourPromiseCount}}</h4>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div  routerLink="/pages/faq" routerLinkActive="active" class="col-sm-12 col-md-12 col-lg-12 col-xl-4">
+									<div class="card custom-card">
+										<div class="card-body">
+											<div class="card-item">
+												<div class="card-item-icon card-icon">
+													<i class="material-icons text-primary"
+														style="font-size: 24px;">help_outline</i>
+												</div>
+												<div class="card-item-title mb-2">
+													<label
+														class="main-content-label tx-13 font-weight-bold mb-1">FAQs</label>
+													<span class="d-block tx-12 mb-0 text-muted">Frequently Asked
+														Questions</span>
+												</div>
+												<div class="card-item-body">
+													<div class="card-item-stat">
+														<h4 class="font-weight-bold">{{dataList?.faqCount}}</h4>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div   routerLink="/pages/banner" routerLinkActive="active"class="col-sm-12 col-md-12 col-lg-12 col-xl-4">
+									<div class="card custom-card">
+										<div class="card-body">
+											<div class="card-item">
+												<div class="card-item-icon card-icon">
+													<i class="material-icons text-primary"
+														style="font-size: 24px;">image</i>
+												</div>
+												<div class="card-item-title mb-2">
+													<label
+														class="main-content-label tx-13 font-weight-bold mb-1">Banners</label>
+													<span class="d-block tx-12 mb-0 text-muted">Total banners</span>
+												</div>
+												<div class="card-item-body">
+													<div class="card-item-stat">
+														<h4 class="font-weight-bold">{{dataList?.bannerCount}}</h4>
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+								<div  routerLink="/pages/vision" routerLinkActive="active" class="col-sm-12 col-md-12 col-lg-12 col-xl-4">
+									<div class="card custom-card">
+										<div class="card-body">
+											<div class="card-item">
+												<div class="card-item-icon card-icon">
+													<i class="material-icons text-primary"
+														style="font-size: 24px;">visibility</i>
+												</div>
+												<div class="card-item-title mb-2">
+													<label class="main-content-label tx-13 font-weight-bold mb-1">Vision
+														Values</label>
+													<span class="d-block tx-12 mb-0 text-muted">Our core values and
+														vision</span>
+												</div>
+												<div class="card-item-body">
+													<div class="card-item-stat">
+														<h4 class="font-weight-bold">{{dataList?.ourvisionCount}}</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+	</div>
+
+	<!-- Main Footer-->
+	<app-footer></app-footer>

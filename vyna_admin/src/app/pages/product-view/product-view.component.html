@@ -1,0 +1,263 @@
+<body class="ltr main-body leftmenu">
+    <div class="page">
+        <!-- Main Header -->
+        <div class="main-header side-header sticky">
+            <div class="main-container container-fluid">
+                <div class="main-header-left">
+                    <a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
+                    <div class="hor-logo">
+
+                    </div>
+                </div>
+                <div class="main-header-center">
+                    <div class="responsive-logo">
+
+                    </div>
+                    <div class="input-group">
+                        <h3 *ngIf="!isEdit">View Product</h3>
+                        <h3 *ngIf="isEdit">View Product</h3>
+                    </div>
+                </div>
+                <div class="main-header-right">
+                    <button class="navbar-toggler navresponsive-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+                    </button>
+                    <div class="navbar navbar-expand-lg nav nav-item navbar-nav-right responsive-navbar navbar-dark">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                            <div class="d-flex order-lg-2 ms-auto">
+                                <app-header></app-header>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Header -->
+
+        <!-- Sidemenu -->
+        <app-sidebar></app-sidebar>
+        <!-- End Sidemenu -->
+
+        <!-- Main Content -->
+        <div class="main-content side-content pt-0">
+            <div class="main-container container-fluid">
+                <div class="inner-body">
+
+                    <!-- Page Header -->
+                    <div class="page-header d-flex align-items-center justify-content-between mt-3 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <button class="back-button" [routerLink]="['/pages/product']">
+                                <i class="fe fe-arrow-left me-1"></i> Back
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <!-- Product Form -->
+                    <div class="container py-4">
+
+                        <!-- Product Info Header -->
+                        <div class="card p-4 shadow-sm mb-4 bg-light">
+                            <div class="row align-items-center">
+                                <div class="col-md-2 text-center">
+                                    <img [src]="product?.categoryId?.category_logo" alt="Category Logo"
+                                        class="img-fluid rounded" style="max-height: 80px;" />
+                                </div>
+                                <div class="col-md-10">
+                                    <h2 class="mb-1">{{ product?.productName }}</h2>
+                                    <h5 class="text-muted">{{ product?.categoryId?.category_name }} &nbsp;|&nbsp;
+                                        {{ product?.subCategoryId?.subCategoryName }}
+                                    </h5>
+                                    <p class="mt-2 mb-0" [innerHTML]="product?.categoryId?.category_description"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Image Carousel -->
+                        <div *ngIf="product?.image?.length" class="mb-4">
+                            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div *ngFor="let img of product.image; let i = index" class="carousel-item"
+                                        [class.active]="i === 0">
+                                        <img [src]="img.url" class="d-block w-100 rounded"
+                                            style="height: 300px; object-fit: contain;" />
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+
+                        <div class="card shadow-sm mb-4 p-4">
+                            <h4 class="mb-3">Short Description</h4>
+                            <p [innerHTML]="product?.short_description"></p>
+                        </div>
+
+                        <div class="card shadow-sm mb-4 p-4">
+                            <h4 class="mb-3">Description</h4>
+                            <p [innerHTML]="product?.description"></p>
+                        </div>
+
+                        <!-- Key Features -->
+                        <!-- <div class="card shadow-sm mb-4 p-4">
+                            <h4 class="mb-3">Key Features</h4>
+                            <p [innerHTML]="product?.keyFeatures"></p>
+                        </div> -->
+
+                        <!-- Specifications -->
+                        <div class="card shadow-sm mb-4 p-4">
+                            <h4 class="mb-3">Specifications</h4>
+                            <div class="table-responsive">
+                                <!-- <table class="table table-bordered text-center align-middle">
+                                    <thead class="table-primary">
+                                        <tr>
+                                            <th>Rated Wattage</th>
+                                            <th>Lumen</th>
+                                            <th>Shape</th>
+                                            <th>Cut Out Size</th>
+                                            <th>Power Factor</th>
+                                            <th>Colour Temp</th>
+                                            <th>Housing</th>
+                                            <th>Beam Angle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let spec of product?.specification">
+                                            <td>{{ spec.ratedWattage }}</td>
+                                            <td>{{ spec.lumen }}</td>
+                                            <td>{{ spec.shape }}</td>
+                                            <td>{{ spec.cutOutSizeInmm }}</td>
+                                            <td>{{ spec.powerFactor }}</td>
+                                            <td>{{ spec.colourTemperature }}</td>
+                                            <td>{{ spec.housing }}</td>
+                                            <td>{{ spec.beamAngle }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table> -->
+                                <table class="table table-bordered table-striped">
+                                    <thead class="table table-bordered table-striped">
+                                        <tr>
+                                            <th>Rated Wattage</th>
+                                            <th>Lumen</th>
+                                            <th>Shape</th>
+                                            <th>Cut Out Size</th>
+                                            <th>Power Factor</th>
+                                            <th>Colour Temp</th>
+                                            <th>Housing</th>
+                                            <th>Beam Angle</th>
+                                            <th>Length (mm)</th>
+                                            <th>Base</th>
+                                            <th>Lumen (AC)</th>
+                                            <th>Lumen (DC)</th>
+                                            <th>Width (mm)</th>
+                                            <th>Protection Class</th>
+                                            <th>CRI</th>
+                                            <th>Std Pkg</th>
+
+                                            <th>Breaking Capacity</th>
+                                            <th>MCB Type</th>
+                                            <th>Curve</th>
+                                            <th>Pole</th>
+                                            <th>Ampere</th>
+                                            <th>Sensitivity</th>
+                                            <th>Door Type</th>
+                                            <th>DB Type</th>
+                                            <th>Phase</th>
+                                            <th>Number of Way</th>
+                                            <th>Module</th>
+                                            <th>Type</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let spec of product?.specification">
+                                            <td>{{ spec.ratedWattage }}</td>
+                                            <td>{{ spec.lumen }}</td>
+                                            <td>{{ spec.shape }}</td>
+                                            <td>{{ spec.cutOutSizeInmm }}</td>
+                                            <td>{{ spec.powerFactor }}</td>
+                                            <td>{{ spec.colourTemperature }}</td>
+                                            <td>{{ spec.housing }}</td>
+                                            <td>{{ spec.beamAngle }}</td>
+                                            <td>{{ spec.lengthInMm }}</td>
+                                            <td>{{spec.base}}</td>
+                                            <td>{{spec?.lumenAC}}</td>
+                                            <td>{{spec?.lumenDC}}</td>
+                                            <td>{{ spec.widthInMm }}</td>
+                                            <td>{{ spec.protectionClass }}</td>
+                                            <td>{{ spec.cri }}</td>
+                                            <td>{{ spec.stdPkg }}</td>
+                                            <td>{{ spec.breakingCapacity }}</td>
+                                            <td>{{ spec.mcbType }}</td>
+                                            <td>{{ spec.curve }}</td>
+                                            <td>{{ spec.pole }}</td>
+                                            <td>{{ spec.ampere }}</td>
+                                            <td>{{ spec.sensitivity }}</td>
+                                            <td>{{ spec.doorType }}</td>
+                                            <td>{{ spec.dbType }}</td>
+                                            <td>{{ spec.phase }}</td>
+                                            <td>{{ spec.numberOfWay }}</td>
+                                            <td>{{ spec.module }}</td>
+                                            <td>{{ spec.type }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+
+                        <!-- Color Temperature -->
+                        <div *ngIf="product?.colorTemperature?.length" class="card shadow-sm mb-4 p-4">
+                            <h4 class="mb-3">Color Temperature</h4>
+                            <div class="row">
+                                <div *ngFor="let item of product.colorTemperature"
+                                    class="col-md-3 col-sm-6 mb-3 text-center">
+                                    <img [src]="item.image" class="img-thumbnail mb-2"
+                                        style="width: 100px; height: 100px; object-fit: cover;" />
+                                    <p class="mb-0"><strong>{{ item.watt }}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Colors -->
+                        <div *ngIf="product?.color?.length" class="card shadow-sm mb-4 p-4">
+                            <h4 class="mb-3">Available Colors</h4>
+                            <div class="d-flex flex-wrap gap-3">
+                                <div *ngFor="let c of product.color" class="text-center">
+                                    <div [style.background]="c.name" class="rounded-circle border"
+                                        style="width: 50px; height: 50px;"></div>
+                                    <small class="text-muted d-block mt-1">{{ getColorName(c.name) }}</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Back Button -->
+                        <div class="text-end">
+                            <button class="btn btn-secondary" [routerLink]="['/pages/product']">
+                                <i class="fe fe-arrow-left me-1"></i> Back
+                            </button>
+                        </div>
+
+                    </div>
+
+
+                    <!-- End Form -->
+                </div>
+            </div>
+        </div>
+        <!-- End Main Content -->
+        <!-- Footer -->
+        <app-footer></app-footer>
+    </div>
+</body>

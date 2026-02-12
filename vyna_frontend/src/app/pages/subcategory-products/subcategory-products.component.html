@@ -1,0 +1,262 @@
+<div id="wrapper">
+
+<div class="tf-slideshow slider-default slider-position slider-effect-fade">
+  <div dir="ltr" 
+       class="swiper tf-sw-slideshow swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden" 
+       data-preview="1" data-tablet="1" data-mobile="1" data-centered="false" 
+       data-space="0" data-space-mb="0" data-loop="false" data-auto-play="false">
+       
+    <div class="swiper-wrapper" aria-live="polite">
+      <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 1" style="width: 100% !important;">
+        <div class="wrap-slider hide-on-mob">
+      
+          <img 
+            *ngIf="subCategoryDetails?.subCategory_banner"
+            [src]="subCategoryDetails?.subCategory_banner" 
+            [alt]="subCategoryDetails?.subCategory_banner || 'Category Banner'"
+                loading="lazy"
+            style="width: 100%; height: auto;" />
+        </div>
+       <!-- <div class="wrap-slider hide-on-mob">
+                            <img src="images/light-1.png" alt="light banner">
+                           
+                        </div> -->
+                        <div class="wrap-slider hide-on-des">
+      <img 
+            *ngIf="subCategoryDetails?.subCategory_mobile_banner"
+            [src]="subCategoryDetails?.subCategory_mobile_banner" 
+            [alt]="subCategoryDetails?.subCategory_mobile_banner || 'Category Banner'"
+                loading="lazy"
+            style="width: 100%; height: auto;" />
+                           
+                        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap-pagination">
+    <div class="container">
+      <div class="sw-dots sw-pagination-slider type-circle white-circle-line justify-content-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal swiper-pagination-lock">
+        <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1" aria-current="true"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="navigation-prev-slider nav-sw nav-sw-left lg swiper-button-disabled swiper-button-lock" tabindex="-1" role="button">
+    <i class="icon icon-arrLeft"></i>
+  </div>
+  <div class="navigation-next-slider nav-sw nav-sw-right lg swiper-button-disabled swiper-button-lock" tabindex="-1" role="button">
+    <i class="icon icon-arrRight"></i>
+  </div>
+</div>
+
+<section class="flat-spacing pt-0 pb-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <ul class="breadcrumbs py-5 d-flex align-items-center">
+          <li>
+            <a class="link" href="/">Home</a>
+          </li>
+          <li><i class="icon-arrRight"></i></li>
+          <li>
+            <a class="link" routerLink="/all-products">Products</a>
+          </li>
+          <li><i class="icon-arrRight"></i></li>
+          <!-- <a class="link" routerLink="/products"> -->
+
+<a class="link"   
+   [routerLink]="['/products', products[0]?.categoryId?._id]"
+   [queryParams]="{ categoryId: products[0]?.categoryId?._id }">
+            {{ subCategoryDetails?.categoryId?.category_name || 'Category' }}
+          </a>
+              <li><i class="icon-arrRight"></i></li>
+                 <li>
+            {{ subCategoryDetails?.subCategoryName || 'Sub-Category' }}
+          </li>
+        </ul>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+
+<section class="flat-spacing pt-0">
+            <div class="container-fluid">
+
+
+
+<div class="tf-grid-layout wrapper-shop tf-col-4" id="gridLayout">
+
+
+
+
+    <div *ngIf="isLoading" class="text-center py-5">
+    <h4>Loading products...</h4>
+    <!-- spinner bhi daal sakte ho -->
+    <!-- <div class="spinner-border text-success" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div> -->
+  </div>
+
+    <div *ngIf="!isLoading && products.length === 0" class="text-center py-5">
+    <h4>No products found</h4>
+  </div>
+
+<div *ngFor="let product of products" class="card-product grid wow fadeInUp" data-wow-delay="0.3s">
+  <div class="card-product-wrapper">
+    <a [routerLink]="['/product-details', product._id]" class="product-img">
+      <!-- 🖼 Default / Fallback image handling -->
+      <img class="img-product" 
+           [src]="(product.image && product.image.length > 0) ? product.image[0]?.url : 'assets/images/noImage.png'" 
+               loading="lazy"
+           alt="{{product.productName}}">
+
+      <img class="img-hover" 
+           [src]="(product.image && product.image.length > 1) 
+                    ? product.image[1]?.url 
+                    : (product.image && product.image.length > 0) 
+                      ? product.image[0]?.url 
+                      : 'assets/images/noImage.png'" 
+                          loading="lazy"
+           alt="{{product.productName}}">
+    </a>
+  </div>
+
+  <div class="card-product-info">
+    <a [routerLink]="['/product-details', product._id]" class="title link">
+      {{ product.productName }}
+    </a>
+    <p [innerHTML]="(product.description?.length > 100 ? (product.description | slice:0:100) + '...' : product.description)"></p>
+
+    <div class="total-lb wow fadeInUp text-center">
+      <a [routerLink]="['/product-details', product._id]" class="tf-btn-new green-btn btn-fill wow fadeInUp">
+        <span class="text text-button">View Details</span>
+        <i class="icon icon-arrowUpRight"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+  <!-- Pagination -->
+  <ul *ngIf="products.length > 0" class="wg-pagination justify-content-center d-flex">
+    <!-- Prev Button -->
+    <li>
+      <a 
+        href="javascript:void(0)" 
+        class="pagination-item text-button" 
+        (click)="onPageChange(page - 1)" 
+        [class.disabled]="page === 1">
+      <i class="icon-arrLeft"></i>
+      </a>
+    </li>
+
+    <!-- Page Numbers -->
+    <li *ngFor="let p of [].constructor(totalPages); let i = index" [class.active]="page === i + 1">
+      <a 
+        href="javascript:void(0)" 
+        class="pagination-item text-button" 
+        (click)="onPageChange(i + 1)">
+        {{ i + 1 }}
+      </a>
+    </li>
+
+    <!-- Next Button -->
+    <li>
+      <a 
+        href="javascript:void(0)" 
+        class="pagination-item text-button" 
+        (click)="onPageChange(page + 1)" 
+        [class.disabled]="page === totalPages">
+        <i class="icon-arrRight"></i>
+      </a>
+    </li>
+  </ul>
+
+</div>
+
+
+ 
+            </div>
+        </section>
+
+            </div>
+
+
+        <div class="offcanvas offcanvas-start canvas-filter" id="filterShop">
+        <div class="canvas-wrapper">
+            <div class="canvas-header">
+                <h5>Filters</h5>
+                <span class="icon-close icon-close-popup" data-bs-dismiss="offcanvas" aria-label="Close"></span>
+            </div>
+            <div class="canvas-body">
+                <div class="meta-filter-shop">
+                       
+                        <div id="applied-filters">
+                            <span class="filter-tag color-tag">
+                  <span class="color bg-light-green"></span>
+                 Copper
+                  <span class="remove-tag icon-close" data-filter="color"></span>
+              </span>
+               <span class="filter-tag color-tag">
+                 235
+                  <span class="remove-tag icon-close" data-filter="voltage"></span>
+              </span>
+               <span class="filter-tag color-tag">
+                6W
+                  <span class="remove-tag icon-close" data-filter="wattage"></span>
+              </span>
+              
+            </div>
+                        <button id="remove-all" class="remove-all-filters text-btn-uppercase bg-transparent text-black">REMOVE ALL <i class="icon icon-close"></i></button>
+                    </div>
+                <div class="widget-facet facet-categories">
+                    <h6 class="facet-title">Product Categories</h6>
+                    <ul class="facet-content">
+                        <li><a href="#" class="categories-item">Cob Downlighter <span class="count-cate">(112)</span></a></li>
+                        <li><a href="#" class="categories-item">LED Spot Light <span class="count-cate">(32)</span> </a></li>
+                        <li><a href="#" class="categories-item">Track Light <span class="count-cate">(42)</span></a></li>
+                        <li><a href="#" class="categories-item active">LED Recess Panel <span class="count-cate">(65)</span></a></li>
+                        <li><a href="#" class="categories-item">LED Surface Panel <span class="count-cate">(13)</span></a></li>
+                        <li><a href="#" class="categories-item">LED Lamp <span class="count-cate">(52)</span></a></li>
+                        <li><a href="#" class="categories-item">LED Bulb <span class="count-cate">(14)</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="widget-facet facet-size">
+                    <h6 class="facet-title">Voltage</h6>
+                    <div class="facet-size-box size-box">
+                        <span class="size-item size-check active">235 </span>
+                        <span class="size-item size-check">245 </span>
+                        <span class="size-item size-check">255 </span>
+                    </div>
+                </div>
+                <div class="widget-facet facet-size">
+                    <h6 class="facet-title">Wattage</h6>
+                    <div class="facet-size-box size-box">
+                        <span class="size-item size-check">6W</span>
+                        <span class="size-item size-check active">12W</span>
+                        <span class="size-item size-check">18W</span>
+                    </div>
+                </div>
+                <div class="widget-facet facet-color">
+                    <h6 class="facet-title">Colors</h6>
+                    <div class="facet-color-box">
+                        <div class="color-item color-check active"><span class="color bg-light-green"></span>Copper</div>
+                        <div class="color-item color-check"><span class="color bg-main"></span>Black</div>
+                        <div class="color-item color-check"><span class="color bg-white line-black"></span>White</div>
+                          
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="canvas-bottom">
+                <button id="reset-filter" class="tf-btn-new btn-reset py-2">Reset Filters</button>
+            </div>
+        </div>
+    </div>
+
+
+
+

@@ -1,0 +1,94 @@
+     <div class="" >
+        <img src="./assets/images/dealer-inner.png" width="100%" alt="">
+            <div class="container-full">
+                <div class="row">
+                    <div class="col-12">
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <section class="flat-spacing pt-0">
+           <div class="container-fluid">
+            <div class="row">
+                    <div class="col-12">
+                       
+                        <ul class="breadcrumbs py-5 d-flex align-items-center">
+                            <li>
+                                <a class="link" href="index.html">Home</a>
+                            </li>
+                          
+                            <li class="">
+                                <i class="icon-arrRight"></i>
+                            </li>
+                            <li class="">
+                               Dealers
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        <!-- Header Section -->
+        <div class="dealer-header">
+            <h1 class="dealer-title">Shop Smarter with Trusted Vyna Dealers   </h1>
+            <p class="dealer-subtitle">Upgrade your home with genuine Vyna Electrical products. Locate the authorized Vyna dealer near you <br>Find Nearby Dealer  
+and experience our commitment to safety, design, and reliability.  </p>
+        </div>
+        
+        <!-- Search Section -->
+        <div class="search-section">
+            <h2 class="search-title">Search Dealers</h2>
+            <form class="search-form" id="dealerSearchForm">
+                <div class="form-group">
+                    <label for="pincode" class="form-label">PIN Code</label>
+                    <input type="text" id="pincode" class="form-input" placeholder="Enter 6-digit PIN">
+                </div>
+                <div class="form-group">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" id="city" class="form-input" placeholder="Enter city">
+                </div>
+                <div class="form-group">
+                    <label for="state" class="form-label">State</label>
+                    <div class="tf-select">
+                                        <select class="form-control" id="state">
+                                           <option value="">Select State</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="maharashtra">Maharashtra</option>
+                        <option value="karnataka">Karnataka</option>
+                        <option value="tamilnadu">Tamil Nadu</option>
+                        <option value="up">Uttar Pradesh</option>
+                                        </select>
+                                    </div>
+                    
+                </div>
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-search btn-icon"></i> Search
+                </button>
+            </form>
+        </div>
+        
+        <!-- Results Section -->
+<div class="results-container">
+  <div class="dealers-list">
+    <div
+      class="dealer-card"
+      *ngFor="let dealer of dealers"
+      [attr.data-lat]="dealer.lat"
+      [attr.data-lng]="dealer.lng"
+    >
+      <h3 class="dealer-name">{{ dealer.name }}</h3>
+      <span class="dealer-distance">
+        <i class="icon icon-map-pin"></i> {{ dealer.distance }} km away
+      </span>
+      <p class="dealer-address">
+        {{ dealer.address }}
+      </p>
+    </div>
+  </div>
+
+  <div class="map-container">
+    <div id="dealerMap" style="height: 400px;"></div>
+  </div>
+</div>
+
+    </div>
+        </section>

@@ -1,0 +1,227 @@
+<div class="page main-signin-wrapper">
+
+  <!-- Row -->
+  <div class="row text-center">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="row row-sm">
+          <div class="col-lg-6 col-xl-4 d-none d-lg-block text-center bg-primary details">
+            <div class="mt-5 pt-4 p-2">
+              <img src="./assets/img/brand/logo-light.png" class="d-lg-none header-brand-img text-start float-start mb-4 error-logo-light" alt="logo">
+              <img src="./assets/img/brand/logo-light.png" class=" d-lg-none header-brand-img text-start float-start mb-4 error-logo" alt="logo">
+              <div class="clearfix"></div>
+              <img src="./assets/img/brand/logo-light.png" class=" mb-0" alt="user">
+              <h5 class="mt-4 text-white">Créez votre compte</h5>
+              <span class="tx-white-6 tx-13 mb-5 mt-xl-0">Si l'utilisateur n'a pas de Compte, il peut créer son compte</span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xl-8 col-xs-12 col-sm-12 login_form ">
+            <div class="main-container container-fluid">
+              <div class="row row-sm">
+                <div class="card-body mt-2 mb-2">
+                  <img src="./assets/img/brand/logo-light.png" class=" d-lg-none header-brand-img text-start float-start mb-4" alt="logo">
+                  <div class="clearfix"></div>
+                  <h5 class="text-start mb-2">Sign Up to Your Account</h5>
+                  <form [formGroup]="userAddForm" (ngSubmit)="addUser()">
+
+                    <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group text-start">
+                      <label>Nom</label>
+                      <input class="form-control" formControlName="nom" placeholder="" type="text">
+                      <mat-error
+                      class="danger"
+                      *ngIf="userAddForm.get('nom')?.hasError('required') && userAddForm.get('nom')?.touched"
+                    >
+                    Nom is required.
+                    </mat-error>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group text-start">
+                      <label>Prenom</label>
+                      <input class="form-control" formControlName="prenom" placeholder="" type="text">
+                      <mat-error
+                      class="danger"
+                      *ngIf="userAddForm.get('prenom')?.hasError('required') && userAddForm.get('prenom')?.touched"
+                    >
+                    Prenom is required.
+                    </mat-error>
+                    </div>
+                  </div>
+                    <div class="col-md-4">
+                    <div class="form-group text-start">
+                      <label>CNI</label>
+                      <input class="form-control" formControlName="cni" placeholder="" type="text">
+                      <mat-error
+                      class="danger"
+                      *ngIf="userAddForm.get('cni')?.hasError('required') && userAddForm.get('cni')?.touched"
+                    >
+                    CNI is required.
+                    </mat-error>
+                    </div>
+                  </div>
+                    <div class="col-md-4">
+                    <div class="form-group text-start">
+                      <label>Telephone</label>
+                      <input class="form-control"  formControlName="telephone" placeholder="" type="tel">
+                      <mat-error
+                      class="danger"
+                      *ngIf="userAddForm.get('telephone')?.hasError('required') && userAddForm.get('telephone')?.touched"
+                    >
+                    Telephone is required.
+                    </mat-error>
+                    </div>
+                  </div>
+                    <div class="col-md-4">
+                    <div class="form-group text-start">
+                      <label>Matricule</label>
+                      <input class="form-control" formControlName="matricule" placeholder="" type="text">
+                      <mat-error
+                      class="danger"
+                      *ngIf="userAddForm.get('matricule')?.hasError('required') && userAddForm.get('matricule')?.touched"
+                    >
+                    Matricule is required.
+                    </mat-error>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group text-start">
+                      <label>Fonction</label>
+                      <input class="form-control" formControlName="fonction" placeholder="" type="text">
+                      <mat-error
+                      class="danger"
+                      *ngIf="userAddForm.get('fonction')?.hasError('required') && userAddForm.get('fonction')?.touched"
+                    >
+                    Fonction is required.
+                    </mat-error>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group text-start">
+                      <label>Situation Famille</label>
+                      <select class="form-control select" formControlName="situationFamille">
+                        <option value=""></option>
+                        <option value="MARIE">Marie</option>
+                        <option value="CELIBATAIRE">Celebataire</option>
+                        <option value="DIVORCE">Divorce</option>
+                      </select>
+                    </div>
+                    <mat-error
+                    class="danger"
+                    *ngIf="userAddForm.get('situationFamille')?.hasError('required') && userAddForm.get('situationFamille')?.touched"
+                  >
+                  Situation Famille is required.
+                  </mat-error>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group text-start">
+                      <label>Genre (Sexe)</label>
+                      <select class="form-control select" formControlName="sexe">
+                        <option value=""></option>
+                        <option value="F">Female</option>
+                        <option value="M">Male</option>
+                      </select>
+                    </div>
+                    <mat-error
+                    class="danger"
+                    *ngIf="userAddForm.get('sexe')?.hasError('required') && userAddForm.get('sexe')?.touched"
+                  >
+                  Genre (Sexe) is required.
+                  </mat-error>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group text-start">
+                      <label>Mode echange</label>
+                      <select class="form-control select" formControlName="canalNotification">
+                        <option value=""></option>
+                        <option value="MAIL">Mail</option>
+                        <option value="SMS">SMS</option>
+                        <option value="WHATSAPP">WhatsApp</option>
+                      </select>
+                    </div>
+                    <mat-error
+                    class="danger"
+                    *ngIf="userAddForm.get('canalNotification')?.hasError('required') && userAddForm.get('canalNotification')?.touched"
+                  >
+                  Mode echange is required.
+                  </mat-error>
+                  </div>
+
+                    <div class="col-md-12">
+                    <div class="form-group text-start">
+                      <label>Adresse</label>
+                      <textarea class="form-control" formControlName="addresse" rows="4"></textarea>
+                    </div>
+                  </div>
+                    
+                  <mat-error
+                  class="danger"
+                  *ngIf="userAddForm.get('addresse')?.hasError('required') && userAddForm.get('addresse')?.touched"
+                >
+                Addresse is required.
+                </mat-error>
+                </div>
+                <div class=""style="background: #bcd1d9;height: 5px;"></div>
+                
+                <div class="row mt-3">
+                  <div class="col-md-4">
+                    <div class="form-group text-start">
+                      <label>Email</label>
+                      <input class="form-control" formControlName="email" placeholder="" type="email">
+                      <mat-error
+                      class="danger"
+                      *ngIf="userAddForm.get('email')?.hasError('required') && userAddForm.get('email')?.touched"
+                    >
+                    Email is required.
+                    </mat-error>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group text-start">
+                      <label>Password</label>
+                      <input class="form-control" formControlName="password" placeholder="" type="password">
+                      <mat-error
+                      class="danger"
+                      *ngIf="userAddForm.get('password')?.hasError('required') && userAddForm.get('password')?.touched"
+                    >
+                    Password is required.
+                    </mat-error>
+                    </div>
+                  </div>
+                    <div class="col-md-4">
+                    <div class="form-group text-start">
+                      <label>Confirmation</label>
+                      <input class="form-control" formControlName="confirmation" placeholder="" type="password">
+                      <mat-error
+                      class="danger"
+                      *ngIf="userAddForm.get('confirmation')?.hasError('required') && userAddForm.get('confirmation')?.touched"
+                    >
+                    Confirmation is required.
+                    </mat-error>
+                    </div>
+                  </div>
+                </div>
+                <button
+                class="btn ripple btn-main-primary btn-block text-white"
+                type="submit"
+              >
+                Submit
+              </button>
+                  </form>
+                  <div class="text-start mt-2 ms-0">
+                    <!-- <div class="mb-1"><a href="#!">Forgot password?</a></div> -->
+                    <div>Already have an acconut? <a [routerLink]="'/login'">Sign In</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Row -->
+
+</div>
+<!-- End Page -->

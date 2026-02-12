@@ -1,0 +1,140 @@
+/* .active-menu {
+  border-left: 4px solid #000;
+  background-color: #f9f9f9 !important;
+} */
+
+
+.big-nav:hover > a,
+.big-nav:hover > i,
+.big-nav .active-menu > a,
+.big-nav .active-menu > i {
+  color: red !important;
+}
+
+
+
+
+.search-dropdown {
+  position: absolute;   /* relative ke jagah absolute rakho */
+  top: calc(100% + 6px); /* input ke just niche 6px gap */
+  left: 0;
+  background: #fff;
+  width: 100%;
+  border: 1px solid #ddd;
+  z-index: 2000;          /* header se upar dikhe */
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  max-height: 250px;
+  overflow-y: auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-radius: 6px;     /* thoda rounded look */
+}
+
+.search-dropdown li {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.search-dropdown li:hover {
+  background: #f9f9f9;
+}
+
+.no-result {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: #fff;
+  width: 100%;
+  border: 1px solid #ddd;
+  padding: 10px;
+  z-index: 2000;
+  color: #666;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-radius: 6px;
+}
+
+.search-input {
+  width: calc(100% - 40px); /* button ke liye space chhod do */
+  padding-right: 40px;      /* button ke overlap se bachane ke liye */
+}
+
+.mobile-nav li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+.mobile-nav li a {
+  text-decoration: none;
+  color: #000;
+  display: block;
+}
+.mobile-nav li a.active {
+  font-weight: bold;
+  color: #e63946;
+}
+
+
+.big-nav ul li a p {
+  line-height: 1.4; 
+}
+
+.nav .big-nav > ul > li > a img {
+    height: 60px;
+}
+
+.offcanvas-body .form-search {
+  position: relative
+}
+
+@media (max-width: 1200px) {
+  .search-dropdown {
+    position: fixed;
+    top: 125px;
+    left: 3%;
+    width: 85%;
+    border-radius: 0;
+
+  }
+
+  .no-result {
+    position: fixed;
+    top: 125px;
+    left: 0;
+    width: 85%;
+    border-radius: 0;
+  }
+}
+
+
+@media (max-width: 800px) {
+  .search-dropdown {
+    position: fixed;
+    top: 130px;
+    left: 2%;
+    width: 44%;
+    border-radius: 0;
+
+  }
+}
+
+.btn-open-sub-::before {
+  content: "+";            /* default sign */
+  font-weight: bold;
+  font-size: 20px;         /* size badha diya */
+  line-height: 1;
+  display: inline-block;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.btn-open-sub-.open::before {
+  content: "-";            /* when open */
+  font-weight: bold;
+  font-size: 20px;
+    line-height: 1;
+      display: inline-block;
+  margin-left: 8px;
+  vertical-align: middle;
+}

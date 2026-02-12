@@ -1,0 +1,125 @@
+
+.stagger-wrap {
+  display: flex;
+  flex-direction: column; 
+  gap: 4px; 
+  align-items: center;
+}
+
+
+@media (max-width: 768px) {
+  .stagger-wrap {
+    display: flex;
+    /* flex-direction: column; */
+    gap: 4px;
+    align-items: center;
+  }
+}
+.stagger-wrap img {
+  width: 200px; /* apni requirement ke hisaab se */
+  height: auto;
+  border-radius: 10px;
+}
+
+.stagger-wrap .stagger-item {
+  transition: 0.3s ease-in-out;
+  transform: scale(0.5) rotate(90deg) skew(15deg);
+  opacity: 0;
+}
+
+.stagger-wrap .stagger-item.stagger-finished {
+  transform: scale(1) rotate(0deg) skew(0deg);
+  opacity: 1;
+}
+.tf-product-media-thumbs .swiper-slide {
+  margin-right: 0 !important;
+  width: auto !important;
+}
+/* .tf-product-media-thumbs {
+  height: 400px; 
+} */
+
+
+
+
+.zoom-wrapper {
+  position: relative;
+  display: inline-block;
+}
+ 
+/* Container of main image */
+.zoom-image-container {
+  position: relative;
+  cursor: crosshair;
+}
+ 
+/* The lens that follows mouse */
+.zoom-lens {
+  position: absolute;
+  border: 2px solid #000;
+  width: 100px;
+  height: 100px;
+  opacity: 0.3;
+  background-color: rgba(255, 255, 255, 0.4);
+  pointer-events: none; /* so it doesn’t block mouse events */
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+}
+ 
+/* The floating zoom preview box */
+/* .zoom-preview {
+  position: fixed; 
+  width: 200px; 
+  height: 300px;
+  border: 1px solid #ccc;
+  background-repeat: no-repeat;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 1000;
+  border-radius: 6px;
+  top: 60%;
+  left: 30%; 
+  background-color: #fff;
+  pointer-events: none;
+} */
+
+
+.zoom-preview {
+  position: absolute;
+  top: 0%;
+  left: 0%; 
+  margin-left: 0px;
+  width: 500px;
+  height: 500px;
+  border: 1px solid #ccc;
+  background-repeat: no-repeat;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 9999;
+  border-radius: 6px;
+  background-color: #fff;
+  pointer-events: none;
+}
+
+.tf-zoom-main {
+  position: sticky;
+  top: 30px;
+  z-index: 50;
+}
+
+
+html {
+  margin-right: 0 !important;
+  scroll-behavior: smooth;
+    /* overflow-x: hidden!important; */
+}
+
+
+.specs-table .common-cell {
+  text-align: center;
+}
+
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.15em;
+}

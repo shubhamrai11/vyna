@@ -1,0 +1,44 @@
+
+     <div class="" >
+        <img src="./assets/images/privacy-banner.png" width="100%" alt="">
+            <div class="container-full">
+                <div class="row">
+                    <div class="col-12">
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+<section class="flat-spacing pt-0 " *ngIf="privacy">
+  <div class="container-fluid">
+        <div class="row">
+                    <div class="col-12">
+                       
+                        <ul class="breadcrumbs py-5 d-flex align-items-center">
+                            <li>
+                                <a class="link" routerLink="/">Home</a>
+                            </li>
+                          
+                            <li class="">
+                                <i class="icon-arrRight"></i>
+                            </li>
+                            <li class="">
+                             Privacy Policy
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+    <!-- <h4 class="mb-4">{{ privacy.title }}</h4> -->
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Use [innerHTML] to display HTML from API -->
+        <div [innerHTML]="privacy.content"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Optional: If no data -->
+<div *ngIf="!privacy" class="text-center py-5">
+  <p>No Privacy Policy found.</p>
+</div>

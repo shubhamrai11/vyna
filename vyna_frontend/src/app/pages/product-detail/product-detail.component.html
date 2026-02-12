@@ -1,0 +1,1134 @@
+
+
+<section class="flat-spacing pt-0 pb-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <ul class="breadcrumbs py-5 d-flex align-items-center">
+          <li>
+            <a class="link" href="index.html">Home</a>
+          </li>
+          <li>
+            <i class="icon-arrRight"></i>
+          </li>
+          <li>
+            <a class="link" routerLink="/all-products">{{
+              productDetails?.categoryId?.category_name
+            }}</a>
+          </li>
+          <li>
+            <i class="icon-arrRight"></i>
+          </li>
+          <li>{{ productDetails?.productName }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="flat-spacing pt-0" *ngIf="productDetails">
+  <div class="tf-main-product section-image-zoom">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="tf-product-media-wrap sticky-top">
+            <div class="thumbs-slider">
+              <div class="swiper tf-product-media-thumbs other-image-zoom">
+                <div class="swiper-wrapper stagger-wrap">
+                  <div
+                    class="swiper-slide"
+                    *ngFor="let img of productDetails.image.slice(0, 5)"
+                  >
+                    <div class="item">
+                      <img [src]="img.url" alt="Product Image" loading="lazy" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper tf-product-media-main">
+                <div class="swiper-wrapper">
+                  <div
+                    class="swiper-slide"
+                    *ngFor="let img of productDetails.image; let i = index"
+                  >
+                    <div class="zoom-wrapper">
+                      <div
+                        class="zoom-image-container"
+                        (mousemove)="onMouseMove($event, i)"
+                        (mouseleave)="onMouseLeave()"
+                        #imageContainer
+                      >
+                        <img
+                          #mainImage
+                          [src]="img.url"
+                          (mouseenter)="onThumbnailClick(img, i)"
+                          class="tf-image-zoom lazyload"
+                          alt="Zoom Image"
+                        />
+                        <div
+                          class="zoom-lens"
+                          *ngIf="showLens && selectedImageIndex === i"
+                          [ngStyle]="lensStyle"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="tf-product-info-wrap position-relative">
+            <div
+              class="zoom-preview"
+              *ngIf="showLens"
+              [ngStyle]="zoomPreviewStyle"
+            ></div>
+
+            <div class="tf-product-info-list other-image-zoom">
+              <div class="tf-product-info-heading">
+                <div class="tf-product-info-name">
+                  <div class="text text-btn-uppercase">
+                    {{ productDetails?.categoryId?.category_name }}
+                  </div>
+                  <h3 class="name">{{ productDetails?.productName }}</h3>
+                </div>
+                <div class="tf-product-info-desc">
+                  <p [innerHTML]="productDetails?.description"></p>
+                </div>
+
+                <section
+                  class="technical-specs"
+                  *ngIf="productDetails?.specification?.length"
+                >
+                  <h2>Specifications</h2>
+                  <div class="specs-table-container">
+                    <table class="specs-table">
+                      <thead>
+                        <tr>
+                          <th>Details</th>
+                          <th colspan="15">
+                            {{ productDetails?.productName }}
+                          </th>
+                          <!-- <th *ngFor="
+                              let spec of productDetails.specification;
+                              let i = index
+                            ">
+                            Option {{ i + 1 }}
+                          </th> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngIf="hasValue('type')">
+                          <td>Type</td>
+                          <td
+                            *ngIf="isCommon('type')"
+                            [attr.colspan]="productDetails.specification.length"
+                          >
+                            {{ getCommonValue("type") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('type')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.type }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('ratedWattage')">
+                          <td>Rated Wattage</td>
+                          <td *ngFor="let spec of productDetails.specification">
+                            {{ spec?.ratedWattage || "-" }}
+                          </td>
+                        </tr>
+                        <tr *ngIf="hasValue('lumen')">
+                          <td>Lumen</td>
+                          <td *ngFor="let spec of productDetails.specification">
+                            {{ spec?.lumen }}
+                          </td>
+                        </tr>
+                        <!-- <tr *ngIf="hasValue('powerFactor')">
+                          <td>Power Factor</td>
+                          <td *ngFor="let spec of productDetails.specification">
+                            {{ spec?.powerFactor }}
+                          </td>
+                        </tr> -->
+                        <tr *ngIf="hasValue('powerFactor')">
+                          <td>Power Factor</td>
+                          <td
+                            *ngIf="isCommon('powerFactor')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("powerFactor") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('powerFactor')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.powerFactor }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <!-- <tr *ngIf="hasValue('colourTemperature')">
+                          <td>Colour Temperature</td>
+                          <td *ngFor="let spec of productDetails.specification">
+                            {{ spec?.colourTemperature }}
+                          </td>
+                        </tr> -->
+                        <tr *ngIf="hasValue('colourTemperature')">
+                          <td>Colour Temperature</td>
+                          <td
+                            *ngIf="isCommon('colourTemperature')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("colourTemperature") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('colourTemperature')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.colourTemperature }}
+                            </td>
+                          </ng-container>
+                        </tr>
+
+                        <!-- <tr *ngIf="hasValue('shape')">
+                          <td>Shape</td>
+                          <td *ngFor="let spec of productDetails.specification">
+                            {{ spec?.shape }}
+                          </td>
+                        </tr> -->
+                        <tr *ngIf="hasValue('shape')">
+                          <td>Shape</td>
+                          <td
+                            *ngIf="isCommon('shape')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("shape") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('shape')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.shape }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <!-- <tr>
+                          <td>Cut-Out Size</td>
+                          <td *ngFor="let spec of productDetails.specification">
+                            {{ spec?.cutOutSizeInmm }}
+                          </td>
+                        </tr> -->
+                        <!-- <tr *ngIf="hasValue('cutOutSizeInmm')">
+                          <td>Cut-Out Size</td>
+                          <td *ngFor="let spec of productDetails.specification">
+                            {{ spec?.cutOutSizeInmm || "-" }}
+                          </td>
+                        </tr> -->
+
+                        <tr *ngIf="hasValue('cutOutSizeInmm')">
+                          <td>Cut-Out Size</td>
+                          <td
+                            *ngIf="isCommon('cutOutSizeInmm')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("cutOutSizeInmm") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('cutOutSizeInmm')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.cutOutSizeInmm }}
+                            </td>
+                          </ng-container>
+                        </tr>
+
+                        <!-- <tr *ngIf="hasValue('beamAngle')">
+                          <td>Beam Angle</td>
+                          <td *ngFor="let spec of productDetails.specification">
+                            {{ spec?.beamAngle }}
+                          </td>
+                        </tr> -->
+                        <tr *ngIf="hasValue('beamAngle')">
+                          <td>Beam Angle</td>
+                          <td
+                            *ngIf="isCommon('beamAngle')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("beamAngle") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('beamAngle')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.beamAngle }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('housing')">
+                          <td>Housing</td>
+                          <td
+                            *ngIf="isCommon('housing')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("housing") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('housing')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.housing }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('lengthInMm')">
+                          <td>Length (mm)</td>
+                          <td
+                            *ngIf="isCommon('lengthInMm')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("lengthInMm") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('lengthInMm')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.lengthInMm }}
+                            </td>
+                          </ng-container>
+                        </tr>
+
+                        <tr *ngIf="hasValue('widthInMm')">
+                          <td>Width (mm)</td>
+                          <td
+                            *ngIf="isCommon('widthInMm')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("widthInMm") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('widthInMm')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.widthInMm }}
+                            </td>
+                          </ng-container>
+                        </tr>
+
+                        <!-- <tr *ngIf="hasValue('widthInMm')">
+                          <td>Width (mm)</td>
+                          <td *ngFor="let spec of productDetails.specification">
+                            {{ spec?.widthInMm }}
+                          </td>
+                        </tr> -->
+
+                        <!-- <tr *ngIf="hasValue('lumenAC')">
+                          <td>Lumen AC</td>
+                          <td *ngFor="let spec of productDetails.specification">
+                            {{ spec?.lumenAC }}
+                          </td>
+                        </tr> -->
+
+                        <tr *ngIf="hasValue('lumenAC')">
+                          <td>Lumen AC</td>
+                          <td
+                            *ngIf="isCommon('lumenAC')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("lumenAC") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('lumenAC')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.lumenAC }}
+                            </td>
+                          </ng-container>
+                        </tr>
+
+                        <tr *ngIf="hasValue('lumenDC')">
+                          <td>Lumen DC</td>
+                          <td
+                            *ngIf="isCommon('lumenDC')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("lumenDC") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('lumenDC')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.lumenDC }}
+                            </td>
+                          </ng-container>
+                        </tr>
+
+                        <tr *ngIf="hasValue('base')">
+                          <td>Base</td>
+                          <td
+                            *ngIf="isCommon('base')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("base") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('base')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.base }}
+                            </td>
+                          </ng-container>
+                        </tr>
+
+                        <tr *ngIf="hasValue('protectionClass')">
+                          <td>Protection Class</td>
+                          <td
+                            *ngIf="isCommon('protectionClass')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("protectionClass") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('protectionClass')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.protectionClass }}
+                            </td>
+                          </ng-container>
+                        </tr>
+
+
+                        <tr *ngIf="hasValue('cri')">
+                          <td>CRI</td>
+                          <td
+                            *ngIf="isCommon('cri')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("cri") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('cri')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.protectionClass }}
+                            </td>
+                          </ng-container>
+                        </tr>
+
+                        <tr *ngIf="hasValue('stdPkg')">
+                          <td>Std Pkg.</td>
+                          <td
+                            *ngIf="isCommon('stdPkg')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("stdPkg") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('stdPkg')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.stdPkg }}
+                            </td>
+                          </ng-container>
+                        </tr>
+
+                    
+
+                        <tr *ngIf="hasValue('breaking_capacity')">
+                          <td>Breaking Capacity</td>
+                          <td
+                            *ngIf="isCommon('breaking_capacity')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("breaking_capacity") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('breaking_capacity')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.breaking_capacity }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('MCB_type')">
+                          <td>MCB Type</td>
+                          <td
+                            *ngIf="isCommon('MCB_type')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("MCB_type") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('MCB_type')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.MCB_type }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('curve')">
+                          <td>Curve</td>
+                          <td
+                            *ngIf="isCommon('curve')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("curve") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('curve')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.curve }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('pole')">
+                          <td>Pole</td>
+                          <td
+                            *ngIf="isCommon('pole')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("pole") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('pole')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.pole }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('ampere')">
+                          <td>Ampere</td>
+                          <td
+                            *ngIf="isCommon('ampere')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("ampere") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('ampere')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.ampere }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('sensitivity')">
+                          <td>Sensitivity</td>
+                          <td
+                            *ngIf="isCommon('sensitivity')"
+                            [attr.colspan]="productDetails.specification.length"
+                          >
+                            {{ getCommonValue("sensitivity") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('sensitivity')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.sensitivity }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('door_type')">
+                          <td>Door Type</td>
+                          <td
+                            *ngIf="isCommon('door_type')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("door_type") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('door_type')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.door_type }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('DB_type')">
+                          <td>DB Type</td>
+                          <td
+                            *ngIf="isCommon('DB_type')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("DB_type") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('DB_type')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.DB_type }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('phase')">
+                          <td>Phase</td>
+                          <td
+                            *ngIf="isCommon('phase')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("phase") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('phase')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.phase }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('number_of_way')">
+                          <td>Number Of Ways</td>
+                          <td
+                            *ngIf="isCommon('number_of_way')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("number_of_way") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('number_of_way')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.number_of_way }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('module')">
+                          <td>Module</td>
+                          <td
+                            *ngIf="isCommon('module')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("module") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('module')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.module }}
+                            </td>
+                          </ng-container>
+                        </tr>
+
+                        <tr *ngIf="hasValue('standardConformity')">
+                          <td>Standard Conformity</td>
+                          <td
+                            *ngIf="isCommon('standardConformity')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("standardConformity") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('standardConformity')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.standardConformity }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('noOfPole')">
+                          <td>No. of Pole</td>
+                          <td
+                            *ngIf="isCommon('noOfPole')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("noOfPole") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('noOfPole')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.noOfPole }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('magneticReleaseSetting')">
+                          <td>Magnetic Release Setting</td>
+                          <td
+                            *ngIf="isCommon('magneticReleaseSetting')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("magneticReleaseSetting") }}
+                          </td>
+                          <ng-container
+                            *ngIf="!isCommon('magneticReleaseSetting')"
+                          >
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.magneticReleaseSetting }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('methodOfMounting')">
+                          <td>Method of Mounting</td>
+                          <td
+                            *ngIf="isCommon('methodOfMounting')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("methodOfMounting") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('methodOfMounting')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.methodOfMounting }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('ratedOperationalVoltage')">
+                          <td>Rated Operational Voltage</td>
+                          <td
+                            *ngIf="isCommon('ratedOperationalVoltage')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("ratedOperationalVoltage") }}
+                          </td>
+                          <ng-container
+                            *ngIf="!isCommon('ratedOperationalVoltage')"
+                          >
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.ratedOperationalVoltage }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('ratedCurrent')">
+                          <td>Rated Current</td>
+                          <td
+                            *ngIf="isCommon('ratedCurrent')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("ratedCurrent") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('ratedCurrent')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.ratedCurrent }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('ratedFrequency')">
+                          <td>Rated Frequency</td>
+                          <td
+                            *ngIf="isCommon('ratedFrequency')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("ratedFrequency") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('ratedFrequency')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.ratedFrequency }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('ratedShortCircuitCapacity')">
+                          <td>Rated Short Circuit Capacity</td>
+                          <td
+                            *ngIf="isCommon('ratedShortCircuitCapacity')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("ratedShortCircuitCapacity") }}
+                          </td>
+                          <ng-container
+                            *ngIf="!isCommon('ratedShortCircuitCapacity')"
+                          >
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.ratedShortCircuitCapacity }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('maxValueOfI2t')">
+                          <td>Max. Value of I2 t (Joule Integral)</td>
+                          <td
+                            *ngIf="isCommon('maxValueOfI2t')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("maxValueOfI2t") }}
+                          </td>
+                          <ng-container *ngIf="!isCommon('maxValueOfI2t')">
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                            >
+                              {{ spec?.maxValueOfI2t }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('ratedInsulationVoltage')">
+                          <td>Rated Insulation Voltage</td>
+                          <td
+                            *ngIf="isCommon('ratedInsulationVoltage')"
+                            [attr.colspan]="productDetails.specification.length"
+                            class="common-cell"
+                          >
+                            {{ getCommonValue("ratedInsulationVoltage") }}
+                          </td>
+                          <ng-container
+                            *ngIf="!isCommon('ratedInsulationVoltage')"
+                          >
+                            <td
+                              *ngFor="let spec of productDetails.specification"
+                               class="common-cell"
+                            >
+                              {{ spec?.ratedInsulationVoltage }}
+                            </td>
+                          </ng-container>
+                        </tr>
+                        <tr *ngIf="hasValue('ratedImpulseWithstandsVoltage')">
+                          <td>Rated Impulse With Stand Voltage</td>
+                          <td *ngFor="let spec of productDetails.specification"
+                           class="common-cell">
+                            {{ spec?.ratedImpulseWithstandsVoltage }}
+                          </td>
+                        </tr>
+                        <tr *ngIf="hasValue('materialGroup')">
+                          <td>Material Group</td>
+                          <td *ngFor="let spec of productDetails.specification"
+                           class="common-cell">
+                            {{ spec?.materialGroup }}
+                          </td>
+                        </tr>
+                        <tr *ngIf="hasValue('ipCategory')">
+                          <td>IP Category</td>
+                          <td *ngFor="let spec of productDetails.specification"
+                           class="common-cell">
+                            {{ spec?.ipCategory }}
+                          </td>
+                        </tr>
+                        <tr *ngIf="hasValue('ambientTemp')">
+                          <td>Ambient Temp.</td>
+                          <td *ngFor="let spec of productDetails.specification"
+                           class="common-cell">
+                            {{ spec?.ambientTemp }}
+                          </td>
+                        </tr>
+                        <tr *ngIf="hasValue('tighteningTorque')">
+                          <td>Tightening Torque</td>
+                          <td *ngFor="let spec of productDetails.specification"
+                           class="common-cell">
+                            {{ spec?.tighteningTorque }}
+                          </td>
+                        </tr>
+                        <tr *ngIf="hasValue('dielectricTestVoltage')">
+                          <td>Dielectric Test Voltage</td>
+                          <td *ngFor="let spec of productDetails.specification"
+                           class="common-cell">
+                            {{ spec?.dielectricTestVoltage }}
+                          </td>
+                        </tr>
+
+                        <tr *ngIf="hasValue('energyLimitingClass')">
+                          <td>Energy Limiting Class</td>
+                          <td *ngFor="let spec of productDetails.specification"
+                           class="common-cell">
+                            {{ spec?.energyLimitingClass }}
+                          </td>
+                        </tr>
+                        <tr *ngIf="hasValue('vibration')">
+                          <td>Vibration</td>
+                          <td *ngFor="let spec of productDetails.specification"
+                           class="common-cell">
+                            {{ spec?.vibration }}
+                          </td>
+                        </tr>
+                        <tr *ngIf="hasValue('installationPosition')">
+                          <td>Installation Position</td>
+                          <td *ngFor="let spec of productDetails.specification"
+                           class="common-cell">
+                            {{ spec?.installationPosition }}
+                          </td>
+                        </tr>
+                        <tr *ngIf="hasValue('biConnectTerminal')">
+                          <td>Bi-connect Terminal</td>
+                          <td *ngFor="let spec of productDetails.specification"
+                           class="common-cell">
+                            {{ spec?.biConnectTerminal }}
+                          </td>
+                        </tr>
+                        <tr *ngIf="hasValue('lineAndLoadTerminalCapacity')">
+                          <td>Line & Load Terminal Capacity</td>
+                          <td *ngFor="let spec of productDetails.specification"
+                           class="common-cell">
+                            {{ spec?.lineAndLoadTerminalCapacity }}
+                          </td>
+                        </tr>
+                        <tr *ngIf="hasValue('resistanceToShock')">
+                          <td>Resistant to Shock</td>
+                          <td *ngFor="let spec of productDetails.specification"
+                           class="common-cell">
+                            {{ spec?.resistanceToShock }}
+                          </td>
+                        </tr>
+                        <tr
+                          *ngIf="
+                            hasValue('enduranceMechanicalElectricalCycles')
+                          "
+                        >
+                          <td>Endurance Mechanical & Electrical Cycles</td>
+                          <td *ngFor="let spec of productDetails.specification"
+                           class="common-cell">
+                            {{ spec?.enduranceMechanicalElectricalCycles }}
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <!-- <td>Swivel</td>
+                          <td *ngFor="let spec of productDetails.specification">
+                            {{ spec.swivelArrangement }}
+                          </td> -->
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+
+                <div class="tf-product-info-choose-option">
+                  <div
+                    class="d-flex justify-content-center align-items-center gap-3 mt-4"
+                  >
+                    <a
+                      routerLink="/contact-us"
+                      class="tf-btn-new green-btn btn-fill wow fadeInUp"
+                    >
+                      <span
+                        class="text text-button d-flex align-items-center gap-2"
+                      >
+                        <i class="icon icon-mail"></i>
+                        <span> Enquire Now </span>
+                      </span>
+                    </a>
+                  
+
+              <button
+  type="button"
+  class="btn-style-1 tf-btn-border"
+  (click)="openBrochure(productDetails?._id)"
+  [disabled]="isLoadingBrochure"
+>
+                      <svg
+                        class="me-2"
+                        version="1.1"
+                        id="_x34_"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 512 512"
+                        xml:space="preserve"
+                        width="24px"
+                        height="24px"
+                        fill="#000000"
+                      >
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g
+                          id="SVGRepo_tracerCarrier"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <g>
+                            <polygon
+                              style="fill: #fffefe"
+                              points="475.435,117.825 475.435,512 47.791,512 47.791,0.002 357.613,0.002 412.491,54.881 "
+                            ></polygon>
+                            <rect
+                              x="36.565"
+                              y="34.295"
+                              style="fill: #b43331"
+                              width="205.097"
+                              height="91.768"
+                            ></rect>
+                            <g>
+                              <g>
+                                <path
+                                  style="fill: #fffefe"
+                                  d="M110.133,64.379c-0.905-2.186-2.111-4.146-3.769-5.804c-1.659-1.658-3.694-3.015-6.031-3.92 c-2.412-0.98-5.127-1.432-8.141-1.432H69.652v58.195h11.383V89.481h11.157c3.015,0,5.729-0.452,8.141-1.432 c2.337-0.905,4.371-2.261,6.031-3.92c1.658-1.658,2.865-3.543,3.769-5.804c0.828-2.186,1.281-4.523,1.281-6.935 C111.413,68.902,110.961,66.565,110.133,64.379z M97.845,77.118c-1.508,1.432-3.618,2.186-6.182,2.186H81.035V63.323h10.628 c2.564,0,4.674,0.754,6.182,2.261c1.432,1.432,2.185,3.392,2.185,5.804C100.031,73.726,99.277,75.686,97.845,77.118z"
+                                ></path>
+                                <path
+                                  style="fill: #fffefe"
+                                  d="M164.558,75.761c-0.075-2.035-0.15-3.844-0.377-5.503c-0.225-1.659-0.603-3.166-1.131-4.598 c-0.527-1.357-1.206-2.714-2.111-3.92c-2.035-2.94-4.522-5.126-7.312-6.483c-2.864-1.357-6.256-2.035-10.252-2.035H122.42v58.195 h20.956c3.996,0,7.388-0.678,10.252-2.035c2.79-1.357,5.277-3.543,7.312-6.483c0.905-1.206,1.584-2.563,2.111-3.92 c0.528-1.432,0.905-2.94,1.131-4.598c0.227-1.658,0.301-3.468,0.377-5.503c0.075-1.96,0.075-4.146,0.075-6.558 C164.633,79.908,164.633,77.721,164.558,75.761z M153.175,88.2c0,1.734-0.15,3.091-0.302,4.297 c-0.151,1.131-0.376,2.186-0.678,2.94c-0.301,0.829-0.754,1.583-1.281,2.261c-1.885,2.412-4.749,3.543-8.518,3.543h-8.668V63.323 h8.668c3.769,0,6.634,1.206,8.518,3.618c0.528,0.678,0.98,1.357,1.281,2.186c0.302,0.829,0.528,1.809,0.678,3.015 c0.152,1.131,0.302,2.563,0.302,4.221c0.075,1.659,0.075,3.694,0.075,5.955C153.251,84.581,153.251,86.541,153.175,88.2z"
+                                ></path>
+                                <path
+                                  style="fill: #fffefe"
+                                  d="M213.18,63.323V53.222h-38.37v58.195h11.383V87.823h22.992V77.646h-22.992V63.323H213.18z"
+                                ></path>
+                              </g>
+                              <g>
+                                <path
+                                  style="fill: #fffefe"
+                                  d="M110.133,64.379c-0.905-2.186-2.111-4.146-3.769-5.804c-1.659-1.658-3.694-3.015-6.031-3.92 c-2.412-0.98-5.127-1.432-8.141-1.432H69.652v58.195h11.383V89.481h11.157c3.015,0,5.729-0.452,8.141-1.432 c2.337-0.905,4.371-2.261,6.031-3.92c1.658-1.658,2.865-3.543,3.769-5.804c0.828-2.186,1.281-4.523,1.281-6.935 C111.413,68.902,110.961,66.565,110.133,64.379z M97.845,77.118c-1.508,1.432-3.618,2.186-6.182,2.186H81.035V63.323h10.628 c2.564,0,4.674,0.754,6.182,2.261c1.432,1.432,2.185,3.392,2.185,5.804C100.031,73.726,99.277,75.686,97.845,77.118z"
+                                ></path>
+                              </g>
+                            </g>
+                            <polygon
+                              style="opacity: 0.08; fill: #040000"
+                              points="475.435,117.825 475.435,512 47.791,512 47.791,419.581 247.706,219.667 259.541,207.832 266.099,201.273 277.029,190.343 289.995,177.377 412.491,54.881 "
+                            ></polygon>
+                            <polygon
+                              style="fill: #bbbbba"
+                              points="475.435,117.836 357.6,117.836 357.6,0 "
+                            ></polygon>
+                            <g>
+                              <path
+                                style="fill: #b43331"
+                                d="M414.376,370.658c-2.488-4.372-5.88-8.518-10.101-12.287c-3.467-3.166-7.538-6.106-12.137-8.82 c-18.543-10.93-45.003-16.207-80.961-16.207h-3.618c-1.96-1.809-3.996-3.618-6.106-5.503 c-13.644-12.287-24.499-25.63-32.942-40.48c16.583-36.561,24.499-69.126,23.519-96.867c-0.151-4.674-0.83-9.046-2.036-13.117 c-1.808-6.558-4.824-12.363-9.046-17.112c-0.075-0.075-0.075-0.075-0.15-0.151c-6.709-7.538-16.056-11.835-25.555-11.835 c-9.574,0-18.393,4.146-24.802,11.76c-6.331,7.538-9.724,17.866-9.875,30.002c-0.225,18.544,1.282,36.108,4.448,52.315 c0.301,1.282,0.528,2.563,0.829,3.844c3.166,14.7,7.84,28.645,13.871,41.611c-7.086,14.398-14.248,26.836-19.222,35.279 c-3.769,6.408-7.916,13.117-12.213,19.826c-19.373,3.468-35.807,7.689-50.129,12.966c-19.374,7.011-34.903,16.056-46.059,26.836 c-7.238,6.935-12.137,14.323-14.55,22.012c-2.563,7.915-2.411,15.83,0.453,22.916c2.638,6.558,7.387,12.061,13.719,15.83 c1.508,0.905,3.091,1.658,4.749,2.337c4.825,1.96,10.102,3.015,15.604,3.015c12.74,0,25.856-5.503,36.938-15.378 c20.654-18.469,41.988-48.169,54.576-66.94c10.327-1.583,21.559-2.94,34.224-4.297c14.927-1.508,28.118-2.412,40.104-2.865 c3.694,3.317,7.237,6.483,10.63,9.498c18.846,16.81,33.168,28.947,46.134,37.465c0,0.075,0.075,0.075,0.15,0.075 c5.127,3.392,10.026,6.181,14.926,8.443c5.502,2.563,11.081,3.92,16.81,3.92c7.237,0,14.021-2.186,19.675-6.181 c5.729-4.146,9.875-10.101,11.76-16.81C420.181,387.694,418.899,378.724,414.376,370.658z M247.706,219.667 c-1.056-9.348-1.508-19.072-1.357-29.324c0.15-9.724,3.694-16.283,8.895-16.283c3.919,0,8.066,3.543,9.951,10.327 c0.528,2.035,0.905,4.372,0.98,7.01c0.15,3.166,0.075,6.483-0.075,9.875c-0.452,9.574-2.112,19.75-4.976,30.681 c-1.734,7.011-3.995,14.323-6.784,21.936C251.173,243.186,248.911,231.803,247.706,219.667z M121.968,418.073 c-1.282-3.166,0.15-9.272,7.99-16.81c11.985-11.458,30.755-20.504,56.914-27.364c-4.976,6.784-9.875,12.966-14.625,18.619 c-7.237,8.744-14.172,16.132-20.429,21.71c-5.351,4.824-11.232,7.84-16.81,8.594c-0.98,0.151-1.96,0.226-2.94,0.226 C127.169,423.049,123.173,421.089,121.968,418.073z M242.428,337.942l0.528-0.829l-0.829,0.151 c0.15-0.377,0.377-0.754,0.602-1.055c3.167-5.352,7.161-12.212,11.458-20.127l0.377,0.829l0.98-2.035 c3.166,4.523,6.634,8.971,10.252,13.267c1.735,2.035,3.544,3.995,5.352,5.955l-1.205,0.075l1.055,0.98 c-3.09,0.226-6.331,0.528-9.573,0.829c-2.036,0.226-4.147,0.377-6.257,0.603C250.796,337.037,246.499,337.49,242.428,337.942z M369.298,384.98c-8.97-5.729-18.997-13.795-31.36-24.575c17.564,1.809,31.36,5.654,41.159,11.383 c4.297,2.488,7.538,5.051,9.724,7.538c3.619,3.844,4.901,7.312,4.221,9.649c-0.602,2.337-3.241,3.92-6.483,3.92 c-1.885,0-3.844-0.452-5.879-1.432c-3.468-1.658-7.086-3.694-10.931-6.181C369.598,385.282,369.448,385.131,369.298,384.98z"
+                              ></path>
+                            </g>
+                          </g>
+                        </g>
+                      </svg>
+                        <ng-container *ngIf="!isLoadingBrochure; else loadingTpl">
+                      Download Specification
+                      </ng-container>
+
+  <ng-template #loadingTpl>
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    &nbsp; Generating...
+  </ng-template>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section
+  class="flat-spacing pt-0"
+  *ngIf="relatedProducts.length"
+  class="common-cell"
+>
+  <div class="container-fluid flat-animate-tab">
+    <ul
+      class="tab-product justify-content-start wow fadeInUp"
+      data-wow-delay="0s"
+      role="tablist"
+    >
+      <li class="nav-tab-item" role="presentation">
+        <a
+          href="#ralatedProducts"
+          class="active"
+          data-bs-toggle="tab"
+          aria-selected="true"
+          role="tab"
+        >
+          Related Products
+        </a>
+      </li>
+    </ul>
+
+    <div
+      dir="ltr"
+      class="swiper tf-sw-latest"
+      data-preview="4"
+      data-tablet="3"
+      data-mobile="1"
+      data-space-lg="30"
+      data-space-md="30"
+      data-space="15"
+      data-pagination="1"
+      data-pagination-md="1"
+      data-pagination-lg="1"
+    >
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" *ngFor="let product of relatedProducts">
+          <div
+            class="card-product grid wow fadeInUp"
+            data-wow-delay="0.3s"
+            data-brand="adidas"
+          >
+            <div class="card-product-wrapper">
+              <a
+                [routerLink]="['/product-details', product._id]"
+                class="product-img"
+              >
+                <img
+                  class="lazyload img-product"
+                  [src]="product.image?.[0]?.url"
+                  alt="image-product"
+                />
+                <img
+                  class="lazyload img-hover"
+                  [src]="product.image?.[1]?.url || product.image?.[0]?.url"
+                  alt="image-product"
+                />
+              </a>
+            </div>
+            <div class="card-product-info">
+              <a
+                [routerLink]="['/product-details', product._id]"
+                class="title link"
+                >{{ product.productName }}</a
+              >
+              <p
+                [innerHTML]="
+                  productDetails?.description?.length > 100
+                    ? (productDetails.description | slice : 0 : 125) + '...'
+                    : productDetails.description
+                "
+              ></p>
+              <div class="total-lb wow fadeInUp text-center">
+                <a
+                  [routerLink]="['/product-details', product._id]"
+                  class="tf-btn-new green-btn btn-fill wow fadeInUp"
+                >
+                  <span class="text text-button">View Details</span>
+                  <i class="icon icon-arrowUpRight"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sw-pagination-latest sw-dots type-circle justify-content-center"
+      ></div>
+    </div>
+  </div>
+</section>

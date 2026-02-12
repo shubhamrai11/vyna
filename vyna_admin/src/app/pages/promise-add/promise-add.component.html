@@ -1,0 +1,141 @@
+<body class="ltr main-body leftmenu">
+  <div class="page">
+    <!-- Header -->
+    <div class="main-header side-header sticky">
+      <div class="main-container container-fluid">
+        <div class="main-header-left">
+          <a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
+          <!-- <div class="hor-logo">
+            <a class="main-logo" [routerLink]="['/pages/dashboard']">
+              <img src="./assets/img/brand/logo.png" class="header-brand-img desktop-logo" />
+              <img src="./assets/img/brand/logo-light.png" class="header-brand-img desktop-logo-dark" />
+            </a>
+          </div> -->
+        </div>
+        <div class="main-header-center">
+          <div class="input-group">
+            <h3 *ngIf="!isEdit">Add Philospy</h3>
+            <h3 *ngIf="isEdit">Edit Philospy</h3>
+          </div>
+        </div>
+        <div class="main-header-right">
+          <div class="navbar navbar-expand-lg nav nav-item navbar-nav-right responsive-navbar navbar-dark">
+            <div class="collapse navbar-collapse">
+              <div class="d-flex order-lg-2 ms-auto">
+                <app-header></app-header>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+
+    <!-- Main Content -->
+    <div class="main-content side-content pt-0">
+      <div class="main-container container-fluid">
+        <div class="inner-body">
+          <div class="page-header d-flex align-items-center justify-content-between mt-3 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <button class="back-button" [routerLink]="['/pages/promise']">
+                <i class="fe fe-arrow-left me-1"></i> Back
+              </button>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <form [formGroup]="promiseForm" (ngSubmit)="submitForm()">
+            <div class="card custom-card shadow-sm">
+              <div class="card-body">
+                <!-- Heading -->
+                <div class="mb-3">
+                  <label class="form-label">Heading<span class="text-danger">*</span></label>
+                  <input type="text" formControlName="heading" class="form-control" placeholder="Enter Heading" />
+                  <div class="text-danger"
+                    *ngIf="promiseForm.get('heading')?.touched && promiseForm.get('heading')?.invalid">
+                    Heading is required
+                  </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                  <label class="form-label">Description<span class="text-danger">*</span></label>
+                  <angular-editor formControlName="description" [config]="config"></angular-editor>
+                  <div class="text-danger"
+                    *ngIf="promiseForm.get('description')?.touched && promiseForm.get('description')?.invalid">
+                    Description is required
+                  </div>
+                </div>
+                <!-- Points -->
+                <div class="mb-3">
+                  <label class="form-label">Points<span class="text-danger">*</span></label>
+                  <div formArrayName="points">
+                    <div *ngFor="let point of points.controls; let i = index" [formGroupName]="i"
+                      class="row g-2 mb-2 align-items-start">
+
+                      <!-- File + Image Preview -->
+                      <div class="col-md-12">
+                        <div class="d-flex align-items-center gap-1" style="min-height: 60px;">
+                          <input type="file" accept="image/*" class="form-control"   style="width: auto; max-width: 100px;"
+                            (change)="onIconUpload($event, i)" />
+                          <img *ngIf="point.get('iconPreview')?.value" [src]="point.get('iconPreview')?.value"
+                            alt="Preview" width="100" height="70" class="border rounded" />
+                        </div>
+                        <div class="text-danger mt-1" *ngIf="point.get('icon')?.touched && point.get('icon')?.invalid">
+                          Image is required
+                        </div>
+                      </div>
+
+                      <!-- Title -->
+                      <div class="col-md-4">
+                        <input formControlName="title" placeholder="Title" class="form-control" />
+                        <div class="text-danger mt-1"
+                          *ngIf="point.get('title')?.touched && point.get('title')?.invalid">
+                          Title is required
+                        </div>
+                      </div>
+
+                      <!-- Subtitle -->
+                      <!-- <div class="col-md-4">
+                        <input formControlName="subtitle" placeholder="Subtitle" class="form-control" />
+                        <div class="text-danger mt-1"
+                          *ngIf="point.get('subtitle')?.touched && point.get('subtitle')?.invalid">
+                          Subtitle is required
+                        </div>
+                      </div> -->
+                      <div class="col-md-4">
+                        <input formControlName="description" placeholder="Description" class="form-control" />
+                        <div class="text-danger mt-1"
+                          *ngIf="point.get('description')?.touched && point.get('description')?.invalid">
+                          Description is required
+                        </div>
+                      </div>
+                      <!-- Remove Button -->
+                      <div class="col-md-1">
+                        <button type="button" class="btn btn-outline-danger w-100" (click)="removePoint(i)">X</button>
+                      </div>
+                    </div>
+                    <button type="button" class="btn btn-primary mb-3" (click)="addPoint()">+ Add Point</button>
+                  </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="d-flex justify-content-end mt-4">
+                  <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+                    <i class="fe fe-save me-1"></i>
+                    {{ isEdit ? 'Update Philospy' : 'Add Philospy' }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <app-footer></app-footer>
+  </div>
+</body>

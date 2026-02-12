@@ -1,0 +1,127 @@
+<body class="ltr main-body leftmenu">
+    <!-- Page -->
+    <div class="page">
+        <!-- Main Header -->
+        <div class="main-header side-header sticky">
+            <div class="main-container container-fluid">
+                <div class="main-header-left">
+                    <a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
+                    <div class="hor-logo">
+                        <!-- <a class="main-logo" [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo.png" class="header-brand-img desktop-logo" alt="logo" />
+                            <img src="./assets/img/brand/logo-light.png" class="header-brand-img desktop-logo-dark"
+                                alt="logo" />
+                        </a> -->
+                    </div>
+                </div>
+                <div class="main-header-center">
+                    <div class="responsive-logo">
+                        <!-- <a [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo.png" class="mobile-logo" alt="logo" />
+                        </a>
+                        <a [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo-light.png" class="mobile-logo-dark" alt="logo" />
+                        </a> -->
+                    </div>
+                    <div class="input-group">
+                        <h3 *ngIf="!isEdit">Create </h3>
+                        <h3 *ngIf="isEdit">Edit </h3>
+
+                    </div>
+                </div>
+                <div class="main-header-right">
+                    <button class="navbar-toggler navresponsive-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+                    </button>
+                    <div class="navbar navbar-expand-lg nav nav-item navbar-nav-right responsive-navbar navbar-dark">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                            <div class="d-flex order-lg-2 ms-auto">
+
+                                <app-header></app-header>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Header -->
+
+        <!-- Sidemenu -->
+        <app-sidebar></app-sidebar>
+        <!-- End Sidemenu -->
+
+        <!-- Main Content -->
+        <div class="main-content side-content pt-0">
+            <div class="main-container container-fluid">
+                <div class="inner-body">
+                    <!-- Page Header -->
+                    <div class="page-header d-flex align-items-center justify-content-between mt-3 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <button class="back-button" [routerLink]="['/pages/content']">
+                                <i class="fe fe-arrow-left me-1"></i> Back
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+                    <div class="container mt-4">
+
+                        <!-- Form -->
+                        <form [formGroup]="addServiceCategory" (ngSubmit)="addCategory()" enctype="multipart/form-data">
+                            <input type="hidden" />
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card custom-card shadow-sm">
+                                        <div class="card-body">
+                                            <div class="row">
+
+                                                <!-- Category Name -->
+                                                <!-- <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Title<span class="text-danger">*</span></label>
+                                                    <input type="text" formControlName="title"
+                                                        class="form-control" placeholder="Enter Title" readonly />
+                                                  
+                                                </div> -->
+
+                                                <!-- Category Description -->
+                                            
+
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Content<span class="text-danger">*</span></label>
+                                                    <!-- <textarea formControlName="description" class="form-control"
+                                                        rows="4" placeholder="Enter Description"></textarea> -->
+                                                         <angular-editor formControlName="content" [config]="config"></angular-editor>
+                                                    <div *ngIf="addServiceCategory.get('content')?.touched && addServiceCategory.get('content')?.invalid"
+                                                        class="text-danger mt-1">Content is required</div>
+                                                </div>
+                                             
+                                            </div>
+
+                                            <!-- Submit Button -->
+                                            <div class="d-flex justify-content-end pt-3">
+                                                <button type="submit" class="btn btn-outline-primary" [disabled]="isSubmitting">
+                                                    <i class="fe fe-save me-1"></i> {{ isEdit ? 'Update' : 'Add' }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- End Form -->
+
+                    </div>
+
+                    <!-- End Form -->
+                </div>
+            </div>
+        </div>
+        <!-- End Main Content -->
+
+        <!-- Footer -->
+        <app-footer></app-footer>
+    </div>
+</body>

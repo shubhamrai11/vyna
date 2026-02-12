@@ -1,0 +1,53 @@
+.menu{
+    cursor: pointer;
+}
+
+.main-sidebar-body .nav-label {
+    text-transform: uppercase;
+    font-size: 11.49px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #fff;
+    padding: 23px 0px 0 0;
+  }
+  .admin-highlight {
+  display: inline-block;
+  width: 90%; /* Makes it stretch full sidebar width */
+  text-align: center;
+  padding: 12px 0;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #dfe4e9;
+  color: #fff !important;
+  border-radius: 6px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  margin-bottom: 3px;
+}
+
+.admin-highlight:hover {
+  background-color: #7f878f;
+  text-decoration: none;
+}
+
+
+
+
+
+.main-menu,
+.main-sidebar,
+.main-sidebar-body {
+  min-height: 100vh;  /* allow content to expand if needed */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+
+.main-sidebar-body li.active::before {
+    width: auto; /* or a bigger fixed width */
+}
+.main-sidebar-body {
+  padding-bottom: 30px; /* prevents "Contact Us" from sticking to bottom edge */
+}

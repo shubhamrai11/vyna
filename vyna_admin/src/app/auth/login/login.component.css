@@ -1,0 +1,57 @@
+.danger {
+  color: red;
+}
+
+/* .landing-page {
+    @import 'assets/css/landing-page.css';
+  } */
+
+.link-text {
+  color: var(--primary-bg-color);
+  text-decoration: none;
+}
+.link-text:hover {
+  cursor: pointer;         /* 👈 shows hyperlink cursor */
+
+}
+
+
+
+
+mat-icon {
+  font-size: 16px !important;
+  text-align: end;
+  cursor: pointer;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  /* Transparent white background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+
+element.style {}
+
+button:not(:disabled),
+[type="button"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[type="submit"]:not(:disabled) {
+  /* cursor: pointer; */
+}
+
+

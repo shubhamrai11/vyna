@@ -1,0 +1,228 @@
+<!-- ========================================
+     HERO SECTION
+     ======================================== -->
+<section class="pr-hero">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1 class="hero-title">
+          <span class="font-light">Press &amp; </span>Media
+        </h1>
+        <p class="hero-subtitle">
+          Stay updated with the latest news, upcoming industry events, and video content from the world of electrical innovation.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Breadcrumbs -->
+<section class="flat-spacing pt-0 pb-0">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <ul class="breadcrumbs py-4 d-flex align-items-center">
+          <li><a class="link" routerLink="/">Home</a></li>
+          <li><i class="icon-arrRight"></i></li>
+          <li>PR</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     TAB NAVIGATION
+     ======================================== -->
+<section class="pr-tabs-section">
+  <div class="container-fluid">
+    <div class="pr-tabs-bar">
+      <button
+        *ngFor="let tab of tabs"
+        class="pr-tab-btn"
+        [class.active]="activeTab === tab.id"
+        (click)="switchTab(tab.id)"
+        [attr.aria-selected]="activeTab === tab.id"
+        role="tab"
+      >
+        <mat-icon class="tab-icon">{{ tab.icon }}</mat-icon>
+        <span class="tab-label">{{ tab.label }}</span>
+        <span class="tab-count" *ngIf="activeTab === tab.id">{{ getActiveTabCount() }}</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     NEWS TAB
+     ======================================== -->
+<section class="pr-content-section" *ngIf="activeTab === 'news'">
+  <div class="container-fluid">
+    <div class="section-intro">
+      <h2 class="section-heading">
+        <span class="font-light">Latest </span>News
+      </h2>
+      <p class="section-desc">Industry insights, product updates, and developments in the electrical sector.</p>
+    </div>
+
+    <div class="news-grid">
+      <a
+        *ngFor="let item of newsItems"
+        class="news-card"
+        [href]="item.externalUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="news-card-image">
+          <img [src]="item.imageUrl" [alt]="item.title" loading="lazy" />
+          <span class="news-tag">{{ item.tag }}</span>
+        </div>
+        <div class="news-card-body">
+          <div class="news-meta">
+            <span class="news-source">{{ item.source }}</span>
+            <span class="news-dot"></span>
+            <span class="news-date">{{ item.date }}</span>
+          </div>
+          <h4 class="news-title">{{ item.title }}</h4>
+          <p class="news-summary">{{ item.summary }}</p>
+          <span class="news-read-more">
+            Read Article
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17l9.2-9.2M17 17V7H7"/>
+            </svg>
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     EVENTS TAB
+     ======================================== -->
+<section class="pr-content-section" *ngIf="activeTab === 'events'">
+  <div class="container-fluid">
+    <div class="section-intro">
+      <h2 class="section-heading">
+        <span class="font-light">Upcoming </span>Events
+      </h2>
+      <p class="section-desc">Exhibitions, conferences, and industry gatherings shaping the future of electrical solutions.</p>
+    </div>
+
+    <div class="events-grid">
+      <a
+        *ngFor="let item of eventItems"
+        class="event-card"
+        [href]="item.externalUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="event-card-image">
+          <img [src]="item.imageUrl" [alt]="item.title" loading="lazy" />
+          <div class="event-overlay">
+            <mat-icon class="event-play-icon">open_in_new</mat-icon>
+          </div>
+          <span class="event-tag">{{ item.tag }}</span>
+        </div>
+        <div class="event-card-body">
+          <h4 class="event-title">{{ item.title }}</h4>
+          <div class="event-details">
+            <div class="event-detail-row">
+              <mat-icon class="event-detail-icon">calendar_today</mat-icon>
+              <span>{{ item.date }}</span>
+            </div>
+            <div class="event-detail-row">
+              <mat-icon class="event-detail-icon">location_on</mat-icon>
+              <span>{{ item.location }}</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     VIDEOS TAB
+     ======================================== -->
+<section class="pr-content-section" *ngIf="activeTab === 'videos'">
+  <div class="container-fluid">
+    <div class="section-intro">
+      <h2 class="section-heading">
+        <span class="font-light">Featured </span>Videos
+      </h2>
+      <p class="section-desc">Watch expert walkthroughs, product demos, and educational content on electrical systems.</p>
+    </div>
+
+    <!-- Featured Video Player -->
+    <div class="video-player-wrapper" *ngIf="featuredVideoUrl">
+      <div class="video-player-container">
+        <div class="video-aspect-ratio">
+          <iframe
+            [src]="featuredVideoUrl"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            title="Featured Video Player"
+          ></iframe>
+        </div>
+      </div>
+      <div class="video-player-info">
+        <h3 class="featured-video-title">{{ featuredVideoTitle }}</h3>
+        <p class="featured-video-desc">{{ featuredVideoDescription }}</p>
+      </div>
+    </div>
+
+    <!-- Video Thumbnails Grid -->
+    <div class="video-grid-header">
+      <h4 class="video-grid-label">All Videos</h4>
+      <span class="video-grid-count">{{ videoItems.length }} videos</span>
+    </div>
+
+    <div class="videos-grid">
+      <div
+        *ngFor="let video of videoItems"
+        class="video-card"
+        [class.active]="featuredVideoId === video.id"
+        (click)="setFeaturedVideo(video)"
+        role="button"
+        tabindex="0"
+        (keydown.enter)="setFeaturedVideo(video)"
+        [attr.aria-label]="'Play ' + video.title"
+      >
+        <div class="video-card-thumb">
+          <img [src]="video.thumbnailUrl" [alt]="video.title" loading="lazy" />
+          <div class="video-thumb-overlay">
+            <div class="video-play-btn">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
+          <span class="video-duration">{{ video.duration }}</span>
+          <div class="video-active-badge" *ngIf="featuredVideoId === video.id">
+            <mat-icon>play_arrow</mat-icon>
+            Now Playing
+          </div>
+        </div>
+        <div class="video-card-body">
+          <h5 class="video-card-title">{{ video.title }}</h5>
+          <span class="video-card-date">{{ video.date }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     CTA SECTION
+     ======================================== -->
+<section class="pr-cta">
+  <div class="container-fluid">
+    <div class="cta-inner">
+      <h3 class="cta-title">Have a media enquiry?</h3>
+      <p class="cta-subtitle">Reach out to our communications team for press kits, interviews, or partnership opportunities.</p>
+      <a routerLink="/contact-us" class="cta-button">Get in Touch</a>
+    </div>
+  </div>
+</section>

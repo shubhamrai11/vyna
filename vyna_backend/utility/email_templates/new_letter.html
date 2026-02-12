@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>New FAQ Query</title>
+    <style>
+      body {
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", sans-serif;
+      }
+      .email-wrapper {
+        width: 100%;
+        padding: 30px 0;
+      }
+      .email-container {
+        max-width: 600px;
+        margin: auto;
+        background: #ffffff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        background-color: #d32f2f;
+        color: #ffffff;
+        padding: 20px;
+        text-align: center;
+      }
+      .header h2 {
+        margin: 0;
+      }
+      .content {
+        padding: 30px;
+      }
+      .content h3 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .content p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
+      }
+      .label {
+        font-weight: bold;
+        color: #000;
+      }
+      .footer {
+        text-align: center;
+        font-size: 13px;
+        color: #999;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="email-wrapper">
+      <div class="email-container">
+        <div class="header">
+          <h2>📩 News Letter Received</h2>
+        </div>
+        <div class="content">
+          <h3>
+            A news letter has been received. Please find the details below:
+          </h3>
+
+          <ul>
+            <li><strong>Sender Email:</strong> {email}</li>
+          </ul>
+        </div>
+        <div class="footer">
+          &copy; 2025 Vyna Electric. This is an automated email notification.
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

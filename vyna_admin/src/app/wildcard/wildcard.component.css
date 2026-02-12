@@ -1,0 +1,37 @@
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f7f7f7;
+  font-family: Arial, sans-serif;
+}
+
+.error-content {
+  text-align: center;
+}
+
+.error-code {
+  font-size: 100px;
+  color:  #0c0c0c;
+  margin-bottom: 20px;
+}
+
+.error-message {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.back-home-btn {
+  font-size: 16px;
+  color: white;
+  background-color:#121313;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.back-home-btn:hover {
+  background-color: #0a0a0a;
+}

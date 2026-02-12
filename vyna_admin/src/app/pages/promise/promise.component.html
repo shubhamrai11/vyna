@@ -1,0 +1,130 @@
+<body class="ltr main-body leftmenu">
+    <!-- Page -->
+    <div class="page">
+        <!-- Main Header-->
+        <div class="main-header side-header sticky">
+            <div class="main-container container-fluid">
+                <div class="main-header-left">
+                    <a class="main-header-menu-icon" [routerLink]="['/pages/dashboard']"
+                        id="mainSidebarToggle"><span></span></a>
+                    <!-- <div class="hor-logo">
+                        <a class="main-logo" [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
+                            <img src="./assets/img/brand/logo-light.png" class="header-brand-img desktop-logo-dark"
+                                alt="logo">
+                        </a>
+                    </div> -->
+                </div>
+                <div class="main-header-center">
+                    <div class="responsive-logo">
+                        <!-- <a [routerLink]="['/pages/dashboard']"><img src="./assets/img/brand/logo.png"
+                                class="mobile-logo" alt="logo"></a>
+                        <a [routerLink]="['/pages/dashboard']"><img src="./assets/img/brand/logo-light.png"
+                                class="mobile-logo-dark" alt="logo"></a> -->
+                    </div>
+                    <div class="input-group">
+                        <h5 class="fw-bold mb-0">
+                            <i class="ti-hand-open sidemenu-icon menu-icon" style="color: gray;"></i> Our Philospy
+                        </h5>
+                    </div>
+
+                </div>
+                <div class="main-header-right">
+                    <button class="navbar-toggler navresponsive-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+                    </button>
+                    <div class="navbar navbar-expand-lg nav nav-item navbar-nav-right responsive-navbar navbar-dark">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                            <div class="d-flex order-lg-2 ms-auto">
+
+                                <app-header></app-header>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Header-->
+
+        <!-- Sidemenu -->
+        <app-sidebar></app-sidebar>
+        <!-- End Sidemenu -->
+
+        <!-- Main Content-->
+        <div class="main-content side-content pt-0">
+            <div class="main-container container-fluid">
+
+                <div class="inner-body">
+
+                    <!-- Page Header -->
+                    <!-- Page Header with Add Button -->
+                    <div class="page-header d-flex justify-content-between align-items-center mt-3 mb-4">
+                        <h5 class="mb-0 fw-bold">
+
+                        </h5>
+                        <!-- <a [routerLink]="['/pages/promise-add']" class="btn btn-primary">
+                            <i class="fe fe-plus me-1"></i> Add
+                        </a> -->
+
+                    </div>
+
+
+                    <!-- Page Header -->
+
+
+                    <!-- Table Section -->
+                    <div class="row row-sm">
+                        <div class="col-md-12">
+                            <div class="card custom-card shadow-sm">
+                                <div class="card-body">
+                                    <div class="table-responsive text-center">
+                                        <table class="table table-bordered table-hover table-striped text-nowrap">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>S NO.</th>
+                                                    <th>Heading </th>
+                                                    <th>Description </th>
+
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let user of dataList; let i = index">
+                                                    <td>{{ i + 1 }}</td>
+                                                    <td>{{ user.heading || 'NA' }}</td>
+                                                    <td [innerHTML]="getTrimmedDescription(user?.description) || 'NA'">
+                                                    <td>
+                                                        <a [routerLink]="['/pages/promise-add/edit', user._id]"
+                                                            class="btn btn-sm btn-outline-primary me-2">
+                                                            <!-- Added me-2 for right margin -->
+                                                            <i class="fe fe-edit"></i> Edit
+                                                        </a>
+                                                        <!-- <button mat-icon-button class="delete-button" title="Delete"
+                                                            (click)="DeleteAccount(user._id)">
+                                                            <mat-icon>delete</mat-icon>
+                                                        </button> -->
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+ 
+
+                </div>
+            </div>
+        </div>
+        <!-- End Main Content-->
+
+        <!-- Main Footer-->
+        <app-footer></app-footer>
+        <!--End Footer-->
+    </div>
+</body>

@@ -1,0 +1,198 @@
+<body class="ltr main-body leftmenu">
+    <!-- Page -->
+    <div class="page">
+        <!-- Main Header -->
+        <div class="main-header side-header sticky">
+            <div class="main-container container-fluid">
+                <div class="main-header-left">
+                    <a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
+                    <div class="hor-logo">
+                        <!-- <a class="main-logo" [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo.png" class="header-brand-img desktop-logo" alt="logo" />
+                            <img src="./assets/img/brand/logo-light.png" class="header-brand-img desktop-logo-dark"
+                                alt="logo" />
+                        </a> -->
+                    </div>
+                </div>
+                <div class="main-header-center">
+                    <div class="responsive-logo">
+                        <!-- <a [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo.png" class="mobile-logo" alt="logo" />
+                        </a>
+                        <a [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo-light.png" class="mobile-logo-dark" alt="logo" />
+                        </a> -->
+                    </div>
+                    <div class="input-group">
+                        <h3 *ngIf="!isEdit">Create Category</h3>
+                        <h3 *ngIf="isEdit">Edit Category </h3>
+
+                    </div>
+                </div>
+                <div class="main-header-right">
+                    <button class="navbar-toggler navresponsive-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+                    </button>
+                    <div class="navbar navbar-expand-lg nav nav-item navbar-nav-right responsive-navbar navbar-dark">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                            <div class="d-flex order-lg-2 ms-auto">
+
+                                <app-header></app-header>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Header -->
+
+        <!-- Sidemenu -->
+        <app-sidebar></app-sidebar>
+        <!-- End Sidemenu -->
+
+        <!-- Main Content -->
+        <div class="main-content side-content pt-0">
+            <div class="main-container container-fluid">
+                <div class="inner-body">
+                    <!-- Page Header -->
+                    <div class="page-header d-flex align-items-center justify-content-between mt-3 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <button class="back-button" [routerLink]="['/pages/category']">
+                                <i class="fe fe-arrow-left me-1"></i> Back
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+                    <div class="container mt-4">
+
+                        <!-- Form -->
+                        <form [formGroup]="addServiceCategory" (ngSubmit)="addCategory()" enctype="multipart/form-data">
+                            <input type="hidden" />
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card custom-card shadow-sm">
+                                        <div class="card-body">
+                                            <div class="row">
+
+                                                <!-- Category Name -->
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Category Name <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" formControlName="category_name"
+                                                        class="form-control" placeholder="Enter Category Name" />
+                                                    <div *ngIf="addServiceCategory.get('category_name')?.touched && addServiceCategory.get('category_name')?.invalid"
+                                                        class="text-danger mt-1">
+                                                        Category name is required.
+                                                    </div>
+                                                </div>
+
+                                                <!-- Category Description -->
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Category Description <span
+                                                            class="text-danger">*</span></label>
+                                                    <angular-editor formControlName="category_description"
+                                                        [config]="config"></angular-editor>
+
+                                                    <div *ngIf="addServiceCategory.get('category_description')?.touched && addServiceCategory.get('category_description')?.invalid"
+                                                        class="text-danger mt-1">
+                                                        Category description is required.
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Category Banner <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="file" (change)="onbannerChange($event)"
+                                                        class="form-control" accept="image/*" />
+                                                    <div *ngIf="selectedBannerPreview" class="mt-2">
+                                                        <img [src]="selectedBannerPreview" alt="Image Preview"
+                                                            width="150" class="img-thumbnail rounded shadow-sm" />
+                                                    </div>
+                                                    <div *ngIf="showBannerError" class="text-danger mt-1">Please upload
+                                                        category banner</div>
+                                                </div>
+                                                  <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Category Banner For Mobile/Tab View <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="file" (change)="onbanner1Change($event)"
+                                                        class="form-control" accept="image/*" />
+                                                    <div *ngIf="selectedBannerPreview1" class="mt-2">
+                                                        <img [src]="selectedBannerPreview1" alt="Image Preview"
+                                                            width="150" class="img-thumbnail rounded shadow-sm" />
+                                                    </div>
+                                                    <div *ngIf="showBannerError1" class="text-danger mt-1">Please upload
+                                                        category banner for mobile/tab view</div>
+                                                </div>
+
+                                                <!-- Category Image -->
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Category Image <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="file" (change)="onImageChange($event)"
+                                                        class="form-control" accept="image/*" />
+                                                    <div *ngIf="selectedImagePreview" class="mt-2">
+                                                        <img [src]="selectedImagePreview" alt="Image Preview"
+                                                            width="150" class="img-thumbnail rounded shadow-sm" />
+                                                    </div>
+                                                    <div *ngIf="showImageError" class="text-danger mt-1">Please upload
+                                                        category image</div>
+                                                </div>
+
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Category Image 1<span class="text-danger">
+                                                            *</span></label>
+                                                    <input type="file" (change)="onImage1Change($event)"
+                                                        class="form-control" accept="image/*" />
+                                                    <div *ngIf="selectedImage1Preview" class="mt-2">
+                                                        <img [src]="selectedImage1Preview" alt="Image Preview"
+                                                            width="150" class="img-thumbnail rounded shadow-sm" />
+                                                    </div>
+                                                    <div *ngIf="showImage1Error" class="text-danger mt-1">Please upload
+                                                        category image 1</div>
+                                                </div>
+
+                                                <!-- Category Logo -->
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Category Logo<span class="text-danger">
+                                                            *</span></label>
+                                                    <input type="file" (change)="onLogoChange($event)"
+                                                        class="form-control" accept="image/*" />
+                                                    <div *ngIf="selectedLogoPreview" class="mt-2">
+                                                        <img [src]="selectedLogoPreview" alt="Logo Preview" width="150"
+                                                            class="img-thumbnail rounded shadow-sm" />
+                                                    </div>
+                                                    <div *ngIf="showImageLogo" class="text-danger mt-1">Please upload
+                                                        category logo</div>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- Submit Button -->
+                                            <div class="d-flex justify-content-end pt-3">
+                                                <button type="submit" class="btn btn-outline-primary"
+                                                    [disabled]="addServiceCategory.invalid || formSubmitted">
+                                                    <i class="fe fe-save me-1"></i> {{ isEdit ? 'Update Category' : 'Add Category' }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- End Form -->
+
+                    </div>
+
+                    <!-- End Form -->
+                </div>
+            </div>
+        </div>
+        <!-- End Main Content -->
+
+        <!-- Footer -->
+        <app-footer></app-footer>
+    </div>
+</body>

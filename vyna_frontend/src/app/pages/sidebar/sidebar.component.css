@@ -1,0 +1,12 @@
+.menu{
+    cursor: pointer;
+}
+
+.main-sidebar-body .nav-label {
+    text-transform: uppercase;
+    font-size: 11.49px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #fff;
+    padding: 23px 0px 0 0;
+  }

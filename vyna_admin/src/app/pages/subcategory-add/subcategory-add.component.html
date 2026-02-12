@@ -1,0 +1,184 @@
+<body class="ltr main-body leftmenu">
+    <!-- Page -->
+    <div class="page">
+        <!-- Main Header -->
+        <div class="main-header side-header sticky">
+            <div class="main-container container-fluid">
+                <div class="main-header-left">
+                    <a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
+                    <div class="hor-logo">
+                        <!-- <a class="main-logo" [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo.png" class="header-brand-img desktop-logo" alt="logo" />
+                            <img src="./assets/img/brand/logo-light.png" class="header-brand-img desktop-logo-dark"
+                                alt="logo" />
+                        </a> -->
+                    </div>
+                </div>
+                <div class="main-header-center">
+                    <div class="responsive-logo">
+                        <!-- <a [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo.png" class="mobile-logo" alt="logo" />
+                        </a>
+                        <a [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo-light.png" class="mobile-logo-dark" alt="logo" />
+                        </a> -->
+                    </div>
+                    <div class="input-group">
+                        <h3 *ngIf="!isEdit">Create Sub-Category </h3>
+                        <h3 *ngIf="isEdit">Edit Sub-Category </h3>
+
+                    </div>
+                </div>
+                <div class="main-header-right">
+                    <button class="navbar-toggler navresponsive-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+                    </button>
+                    <div class="navbar navbar-expand-lg nav nav-item navbar-nav-right responsive-navbar navbar-dark">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                            <div class="d-flex order-lg-2 ms-auto">
+
+                                <app-header></app-header>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Header -->
+
+        <!-- Sidemenu -->
+        <app-sidebar></app-sidebar>
+        <!-- End Sidemenu -->
+
+        <!-- Main Content -->
+        <div class="main-content side-content pt-0">
+            <div class="main-container container-fluid">
+                <div class="inner-body">
+                    <!-- Page Header -->
+                    <div class="page-header d-flex align-items-center justify-content-between mt-3 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <button class="back-button" [routerLink]="['/pages/subcategory']">
+                                <i class="fe fe-arrow-left me-1"></i> Back
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+                    <form [formGroup]="userAddForm" (ngSubmit)="onSubmit()">
+                        <input type="hidden" formControlName="id" />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card custom-card shadow-sm">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Category<span
+                                                        class="text-danger">*</span></label>
+                                                <select class="form-select" formControlName="question">
+                                                    <option value="" disabled selected>Select Category</option>
+                                                    <option *ngFor="let category of categories" [value]="category.value"
+                                                        [hidden]="category.value === userAddForm.get('question')?.value">
+                                                        {{ category.label }}</option>
+                                                </select>
+                                                <div *ngIf="userAddForm.get('question')?.touched && userAddForm.get('question')?.invalid"
+                                                    class="text-danger mt-1">
+                                                    Category is required.
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Sub-Catgeory<span
+                                                        class="text-danger">*</span></label>
+                                                <textarea type="email" class="form-control"
+                                                    placeholder="Enter Sub-Catgeory"
+                                                    formControlName="answer"></textarea>
+                                                <div *ngIf="userAddForm.get('answer')?.touched && userAddForm.get('answer')?.invalid"
+                                                    class="text-danger mt-1">
+                                                    Sub-Catgeory is required.
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-md-12 mb-3">
+                                                <label class="form-label">Sequence Number<span class="text-danger">*</span></label>
+                                                <textarea type="number" class="form-control"  placeholder="Enter sequence number"
+                                                    formControlName="sequence"></textarea>
+                                                <div *ngIf="userAddForm.get('sequence')?.touched && userAddForm.get('sequence')?.invalid"
+                                                    class="text-danger mt-1">
+                                                    Sequence number is required.
+                                                </div>
+                                            </div> -->
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Sequence Number <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="number" class="form-control"
+                                                    placeholder="Enter sequence number" formControlName="sequence"
+                                                    min="1" step="1" pattern="^[0-9]+$" />
+                                                <div *ngIf="userAddForm.get('sequence')?.touched && userAddForm.get('sequence')?.invalid"
+                                                    class="text-danger mt-1">
+                                                    Sequence number is required and must be a positive integer.
+                                                </div>
+                                            </div>
+
+                                            <!-- Category Image -->
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Image<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="file" (change)="onImageChange($event)" class="form-control"
+                                                    accept="image/*" />
+                                                <div *ngIf="selectedImagePreview" class="mt-2">
+                                                    <img [src]="selectedImagePreview" alt="Image Preview" width="150"
+                                                        class="img-thumbnail rounded shadow-sm" />
+                                                </div>
+                                                <div *ngIf="showImageError" class="text-danger mt-1">Please upload
+                                                    sub category image</div>
+                                            </div>
+
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Sub-Category Banner<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="file" (change)="onImageChange1($event)"
+                                                    class="form-control" accept="image/*" />
+                                                <div *ngIf="selectedLogoPreview" class="mt-2">
+                                                    <img [src]="selectedLogoPreview" alt="Image Preview" width="150"
+                                                        class="img-thumbnail rounded shadow-sm" />
+                                                </div>
+                                                <div *ngIf="showImageLogo" class="text-danger mt-1">Please upload
+                                                    sub category banner</div>
+                                            </div>
+                                              <div class="col-md-12 mb-3">
+                                                <label class="form-label">Sub-Category Banner For Mobile/Tab View<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="file" (change)="onImageChange1Mobile($event)"
+                                                    class="form-control" accept="image/*" />
+                                                <div *ngIf="selectedLogoPreviewMobile" class="mt-2">
+                                                    <img [src]="selectedLogoPreviewMobile" alt="Image Preview" width="150"
+                                                        class="img-thumbnail rounded shadow-sm" />
+                                                </div>
+                                                <div *ngIf="showImageLogo1" class="text-danger mt-1">Please upload
+                                                    sub category banner for mobile/tab view</div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="d-flex justify-content-end pt-3">
+                                            <button type="submit" class="btn btn-outline-primary"
+                                                [disabled]=" formSubmitted">
+                                                <i class="fe fe-save me-1"></i> {{ isEdit ? 'Update' : 'Add' }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End Form -->
+                </div>
+            </div>
+        </div>
+        <!-- End Main Content -->
+
+        <!-- Footer -->
+        <app-footer></app-footer>
+    </div>
+</body>

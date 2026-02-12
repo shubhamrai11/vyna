@@ -1,0 +1,455 @@
+<body class="ltr main-body leftmenu">
+
+
+
+    <!-- Page -->
+    <div class="page">
+
+        <!-- Main Header-->
+        <div class="main-header side-header sticky">
+            <div class="main-container container-fluid">
+                <div class="main-header-left">
+                    <a class="main-header-menu-icon" [routerLink]="['/pages/dashboard'] "
+                        id="mainSidebarToggle"><span></span></a>
+                    <div class="hor-logo">
+                        <!-- <a class="main-logo" [routerLink]="['/pages/dashboard'] ">
+                            <img src="./assets/img/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
+                            <img src="./assets/img/brand/logo-light.png" class="header-brand-img desktop-logo-dark"
+                                alt="logo">
+                        </a> -->
+                    </div>
+                </div>
+                <div class="main-header-center">
+                    <div class="responsive-logo">
+                        <!-- <a [routerLink]="['/pages/dashboard'] "><img src="./assets/img/brand/logo.png"
+                                class="mobile-logo" alt="logo"></a>
+                        <a [routerLink]="['/pages/dashboard'] "><img src="./assets/img/brand/logo-light.png"
+                                class="mobile-logo-dark" alt="logo"></a> -->
+                    </div>
+                    <div class="input-group">
+                        <h5><i>Candidatures / Soumission</i></h5>
+                    </div>
+                </div>
+                <div class="main-header-right">
+                    <button class="navbar-toggler navresponsive-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+                    </button><!-- Navresponsive closed -->
+                    <div
+                        class="navbar navbar-expand-lg  nav nav-item  navbar-nav-right responsive-navbar navbar-dark  ">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                            <div class="d-flex order-lg-2 ms-auto">
+                                <!-- Search -->
+                                <div class="dropdown header-search">
+                                    <p><i>Candidatures / Soumission</i> </p>
+
+                                </div>
+
+                                <app-header></app-header>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Header-->
+
+        <!-- Sidemenu -->
+        <app-sidebar></app-sidebar>
+        <!-- End Sidemenu -->
+
+        <!-- Main Content-->
+        <div class="main-content side-content pt-0">
+
+            <div class="main-container container-fluid">
+                <div class="inner-body">
+					<div class="page-header d-flex mt-0">
+                        <div><h5 class="main-content-title tx-20"></h5></div>
+                        <div class="d-flex">
+                            <div class="d-flex justify-content-center gap-3 align-items-center">
+                                <div class="text-center btn-list">
+                                    <a [routerLink]="['/pages/project']" class="btn ripple btn-primary">
+                                        <i class="fe fe-plus me-2 fs-14"></i> Liste des projets
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+
+                    <div class="row mt-1">
+                        <div class="col-lg-12 col-md-12">
+
+                            <div class="card custom-card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-wrap justify-content-between gap-3 align-items-center mb-3">
+                                        <h5 class=" mb-1">Information du candidat</h5>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-10 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Email</label>
+                                                <input class="form-control" required="" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1 mt-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <button class="btn ripple btn-primary pd-x-30">
+                                                    <i class="fe fe-search me-2 fs-14"></i>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Prénom</label>
+                                                <input class="form-control" required="" type="text" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Nom</label>
+                                                <input class="form-control" required="" type="text" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">CNI</label>
+                                                <input class="form-control" required="" type="text" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Matricule</label>
+                                                <input class="form-control" required="" type="text" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Téléphone</label>
+                                                <input class="form-control" required="" type="text" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">A déjà bénéficier d'un bien ?</label>
+                                                <select class="form-control  form-select">
+                                                    <option value=""></option>
+                                                    <option value="OUI">Oui</option>
+                                                    <option value="NON">Non</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Nombre de biens <span class="text-danger">*</span></label>
+                                                <select class="form-control  form-select">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Projet</label>
+                                                <select class="form-control  form-select">
+                                                    <option value=""></option>
+                                                    <option value="774c7a0e-8fa0-447d-af34-1a4b91d7152d">Projet 1</option>
+                                                    <option value="cf7a65b4-f7d1-45d8-8888-4b888f75e08d">Projet 2</option>
+                                                </select>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card custom-card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-wrap justify-content-between gap-3 align-items-center mb-3">
+                                        <h5 class=" mb-1">Dossier de candidature</h5>
+                                        <div class="d-flex justify-content-center gap-3 align-items-center">
+                                            <div class="text-center btn-list">
+                                                <a href="javascript:void(0)" class="btn ripple btn-primary"><i
+                                                        class="fe fe-file me-2 fs-14"></i>
+                                                    Dossier N<sup>o</sup> : #W83548909
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Date <span class="text-danger">*</span></label>
+                                                <input class="form-control" required="" type="date">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Montant a payer <span
+                                                        class="text-danger">*</span></label>
+                                                <input class="form-control" required="" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Statut <span class="text-danger">*</span></label>
+                                                <select class="form-control  form-select">
+                                                    <option value="SOUMIS">Demande Soumise</option>
+                                                    <option value="EN_INSTRUCTION">Demande En Instruction</option>
+                                                    <option value="VALIDER">Demande Validée</option>
+                                                    <option value="EN_COURS">Demande En cours</option>
+                                                    <option value="REJETER">Demande Rejetée</option>
+                                                    <option value="COMPLET">Demande Complète</option>
+                                                    <option value="TERMINER">Demande Cloturée</option>
+                                                    <option value="DEMANDE_ANNULATION">Demande d'annulation</option>
+                                                    <option value="ABANDONNER">Demande d'abandon</option>
+                                                    <option value="ANNULER">Demande Annuler</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Mode de paiement
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <select class="form-control  form-select">
+                                                    <option value=""></option>
+                                                    <option value="PLAN_PAIEMENT">Plan de paiement</option>
+                                                    <option value="COMPTANT">Paiement comptant</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Moyen de paiement
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <select class="form-control  form-select">
+                                                    <option value=""></option>
+                                                    <option value="BANK_CARD">Paiement Carte Bancaire</option>
+                                                    <option value="BANK_PRELEVEMENT">Paiement Prélèvement Bancaire</option>
+                                                    <option value="MOBILE">Paiement Mobile Money</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Numéro Compte de paiement 
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input class="form-control" required="" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Opérateur de paiement <span
+                                                        class="text-danger">*</span></label>
+                                                <select class="form-control  form-select">
+                                                    <option value=""></option>
+                                                    <option value="ORANGE">Paiement orange money</option>
+                                                    <option value="WAVE">Paiement orange money</option>
+                                                    <option value="KPAY">Paiement quickpay money</option>
+                                                    <option value="FREE">Paiement free money</option>
+                                                    <option value="WIZALL">Paiement wizall money</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card custom-card">
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <h5>Caractéristique de vos biens</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-1 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">N<sup>o</sup> </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Caracteristiques </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Commentaires </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-1 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <select class="form-control  form-select">
+                                                    <option value="1"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <select class="form-control  form-select">
+                                                    <option value=""></option>
+                                                    <option value="774c7a0e-8fa0-447d-af34-1a4b91d7152d">Terrain en angle</option>
+                                                    <option value="cf7a65b4-f7d1-45d8-8888-4b888f75e08d">Superficie 200m2</option>
+                                                </select>  
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <div class="input-group file-browser">
+                                                    <input type="text" class="form-control" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="card custom-card">
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <h5>Documents requis</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Nom du document </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Date limite a soumettre </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <label class="">Fichier charger </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <input class="form-control" required="" type="text" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <input class="form-control" required="" type="text" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <div class="input-group file-browser">
+                                                    <input type="text" class="form-control border-end-0 browse-file"
+                                                        placeholder="" readonly="">
+                                                    <label class="input-group-btn">
+                                                        <span class="btn btn-primary">
+                                                            Parcourir <input type="file" style="display: none;"
+                                                                multiple>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <input class="form-control" required="" type="text" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <input class="form-control" required="" type="text" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 mg-t-20 mg-sm-t-0">
+                                            <div class="form-group">
+                                                <div class="input-group file-browser">
+                                                    <input type="text" class="form-control border-end-0 browse-file"
+                                                        placeholder="" readonly="">
+                                                    <label class="input-group-btn">
+                                                        <span class="btn btn-primary">
+                                                            Parcourir <input type="file" style="display: none;"
+                                                                multiple>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row  mb-0">
+                            <div class="justify-content-end d-flex pb-4">
+                                <button class="btn ripple btn-outline-primary pd-x-30 mg-r-5"><a
+                                        href="javascript:void(0)"> Annuler</a></button>
+                                <button class="btn ripple btn-primary pd-x-30">Confirmer candidature</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- End Main Content-->
+
+    <!-- Main Footer-->
+    <div class="main-footer text-center">
+        <div class="container">
+            <div class="row row-sm">
+                <div class="col-md-12">
+                    <span>Copyright © 2022 <a href="javascript:void(0)">CohabManager</a>. Designed by <a
+                            href="https://webmobril.com/" target="_blank">Webmobril Technologies</a> All rights
+                        reserved.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Footer-->
+
+    <!-- Sidebar -->
+    <div class="sidebar sidebar-right sidebar-animate">
+        <div class="sidebar-icon">
+            <a href="#" class="text-end float-end text-dark fs-20" data-bs-toggle="sidebar-right"
+                data-bs-target=".sidebar-right"><i class="fe fe-x"></i></a>
+        </div>
+        <div class="sidebar-body">
+            <h5>Filter</h5>
+            <div class="filter-box">
+                <h5>Project status</h5>
+                <div class="d-flex pb-3">
+                    <label class="ckbox"><input type="checkbox"><span>In Negotiation</span></label>
+                </div>
+                <div class="d-flex  ">
+                    <label class="ckbox"><input type="checkbox"><span>Open</span></label>
+                </div>
+            </div>
+
+            <div class="filter-box">
+                <button type="button" class="btn btn-primary my-2 btn-icon-text">
+                    Apply Filter
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- End Sidebar -->

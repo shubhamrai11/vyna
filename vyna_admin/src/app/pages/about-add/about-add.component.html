@@ -1,0 +1,211 @@
+<body class="ltr main-body leftmenu">
+    <!-- Page -->
+    <div class="page">
+        <!-- Main Header -->
+        <div class="main-header side-header sticky">
+            <div class="main-container container-fluid">
+                <div class="main-header-left">
+                    <a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
+                    <div class="hor-logo">
+                        <!-- <a class="main-logo" [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo.png" class="header-brand-img desktop-logo" alt="logo" />
+                            <img src="./assets/img/brand/logo-light.png" class="header-brand-img desktop-logo-dark"
+                                alt="logo" />
+                        </a> -->
+                    </div>
+                </div>
+                <div class="main-header-center">
+                    <div class="responsive-logo">
+                        <!-- <a [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo.png" class="mobile-logo" alt="logo" />
+                        </a>
+                        <a [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo-light.png" class="mobile-logo-dark" alt="logo" />
+                        </a> -->
+                    </div>
+                    <div class="input-group">
+                        <h3 *ngIf="!isEdit">Create About US</h3>
+                        <h3 *ngIf="isEdit">Edit About US </h3>
+
+                    </div>
+                </div>
+                <div class="main-header-right">
+                    <button class="navbar-toggler navresponsive-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+                    </button>
+                    <div class="navbar navbar-expand-lg nav nav-item navbar-nav-right responsive-navbar navbar-dark">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                            <div class="d-flex order-lg-2 ms-auto">
+
+                                <app-header></app-header>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Header -->
+
+        <!-- Sidemenu -->
+        <app-sidebar></app-sidebar>
+        <!-- End Sidemenu -->
+
+        <!-- Main Content -->
+        <div class="main-content side-content pt-0">
+            <div class="main-container container-fluid">
+                <div class="inner-body">
+                    <!-- Page Header -->
+                    <div class="page-header d-flex align-items-center justify-content-between mt-3 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <button class="back-button" [routerLink]="['/pages/about']">
+                                <i class="fe fe-arrow-left me-1"></i> Back
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+                    <div class="container mt-4" #formElement>
+
+                        <!-- Form -->
+                        <form [formGroup]="aboutForm" (ngSubmit)="saveAbout()" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card custom-card shadow-sm">
+                                        <div class="card-body">
+                                            <div class="row">
+
+                                                <!-- Title -->
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Title <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" formControlName="title" class="form-control"
+                                                        placeholder="Enter Title" />
+                                                    <div *ngIf="aboutForm.get('title')?.touched && aboutForm.get('title')?.invalid"
+                                                        class="text-danger mt-1">Title is required</div>
+                                                </div>
+
+                                                <!-- Description -->
+                                                <div class="col-md-12 mb-3">
+                                                    <label class="form-label">Description <span
+                                                            class="text-danger">*</span></label>
+                                                    <!-- <textarea formControlName="description" class="form-control"
+                                                        rows="4" placeholder="Enter Description"></textarea> -->
+                                                    <angular-editor formControlName="description"  placeholder="Enter Description"
+                                                        [config]="config"></angular-editor>
+                                                    <div *ngIf="aboutForm.get('description')?.touched && aboutForm.get('description')?.invalid"
+                                                        class="text-danger mt-1">Description is required</div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="images" class="form-label">
+                                                        Upload Images <span class="text-danger">*</span>
+                                                    </label>
+
+                                                    <input type="file" id="images" accept="image/*"
+                                                        (change)="onImageChange($event)" multiple
+                                                        class="form-control" />
+
+                                                    <!-- API Images Preview -->
+                                                    <div class="d-flex flex-wrap mt-3"
+                                                        *ngIf="selectedImagePreview?.length">
+                                                        <div *ngFor="let img of selectedImagePreview"
+                                                            class="position-relative me-2 mb-2">
+                                                            <img [src]="img.url" alt="preview" width="100" height="100"
+                                                                class="img-thumbnail" />
+                                                            <button type="button"
+                                                                class="btn-close position-absolute top-0 end-0 translate-middle bg-white"
+                                                                aria-label="Remove" (click)="removeImage(img)"></button>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Uploaded Base64 Images Preview -->
+                                                    <div class="d-flex flex-wrap mt-3" *ngIf="uploadedPreview?.length">
+                                                        <div *ngFor="let base64 of uploadedPreview; let i = index"
+                                                            class="position-relative me-2 mb-2">
+                                                            <img [src]="base64" alt="preview" width="100" height="100"
+                                                                class="img-thumbnail" />
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!--  About Values (Points with icon/title/subtitle) -->
+                                                <div class="col-md-12 mb-3" formArrayName="aboutValues">
+                                                    <label class="form-label">Key Highlights</label>
+                                                    <div *ngFor="let point of aboutValues.controls; let i = index"
+                                                        [formGroupName]="i" class="card p-3 mb-3 border">
+                                                        <!-- Icon -->
+                                                        <label>Icon <span class="text-danger">*</span></label>
+                                                        <input type="file" (change)="onIconSelect($event, i)"
+                                                            class="form-control mb-1" accept="image/*" />
+                                                        <div *ngIf="point.get('iconPreview')?.value" class="mb-2">
+                                                            <img [src]="point.get('iconPreview')?.value" width="60"
+                                                                height="60" />
+                                                        </div>
+                                                        <div *ngIf="point.get('icon')?.touched && point.get('icon')?.invalid"
+                                                            class="text-danger mb-2">
+                                                            Icon is required
+                                                        </div>
+
+                                                        <!-- Title -->
+                                                        <label>Title <span class="text-danger">*</span></label>
+                                                        <input type="text" placeholder="Enter Title" formControlName="title"
+                                                            class="form-control mb-1" />
+                                                        <div *ngIf="point.get('title')?.touched && point.get('title')?.invalid"
+                                                            class="text-danger mb-2">
+                                                            Title is required
+                                                        </div>
+
+                                                        <!-- Subtitle -->
+                                                        <label>Subtitle <span class="text-danger">*</span></label>
+                                                        <input type="text" placeholder="Enter Subtitle" formControlName="subtitle"
+                                                            class="form-control mb-1" />
+                                                        <div *ngIf="point.get('subtitle')?.touched && point.get('subtitle')?.invalid"
+                                                            class="text-danger mb-2">
+                                                            Subtitle is required
+                                                        </div>
+                                                        <!-- Remove -->
+                                                        <button type="button" class="btn btn-sm btn-danger mt-2"
+                                                            (click)="removeAboutValue(i)">
+                                                            <i class="fe fe-trash"></i> Remove
+                                                        </button>
+                                                    </div>
+
+                                                    <!-- Add Button -->
+                                                    <button type="button" class="btn btn-outline-primary"
+                                                        (click)="addPoint()">
+                                                        <i class="fe fe-plus"></i> Add Value
+                                                    </button>
+                                                </div>
+                                                <!--  Submit Button -->
+                                                <div class="d-flex justify-content-end pt-3">
+                                                    <button type="submit" class="btn btn-outline-primary"
+                                                        [disabled]=" formSubmitted">
+                                                        <i class="fe fe-save me-1"></i> {{ isEdit ? 'Update About Us' :
+                                                        'Save About Us' }}
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- End Form -->
+
+                    </div>
+
+                    <!-- End Form -->
+                </div>
+            </div>
+        </div>
+        <!-- End Main Content -->
+
+        <!-- Footer -->
+        <app-footer></app-footer>
+    </div>
+</body>

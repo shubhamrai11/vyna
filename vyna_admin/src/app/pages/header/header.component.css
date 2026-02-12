@@ -1,0 +1,35 @@
+/* Make sure dropdowns show when active */
+.dropdown-menu {
+    display: none;
+  }
+  
+  .dropdown-menu.show {
+    display: block;
+  }
+  
+
+  .goog-te-banner-frame, .goog-te-gadget {
+    display: none !important;
+}
+
+.goog-te-combo {
+    display: none !important;
+}
+
+.option-dots-header {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 45px;
+  display: block;
+  cursor: pointer;
+}
+.option-dots-header:hover {
+  background-color: #eaedf7;
+  color:#fff;
+  border-radius: 50%;
+}
+  

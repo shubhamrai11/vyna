@@ -1,0 +1,250 @@
+ 
+<div class="tf-slideshow slider-default slider-position slider-effect-fade">
+  <div
+    dir="ltr"
+    class="swiper tf-sw-slideshow"
+    data-preview="1"
+    data-tablet="1"
+    data-mobile="1"
+    data-centered="false"
+    data-space="0"
+    data-space-mb="0"
+    data-loop="true"
+    data-auto-play="true"
+  >
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="wrap-slider">
+          <picture>
+            <!-- Mobile -->
+            <source media="(max-width: 768px)" srcset="./assets/images/mobilecategory1.png" />
+            <!-- Desktop -->
+            <img src="./assets/images/category main 1.png" loading="lazy" alt="banner 1" />
+          </picture>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="wrap-slider">
+          <picture>
+            <source media="(max-width: 768px)" srcset="./assets/images/mobilecategory2.png" />
+            <img src="./assets/images/category main 2.png" loading="lazy" alt="banner 2" />
+          </picture>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="wrap-slider">
+          <picture>
+            <source media="(max-width: 768px)" srcset="./assets/images/mobilecategory3.png" />
+            <img src="./assets/images/category main 3.png" loading="lazy" alt="banner 3" />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrows -->
+  <div class="navigation-prev-slider nav-sw nav-sw-left lg">
+    <i class="icon icon-arrLeft"></i>
+  </div>
+  <div class="navigation-next-slider nav-sw nav-sw-right lg">
+    <i class="icon icon-arrRight"></i>
+  </div>
+</div>
+
+
+<div class="wrap-pagination">
+    <div class="container">
+      <div
+        class="sw-dots sw-pagination-slider type-circle white-circle-line justify-content-center"
+      ></div>
+    </div>
+  </div>
+
+<section class="flat-spacing pt-0 pb-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <ul class="breadcrumbs py-5 d-flex align-items-center">
+          <li>
+            <a class="link" routerLink="/">Home</a>
+          </li>
+          <li>
+            <i class="icon-arrRight"></i>
+          </li>
+          <li>
+            <a class="link" routerLink="/all-products">Products</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="flat-collection-circle wow fadeInUp" data-wow-delay="0.1s">
+      <div
+        dir="ltr"
+        class="swiper tf-sw-categories"
+        data-preview="6"
+        data-tablet="4"
+        data-mobile-sm="3"
+        data-mobile="2"
+        data-space-lg="40"
+        data-space-md="40"
+        data-space="40"
+        data-pagination="2"
+        data-pagination-md="4"
+        data-pagination-lg="1"
+      >
+        <div class="swiper-wrapper justify-content-center" aria-live="polite">
+          <div
+            class="swiper-slide"
+            *ngFor="let cat of category"
+            style="width: 168.333px; margin-right: 40px"
+          >
+            <div class="collection-circle hover-img">
+              <a
+                [routerLink]="['/products', cat?._id]"
+                [queryParams]="{ categoryId: cat._id }"
+                class="img-style"
+              >
+                <img
+                  class="ls-is-cached lazyloaded"
+                  [src]="cat?.image"
+                      loading="lazy"
+                  [alt]="cat?.image"
+                />
+              </a>
+              <div class="collection-content text-center">
+                <div class="count text-secondary">
+                  <a
+                    [routerLink]="['/products', cat?._id]"
+                    [queryParams]="{ categoryId: cat._id }"
+                    >{{ cat.category_name }}</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination and navigation buttons -->
+         <div class="sw-pagination-categories sw-dots type-circle d-block d-lg-none"></div>
+
+        <span
+          class="swiper-notification"
+          aria-live="assertive"
+          aria-atomic="true"
+        ></span>
+      </div>
+
+    <div class="nav-prev-categories nav-sw style-line nav-sw-left d-none d-lg-flex">
+      <i class="icon icon-arrLeft"></i>
+    </div>
+    <div class="nav-next-categories nav-sw style-line nav-sw-right d-none d-lg-flex">
+      <i class="icon icon-arrRight"></i>
+    </div>
+    </div>
+              </div>
+</section>
+<section class="flat-spacing pt-0">
+  <div class="container-fluid">
+    <div class="wrapper-control-shop">
+      <div class="meta-filter-shop">
+        <div id="product-count-grid" class="count-text"></div>
+        <div id="product-count-list" class="count-text"></div>
+        <div id="applied-filters"></div>
+        <button
+          id="remove-all"
+          class="remove-all-filters text-btn-uppercase"
+          style="display: none"
+        >
+          REMOVE ALL <i class="icon icon-close"></i>
+        </button>
+      </div>
+
+      <!-- product.component.html -->
+
+      <div class="tf-grid-layout wrapper-shop tf-col-4" id="gridLayout">
+        <div
+          class="card-product grid wow fadeInUp"
+          data-wow-delay="0.3s"
+          *ngFor="let product of products"
+        >
+          <div class="card-product-wrapper">
+            <a
+              [routerLink]="['/product-details', product._id]"
+              class="product-img"
+            >
+                    <img class="img-product" 
+           [src]="(product.image && product.image.length > 0) ? product.image[0]?.url : 'assets/images/noImage.png'" 
+               loading="lazy"
+           alt="{{product.productName}}">
+
+      <img class="img-hover" 
+           [src]="(product.image && product.image.length > 1) 
+                    ? product.image[1]?.url 
+                    : (product.image && product.image.length > 0) 
+                      ? product.image[0]?.url 
+                      : 'assets/images/noImage.png'" 
+           alt="{{product.productName}}">
+            </a>
+          </div>
+          <div class="card-product-info">
+            <a
+              [routerLink]="['/product-details', product._id]"
+              class="title link"
+              >{{ product.productName }}</a
+            >
+            <p
+              [innerHTML]="
+                product.description?.length > 100
+                  ? (product.description | slice : 0 : 150) + '...'
+                  : product.description
+              "
+            ></p>
+            <div class="total-lb wow fadeInUp text-center">
+              <a
+                [routerLink]="['/product-details', product?._id]"
+                class="tf-btn-new green-btn btn-fill wow fadeInUp"
+              >
+                <span class="text text-button"
+                  >View Details <i class="icon icon-arrowUpRight"></i
+                ></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-container text-center mt-4" style="line-height: 45px;">
+        <button
+          class="btn btn-outline-dark mx-1"
+          [disabled]="currentPage === 1"
+          (click)="changePage(currentPage - 1)"
+        >
+          <i class="icon-arrLeft"></i>
+        </button>
+
+        <ng-container
+          *ngFor="let page of [].constructor(totalPages); let i = index"
+        >
+          <button
+            class="btn mx-1"
+            [class.btn-dark]="currentPage === i + 1"
+            [class.btn-outline-dark]="currentPage !== i + 1"
+            (click)="changePage(i + 1)"
+          >
+            {{ i + 1 }}
+          </button>
+        </ng-container>
+
+        <button
+          class="btn btn-outline-dark mx-1"
+          [disabled]="currentPage === totalPages"
+          (click)="changePage(currentPage + 1)"
+        >
+          <i class="icon-arrRight"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

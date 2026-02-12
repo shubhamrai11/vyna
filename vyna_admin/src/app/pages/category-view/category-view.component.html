@@ -1,0 +1,192 @@
+<body class="ltr main-body leftmenu">
+    <!-- Page -->
+    <div class="page">
+        <!-- Main Header -->
+        <div class="main-header side-header sticky">
+            <div class="main-container container-fluid">
+                <div class="main-header-left">
+                    <a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
+                    <div class="hor-logo">
+                        <!-- <a class="main-logo" [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo.png" class="header-brand-img desktop-logo" alt="logo" />
+                            <img src="./assets/img/brand/logo-light.png" class="header-brand-img desktop-logo-dark"
+                                alt="logo" />
+                        </a> -->
+                    </div>
+                </div>
+                <div class="main-header-center">
+                    <div class="responsive-logo">
+
+                    </div>
+                    <div class="input-group">
+                        <h3 *ngIf="!isEdit">Category</h3>
+                        <h3 *ngIf="isEdit"> Category </h3>
+
+                    </div>
+                </div>
+                <div class="main-header-right">
+                    <button class="navbar-toggler navresponsive-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+                    </button>
+                    <div class="navbar navbar-expand-lg nav nav-item navbar-nav-right responsive-navbar navbar-dark">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                            <div class="d-flex order-lg-2 ms-auto">
+
+                                <app-header></app-header>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Header -->
+
+        <!-- Sidemenu -->
+        <app-sidebar></app-sidebar>
+        <!-- End Sidemenu -->
+
+        <!-- Main Content -->
+        <div class="main-content side-content pt-0">
+            <div class="main-container container-fluid">
+                <div class="inner-body">
+                    <!-- Page Header -->
+                    <div class="page-header d-flex align-items-center justify-content-between mt-3 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <button class="back-button" [routerLink]="['/pages/category']">
+                                <i class="fe fe-arrow-left me-1"></i> Back
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+
+                    <div class="row justify-content-center">
+                        <div class="col-xl-10 col-lg-11">
+
+                            <!-- Show Category Details if data exists -->
+                            <ng-container *ngIf="category; else noDataTemplate">
+                                <div class="card shadow-sm border-0">
+                                    <div class="card-body">
+                                        <!-- Category Details -->
+                                        <div class="row mb-4">
+                                            <!-- Category Name -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="fw-semibold text-muted">Category Name</label>
+                                                <h5 class="text-dark">{{ category?.category_name || '-' }}</h5>
+                                            </div>
+
+                                            <!-- Description -->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="fw-semibold text-muted">Description</label>
+                                                <p class="text-dark mb-0"
+                                                    [innerHTML]="category?.category_description || '-'"></p>
+                                            </div>
+
+
+                                            <!-- Images in Single Row -->
+                                            <div class="col-md-4 mb-3 d-flex align-items-start">
+                                                <div>
+                                                    <label class="fw-semibold text-muted d-block mb-2">Category
+                                                        Image</label>
+                                                    <div class="bg-light p-2 rounded border d-inline-block">
+                                                        <img [src]="category?.category_image" alt="Category Image"
+                                                            class="img-fluid rounded shadow-sm"
+                                                            style="max-height: 120px;" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 mb-3 d-flex align-items-start">
+                                                <div>
+                                                    <label class="fw-semibold text-muted d-block mb-2">Category Image
+                                                        1</label>
+                                                    <div class="bg-light p-2 rounded border d-inline-block">
+                                                        <img [src]="category?.image" alt="Category Image 1"
+                                                            class="img-fluid rounded shadow-sm"
+                                                            style="max-height: 120px;" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 mb-3 d-flex align-items-start">
+                                                <div>
+                                                    <label class="fw-semibold text-muted d-block mb-2">Category
+                                                        Logo</label>
+                                                    <div class="bg-light p-2 rounded border d-inline-block">
+                                                        <img [src]="category?.category_logo" alt="Category Logo"
+                                                            class="img-fluid rounded shadow-sm"
+                                                            style="max-height: 120px;" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Subcategories Table -->
+                                        <div class="mt-4">
+                                            <h5 class="mb-3 border-bottom pb-2">🗂️ Subcategories</h5>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-bordered align-middle mb-0">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th style="width: 80px; white-space: nowrap;">S NO.</th>
+
+                                                            <th>Sub-category</th>
+                                                            <th>Created At</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let sub of subCategories; let i = index">
+                                                            <td>{{ i + 1 }}</td>
+                                                            <!-- <a [routerLink]="['/pages/subcategory-view', sub._id]"
+                                                                class="text-primary text-decoration-underline">
+                                                                {{ sub.subCategoryName }}
+                                                            </a> -->
+                                                            <td (click)="goToCategory(sub._id)"
+                                                                class="text-success text-decoration-underline"
+                                                                style="cursor: pointer;">
+                                                                {{ sub.subCategoryName }}
+                                                            </td>
+                                                            <td>{{ sub.createdAt | date: 'medium' }}</td>
+                                                        </tr>
+                                                        <tr *ngIf="subCategories && subCategories.length === 0">
+                                                            <td colspan="3" class="text-center text-muted py-4">
+                                                                No subcategories available.
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                            <!-- No Data Template -->
+                            <ng-template #noDataTemplate>
+                                <div class="card shadow-sm border-0">
+                                    <div class="card-body text-center py-5">
+
+                                        <h5 class="text-muted">No category data found.</h5>
+                                    </div>
+                                </div>
+                            </ng-template>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- End Form -->
+            </div>
+        </div>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Footer -->
+    <app-footer></app-footer>
+
+</body>

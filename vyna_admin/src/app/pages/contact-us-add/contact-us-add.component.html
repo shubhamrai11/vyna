@@ -1,0 +1,151 @@
+<body class="ltr main-body leftmenu">
+    <!-- Page -->
+    <div class="page">
+        <!-- Main Header -->
+        <div class="main-header side-header sticky">
+            <div class="main-container container-fluid">
+                <div class="main-header-left">
+                    <a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
+                    <div class="hor-logo">
+                        <!-- <a class="main-logo" [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo.png" class="header-brand-img desktop-logo" alt="logo" />
+                            <img src="./assets/img/brand/logo-light.png" class="header-brand-img desktop-logo-dark"
+                                alt="logo" />
+                        </a> -->
+                    </div>
+                </div>
+                <div class="main-header-center">
+                    <div class="responsive-logo">
+                        <!-- <a [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo.png" class="mobile-logo" alt="logo" />
+                        </a>
+                        <a [routerLink]="['/pages/dashboard']">
+                            <img src="./assets/img/brand/logo-light.png" class="mobile-logo-dark" alt="logo" />
+                        </a> -->
+                    </div>
+                    <div class="input-group">
+                        <h5 class="text-primary fw-bold mb-0">
+                            <i class="fe fe-edit me-2"></i> Edit Contact Us
+                        </h5>
+                    </div>
+                </div>
+                <div class="main-header-right">
+                    <button class="navbar-toggler navresponsive-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+                    </button>
+                    <div class="navbar navbar-expand-lg nav nav-item navbar-nav-right responsive-navbar navbar-dark">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                            <div class="d-flex order-lg-2 ms-auto">
+
+                                <app-header></app-header>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Header -->
+
+        <!-- Sidemenu -->
+        <app-sidebar></app-sidebar>
+        <!-- End Sidemenu -->
+
+        <!-- Main Content -->
+        <div class="main-content side-content pt-0">
+            <div class="main-container container-fluid">
+                <div class="inner-body">
+                    <!-- Page Header -->
+                    <div class="page-header d-flex align-items-center justify-content-between mt-3 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <button class="back-button" [routerLink]="['/pages/contact']">
+                                <i class="fe fe-arrow-left me-1"></i> Back
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+                    <form [formGroup]="userAddForm" (ngSubmit)="onSubmit()">
+                        <input type="hidden" formControlName="id" />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card custom-card shadow-sm">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Title<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" formControlName="title" />
+                                                <div *ngIf="userAddForm.get('title')?.touched && userAddForm.get('title')?.invalid"
+                                                    class="text-danger mt-1">
+                                                    Title is required.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Email<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="email" class="form-control" formControlName="email" />
+                                                <div *ngIf="userAddForm.get('email')?.touched && userAddForm.get('email')?.invalid"
+                                                    class="text-danger mt-1">
+                                                    Email is required.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Mobile Number<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control"
+                                                    formControlName="mobile_number" />
+                                                <div *ngIf="userAddForm.get('mobile_number')?.touched && userAddForm.get('mobile_number')?.invalid"
+                                                    class="text-danger mt-1">
+                                                    <div *ngIf="userAddForm.get('mobile_number')?.errors?.['required']">
+                                                        Mobile number is required.
+                                                    </div>
+                                                    <div *ngIf="userAddForm.get('mobile_number')?.errors?.['pattern']">
+                                                        Mobile number must be 6 to 15 digits and can optionally start
+                                                        with '+'.
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Address<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" formControlName="address" />
+                                                <div *ngIf="userAddForm.get('address')?.touched && userAddForm.get('address')?.invalid"
+                                                    class="text-danger mt-1">
+                                                    Address is required.
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Website URL<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" formControlName="website_url" />
+                                                <div *ngIf="userAddForm.get('website_url')?.touched && userAddForm.get('website_url')?.invalid"
+                                                    class="text-danger mt-1">
+                                                    Website URL is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-end pt-3">
+                                            <button type="submit" class="btn btn-outline-primary"
+                                                [disabled]="isSubmitting">
+                                                <i class="fe fe-save me-1"></i> Update
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End Form -->
+                </div>
+            </div>
+        </div>
+        <!-- End Main Content -->
+
+        <!-- Footer -->
+        <app-footer></app-footer>
+    </div>
+</body>

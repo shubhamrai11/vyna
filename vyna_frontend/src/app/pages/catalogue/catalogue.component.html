@@ -1,0 +1,139 @@
+<!-- Hero Banner -->
+<section class="catalogue-hero">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-12 text-center">
+        <h1 class="hero-title">
+          <span class="font-light">Product </span>Catalogues
+        </h1>
+        <p class="hero-subtitle">
+          Download our comprehensive product catalogues to explore the complete range of Vyna Electric solutions.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">{{ sections.length }}</span>
+            <span class="stat-label">Categories</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">{{ getTotalCatalogues() }}</span>
+            <span class="stat-label">Catalogues</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Breadcrumbs -->
+<section class="flat-spacing pt-0 pb-0">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <ul class="breadcrumbs py-4 d-flex align-items-center">
+          <li><a class="link" routerLink="/">Home</a></li>
+          <li><i class="icon-arrRight"></i></li>
+          <li>Catalogue</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Navigation Tabs -->
+<section class="catalogue-nav-section">
+  <div class="container-fluid">
+    <div class="catalogue-nav-wrapper">
+      <div class="catalogue-nav-scroll">
+        <button
+          *ngFor="let section of sections"
+          class="catalogue-nav-btn"
+          [class.active]="activeSection === section.id"
+          (click)="scrollToSection(section.id)"
+        >
+          <mat-icon class="nav-icon">{{ section.icon }}</mat-icon>
+          <span>{{ section.title }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Loading State -->
+<div *ngIf="isLoading" class="loading-container">
+  <div class="loading-spinner"></div>
+  <p>Loading catalogues...</p>
+</div>
+
+<!-- Catalogue Sections -->
+<section class="catalogue-sections" *ngIf="!isLoading">
+  <div class="container-fluid">
+    <div
+      *ngFor="let section of sections; let i = index"
+      [id]="'section-' + section.id"
+      class="catalogue-section"
+      [class.alt-bg]="i % 2 !== 0"
+    >
+      <!-- Section Header -->
+      <div class="section-header">
+        <div class="section-header-content">
+          <div class="section-icon-wrapper">
+            <mat-icon class="section-icon">{{ section.icon }}</mat-icon>
+          </div>
+          <div>
+            <h2 class="section-title">{{ section.title }}</h2>
+            <p class="section-subtitle">{{ section.subtitle }}</p>
+          </div>
+        </div>
+        <span class="section-count">{{ section.items.length }} catalogue{{ section.items.length !== 1 ? 's' : '' }}</span>
+      </div>
+
+      <!-- PDF Cards Grid -->
+      <div class="catalogue-grid">
+        <div
+          *ngFor="let item of section.items"
+          class="catalogue-card"
+          (click)="downloadCatalogue(item)"
+          role="button"
+          tabindex="0"
+          (keydown.enter)="downloadCatalogue(item)"
+          [attr.aria-label]="'Download ' + item.name"
+        >
+          <div class="card-icon-area">
+            <div class="pdf-icon-wrapper">
+              <svg class="pdf-svg-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="4" width="32" height="40" rx="3" fill="#fff" stroke="#e9e9e9" stroke-width="1.5"/>
+                <rect x="8" y="4" width="32" height="12" rx="3" fill="#ed1c24"/>
+                <text x="24" y="13.5" text-anchor="middle" fill="#fff" font-size="7" font-weight="700" font-family="Arial, sans-serif">PDF</text>
+                <rect x="14" y="22" width="20" height="2" rx="1" fill="#e9e9e9"/>
+                <rect x="14" y="27" width="16" height="2" rx="1" fill="#e9e9e9"/>
+                <rect x="14" y="32" width="12" height="2" rx="1" fill="#e9e9e9"/>
+              </svg>
+            </div>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">{{ item.name }}</h4>
+            <p class="card-description">{{ item.description }}</p>
+          </div>
+          <div class="card-action">
+            <div class="download-btn">
+              <mat-icon class="download-icon">download</mat-icon>
+              <span class="download-text">Download</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="catalogue-cta">
+  <div class="container-fluid">
+    <div class="cta-inner">
+      <h3 class="cta-title">Can't find what you're looking for?</h3>
+      <p class="cta-subtitle">Get in touch with our team and we'll help you find the right product catalogue.</p>
+      <a routerLink="/contact-us" class="cta-button">Contact Us</a>
+    </div>
+  </div>
+</section>

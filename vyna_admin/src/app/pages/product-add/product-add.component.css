@@ -1,0 +1,62 @@
+.main-container.cantainer{
+    padding-top: 15px;
+    padding-left: 15px;
+
+}
+
+.back-button {
+  background-color: #e0e0e0; /* light grey */
+  color: #333;               /* dark text */
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #d5d5d5; /* slightly darker on hover */
+}
+
+
+.spec-input {
+  height: 44px;
+  padding: 12px 12px;
+  font-size: 14px;
+  width:120px;
+}
+.spec-input1{
+   height: 44px;
+  padding: 12px 12px;
+  font-size: 14px;
+  width:250px;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+  text-align: center;
+  padding: 12px 8px;
+  min-width: 120px; /* Adjust this if needed */
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+input.form-control {
+  border-radius: 6px;
+}
+.table-responsive {
+  overflow-x: auto;
+}
+.table th, .table td {
+  min-width: 150px; /* ensures columns don't shrink too much */
+  white-space: nowrap;
+}
+
+

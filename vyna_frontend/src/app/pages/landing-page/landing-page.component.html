@@ -1,0 +1,329 @@
+<div id="wrapper">
+<div class="slider-padding" *ngIf="banner.length">
+
+  <!-- Laptop Slider -->
+  <div class="tf-slideshow slider-default slider-position slider-effect-fade slider-radius-3 hide-on-mob">
+    <div class="swiper tf-sw-slideshow" data-auto-play="true">
+      <div class="swiper-wrapper">
+        <ng-container *ngFor="let item of banner">
+          <div class="swiper-slide" *ngIf="item.role === 'laptop'">
+            <div class="wrap-slider">
+              <a>
+                <ng-container *ngIf="isVideo(item?.image); else imageTemplateLaptop">
+                              <video
+                    [src]="item?.image"
+                    class="swiper-lazy" [autoplay]="'true'" [loop]="true" loading="lazy" playsinline muted oncanplay="this.play()"
+          onloadedmetadata="this.muted = true"
+                  ></video>
+                </ng-container>
+                <ng-template #imageTemplateLaptop>
+                  <img
+                    [src]="item?.image"
+                    class="swiper-lazy"
+                       style="border-radius: 20px;"
+                    loading="lazy"
+                    alt="slideshow"
+                  />
+                  <div class="swiper-lazy-preloader"></div>
+                </ng-template>
+              </a>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="navigation-prev-slider nav-sw nav-sw-left lg">
+        <i class="icon icon-arrLeft"></i>
+      </div>
+      <div class="navigation-next-slider nav-sw nav-sw-right lg">
+        <i class="icon icon-arrRight"></i>
+      </div>
+      <div class="sw-dots sw-pagination-slider type-circle white-circle-line justify-content-center"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Slider -->
+  <div class="tf-slideshow slider-default slider-position slider-effect-fade slider-radius-3 hide-on-des">
+    <div class="swiper tf-sw-slideshow" data-auto-play="true">
+      <div class="swiper-wrapper">
+        <ng-container *ngFor="let item of banner">
+          <div class="swiper-slide" *ngIf="item.role === 'mobile'">
+            <div class="wrap-slider">
+              <a>
+                <ng-container *ngIf="isVideo(item?.image); else imageTemplateMobile">
+                                <video
+                    [src]="item?.image"
+                    class="swiper-lazy" [autoplay]="'true'" [loop]="true" loading="lazy" playsinline muted oncanplay="this.play()"
+          onloadedmetadata="this.muted = true"
+                  ></video>
+                </ng-container>
+                <ng-template #imageTemplateMobile>
+                  <img
+                    [src]="item?.image"
+                    class="swiper-lazy"
+                    style="border-radius: 20px;"
+                    loading="lazy"
+                    alt="slideshow"
+                  />
+                  <div class="swiper-lazy-preloader"></div>
+                </ng-template>
+              </a>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="navigation-prev-slider nav-sw nav-sw-left lg">
+        <i class="icon icon-arrLeft"></i>
+      </div>
+      <div class="navigation-next-slider nav-sw nav-sw-right lg">
+        <i class="icon icon-arrRight"></i>
+      </div>
+      <div class="sw-dots sw-pagination-slider type-circle white-circle-line justify-content-center"></div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<div class="flat-spacing">
+    <div class="footer-cta-inner m-auto">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h2 class="title color-black">
+              <span class="font-weght-100">Who </span>We Are
+            </h2>
+            <h4 class="font-weght-100 mt-3">Powered by Legacy, Built for the Future.</h4>
+
+            <div class="text-animate puvi-lite position-relative">
+              <p
+                *ngFor="let line of descriptionLines"
+                class="text-animate puvi-lite"
+                #fadeLine
+                [innerHTML]="line"
+              >
+                {{ line }}
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-6" *ngIf="imageList.length > 0">
+            <div id="js-splide" class="splide com-sp">
+              <div class="splide__track">
+                <ul class="splide__list">
+                  <li class="splide__slide" *ngFor="let img of imageList">
+                    <div class="card-new">
+                      <img [src]="img?.url" alt="Image" />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="flat-spacing pt-0">
+    <div class="container-fluid">
+      <div class="heading-section">
+        <h2 class="heading wow fadeInUp">
+          <span class="font-weght-100">Explore by </span>Category
+        </h2>
+      </div>
+      <div class="tf-grid-layout md-col-3">
+        <div
+          *ngFor="let cat of category"
+          class="collection-default abs-left-bottom type-xl radius-20 hover-img wow fadeInUp"
+        >
+          <a [routerLink]="['/products', cat?._id]"
+        [queryParams]="{ categoryId: cat._id }" class="img-style">
+            <img
+              [src]="cat.category_image"
+              alt="banner-cls"
+              loading="lazy"
+              class="fade-in-image"
+              (load)="onImageLoad($event)"
+            />
+          </a>
+          <div class="content text-start">
+            <div class="box-title">
+                 <h3 class="title">
+                      <a [routerLink]="['/products', cat?._id]"
+        [queryParams]="{ categoryId: cat._id }" style="color: white;" class="tag text-btn-uppercase text-white">
+              <p class="tag text-btn-uppercase text-white">
+                {{ cat?.category_name }}
+              </p>
+                      </a>
+                      </h3>
+              <h3 class="title">
+                <a   [routerLink]="['/products', cat?._id]"
+        [queryParams]="{ categoryId: cat._id }" class="link text-white font-5">
+                  <p [innerHTML]="cat?.category_description"></p>
+                </a>
+              </h3>
+            </div>
+            <!-- <div class="box-btn">
+              <a href="#!" class="btn-line style-white text-white has-icon">
+                Explore Now
+                <i class="icon icon-arrowUpRight"></i>
+              </a>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="flat-spacing pt-0" *ngIf="product.length > 0">
+  <div class="container-fluid">
+    <!-- Heading -->
+    <div
+      class="heading-section d-flex justify-content-between align-items-center"
+    >
+      <h2 class="heading wow fadeInUp">
+        <span class="font-weght-100">Featured</span> Products
+      </h2>
+      <a
+        routerLink="/all-products"
+        class="tf-btn-new green-btn btn-fill wow fadeInUp"
+      >
+        <span class="text text-button"
+          >View all <i class="icon icon-arrowUpRight"></i
+        ></span>
+      </a>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="row hide-on-mob">
+
+         <ng-container *ngFor="let item of product; let i = index">
+          <div class="col-lg-6 p-0">
+            <div class="article-blog style-row hover-img4 wow fadeInLeft">
+              <ng-container *ngIf="Math.floor(i / 2) % 2 === 0; else oddLayout">
+                <a
+                  routerLink="/all-products"
+                  class="entry_image img-style4 flex-xl-1"
+                >
+                  <div class="collection-social style-2 hover-img wow fadeInUp">
+                    <img
+                      [src]="item.image?.[0]?.url"
+                      alt="poster"
+                      class="poster"
+                    />
+                    <div class="hover-video" *ngIf="item.image?.[1]">
+                      <img [src]="item.image?.[1]?.url" alt="poster" />
+                      <div class="list-btn-main">
+                        {{ item?.productName }}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+                <div class="blog-content flex-1">
+                  <a routerLink="/all-products" class="entry_name link h4">{{
+                    item?.productName
+                  }}</a>
+                  <p class="text">
+                    <a routerLink="/all-products" class="">
+                      <p [innerHTML]="item?.description"></p>
+                    </a>
+                  </p>
+                </div>
+              </ng-container>
+
+              <ng-template #oddLayout>
+                <div class="blog-content flex-1">
+                  <a routerLink="/all-products" class="entry_name link h4">{{
+                    item?.productName
+                  }}</a>
+   
+                    <p [innerHTML]="item?.short_description"></p>
+                </div>
+                <a
+                  routerLink="/all-products"
+                  class="entry_image img-style4 flex-xl-1"
+                >
+                  <div class="collection-social style-2 hover-img wow fadeInUp">
+                    <img
+                      [src]="item.image?.[0]?.url"
+                      alt="poster"
+                      class="poster"
+                    />
+                    <div class="hover-video" *ngIf="item.image?.[1]">
+                      <img [src]="item.image?.[1]?.url" alt="poster" />
+                      <div class="list-btn-main">
+                        {{ item?.productName }}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </ng-template>
+            </div>
+          </div>
+        </ng-container>
+
+    </div>
+
+
+
+
+    <div class="row hide-on-des">
+  <ng-container *ngFor="let item of product; let i = index">
+    <div class="col-lg-6 p-0">
+      <div class="article-blog style-row hover-img4 wow fadeInLeft">
+
+        <a
+          routerLink="/all-products"
+          class="entry_image img-style4 flex-xl-1"
+          [ngClass]="{ 'order-22': i % 2 !== 0 }"
+        >
+          <div class="collection-social style-2 hover-img wow fadeInUp">
+            <!-- First Image -->
+            <img
+              [src]="item.image?.[0]?.url"
+              alt="poster"
+              class="poster"
+            />
+
+            <!-- Hover Image -->
+            <div class="hover-video" *ngIf="item.image?.[1]">
+              <img [src]="item.image?.[1]?.url" alt="poster" />
+              <div class="list-btn-main">
+                {{ item?.productName }}
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <div class="blog-content flex-1">
+          <a routerLink="/all-products" class="entry_name link h4">
+            {{ item?.productName }}
+          </a>
+          <p class="text">
+            <a routerLink="/all-products">
+              <span [innerHTML]="item?.description"></span>
+            </a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </ng-container>
+
+
+                </div>
+  </div>
+</section>
+
+  <section *ngIf="product.length === 0">
+    <div class="container text-center">
+      <p>No products found.</p>
+    </div>
+  </section>
+
+
+</div>

@@ -1,0 +1,16 @@
+<div class="row" *ngIf="error">
+    <div class="col-12">
+        <div class="alert alert-danger alert-dismissible border-0 fade show" role="alert" id="messageAlert">
+            <button type="button" class="close" (click)="hideAlert()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h5 *ngIf="error.errorCode" class="alert-heading">{{ error.errorCode }}</h5>
+            <h5 *ngIf="!error.errorCode" class="alert-heading">{{ error.errorMessage }}</h5>
+            <p *ngIf="error.errorCode">
+                {{ error.errorMessage }}
+            </p>
+            <hr>
+            <p *ngFor="let err of error.errors" [innerHTML]="err | sanityzeHtml"></p>
+        </div>
+    </div>
+</div>

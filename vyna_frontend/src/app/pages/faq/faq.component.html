@@ -1,0 +1,119 @@
+
+            
+          <div class="" >
+        <img src="./assets/images/faq-banner.png" width="100%" alt="">
+            <div class="container-full">
+                <div class="row">
+                    <div class="col-12">
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page-title -->
+
+        <!-- FAQs -->
+        <section class="flat-spacing">
+            <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12">
+                       
+                        <ul class="breadcrumbs py-5 d-flex align-items-center">
+                            <li>
+                                <a class="link" routerLink="/">Home</a>
+                            </li>
+                          
+                            <li class="">
+                                <i class="icon-arrRight"></i>
+                            </li>
+                            <li class="">
+                              FAQs
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="page-faqs-wrap">
+                    
+                    <div class="list-faqs">
+                              <h3><span class="font-weght-100">Frequently</span> Asked Questions</h3>
+                        <div>
+<ul class="accordion-product-wrap style-faqs">
+  <li class="accordion-product-item" *ngFor="let item of faq; let i = index">
+    <div
+      class="accordion-title"
+      [ngClass]="{
+        'current': openedIndex === i,
+        'collapsed': openedIndex !== i
+      }"
+      (click)="toggleAccordion(i)"
+    >
+      <h6>{{ i + 1 }}. {{ item.question }}</h6>
+      <span class="btn-open-sub">
+        <i [ngClass]="openedIndex === i ? 'fa fa-minus' : 'fa fa-plus'"></i>
+      </span>
+    </div>
+
+    <div class="accordion-faqs-content" *ngIf="openedIndex === i">
+      <p class="text-secondary">{{ item.answer }}</p>
+    </div>
+  </li>
+</ul>
+
+
+
+                        </div>
+                       
+                     
+                    </div>
+<div class="ask-question sticky-top">
+  <div class="ask-question-wrap">
+    <h5 class="mb_4">Ask Your Question</h5>
+    <p class="mb_20 text-secondary">Ask Anything, We're Here to Help</p>
+
+    <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="form-leave-comment">
+      <fieldset class="mb_20">
+        <div class="text-caption-1 mb_8">Name</div>
+        <input type="text" placeholder="Your Name*" formControlName="name" class="form-control" />
+<div *ngIf="submitted && f['name'].errors" class="text-danger small">
+  <div *ngIf="f['name'].errors['required']">Name is required</div>
+  <div *ngIf="f['name'].errors['minlength']">Minimum 2 characters required</div>
+</div>
+</fieldset>
+
+      <fieldset class="mb_20">
+        <div class="text-caption-1 mb_8">Phone Number</div>
+        <input type="tel" placeholder="Your Phone Number*" formControlName="mobile_number" class="form-control" />
+   <div *ngIf="submitted && f['mobile_number'].errors" class="text-danger small">
+  <div *ngIf="f['mobile_number'].errors['required']">Phone number is required</div>
+  <div *ngIf="f['mobile_number'].errors['pattern']">Enter a valid 10-digit number</div>
+</div>
+      </fieldset>
+
+      <fieldset class="mb_20">
+        <div class="text-caption-1 mb_8">Message</div>
+        <textarea rows="4" placeholder="Your Message*" formControlName="message" class="form-control"></textarea>
+<div *ngIf="submitted && f['message'].errors" class="text-danger small">
+  <div *ngIf="f['message'].errors['required']">Message is required</div>
+  <div *ngIf="f['message'].errors['minlength']">Minimum 5 characters required</div>
+</div>
+      </fieldset>
+
+<div class="button-submit">
+  <button
+    type="submit"
+    class="btn-style-2 w-100"
+    [disabled]="isLoading"
+  >
+    <span class="text text-button">
+      {{ isLoading ? 'Sending...' : 'Send Request' }}
+    </span>
+  </button>
+</div>
+
+    </form>
+  </div>
+</div>
+
+                </div>
+            </div>
+        </section>

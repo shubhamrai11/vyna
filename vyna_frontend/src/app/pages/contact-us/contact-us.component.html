@@ -1,0 +1,154 @@
+
+
+         <div class="hide-on-mob" >
+        <img src="./assets/images/finaldescontactus.png" width="100%" alt="">
+            <div class="container-full">
+                <div class="row">
+                    <div class="col-12">
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+                     <div class="hide-on-des">
+                            <img src="./assets/images/finalmobcontactus.png" width="100%" alt="light banner">
+                           
+                        </div>
+        <section class="flat-spacing pt-0 contact-info" *ngIf="contact">
+   <div class="container-fluid heading-section">
+
+         <div class="row">
+                    <div class="col-12">
+                       
+                        <ul class="breadcrumbs py-5 d-flex align-items-center">
+                            <li>
+                                <a class="link" routerLink="/">Home</a>
+                            </li>
+                          
+                            <li class="">
+                                <i class="icon-arrRight"></i>
+                            </li>
+                            <li class="">
+                              Contact Us
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                 <h4 class="mb-2 text-uppercase heading"><span class="font-weght-100">Contact</span> Information</h4>
+    <p class="mb-4">
+      Have a product question, partnership inquiry, or need assistance? We are here to help.
+    </p>
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="mb_20">
+          <div class="icon-images">
+            <div class="text-title mb_8">Phone:</div>
+            <img src="./assets/images/call.png" alt="call" />
+          </div>
+          <p class="text-secondary">
+            <a [href]="'tel:' + contact.mobile_number">{{ contact.mobile_number }}</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-3">
+        <div class="mb_20">
+          <div class="icon-images">
+            <div class="text-title mb_8">Email:</div>
+            <img src="./assets/images/email.png" alt="email" />
+          </div>
+          <p class="text-secondary">
+            <a [href]="'mailto:' + contact.email">{{ contact.email }}</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-3">
+        <div class="mb_20">
+          <div class="icon-images">
+            <div class="text-title mb_8">Head Office:</div>
+            <img src="./assets/images/location.png" alt="location" />
+          </div>
+          
+          <p class=""> <b>VYNA ELECTRIC PVT. LTD. </b> <br>
+            {{ contact.address }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+                <section class="flat-spacing pt-0">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="contact-us-map">
+                            <div class="wrap-map">
+                                    <div class="heading-section ">
+               <h4 class="heading"><span class="font-weght-100">Get </span>In Touch</h4>
+                    <p class="subheading">Fill out the form below or use the contact details to reach us directly. We'll get back to you as soon as possible. </p>
+                </div>
+          <form  class="form-leave-comment" [formGroup]="contactForm" (ngSubmit)="onContactSubmit()" novalidate>
+  <div class="wrap">
+    <div class="cols">
+      <fieldset class="">
+  <input class="" type="text" formControlName="name" placeholder="Your Name*" />
+  
+  <div *ngIf="submitted && contactForm.controls['name']?.errors?.['required']" class="error">
+    Name is required.
+  </div>
+
+  <div *ngIf="submitted && contactForm.controls['name']?.errors?.['whitespace']" class="error">
+    Name cannot be empty spaces
+  </div>
+</fieldset>
+
+
+      <fieldset class="">
+        <input class="" type="email" formControlName="email" placeholder="Your Email*" />
+        <div *ngIf="submitted && contactForm.controls['email'].invalid" class="error">Valid email is required.</div>
+      </fieldset>
+
+<fieldset>
+  <input type="text" formControlName="phone" placeholder="Your Phone Number*" />
+  
+  <div *ngIf="submitted && contactForm.get('phone')?.errors?.['required']" class="error">
+    Phone number is required.
+  </div>
+  <div *ngIf="submitted && contactForm.get('phone')?.errors?.['pattern']" class="error">
+    Phone number must contain only digits.
+  </div>
+  <div *ngIf="submitted && contactForm.get('phone')?.errors?.['whitespace']" class="error">
+    Phone number cannot be empty spaces.
+  </div>
+</fieldset>
+    </div>
+
+    <fieldset class="">
+      <textarea class="" formControlName="message" rows="4" placeholder="Your Message*"></textarea>
+      <div *ngIf="submitted && contactForm.controls['message'].invalid" class="error">Message is required.</div>
+        <div *ngIf="submitted && contactForm.get('message')?.errors?.['whitespace']" class="error">
+    Message cannot be empty spaces.
+  </div>
+    </fieldset>
+  </div>
+
+  <div class="button-submit send-wrap">
+    <button class="tf-btn-new btn-fill" type="submit" [disabled]="isLoading">
+      <span class="text text-button">{{ isLoading ? 'Sending...' : 'Send message' }} <i class="icon icon-arrowUpRight"></i></span>
+    </button>
+  </div>
+</form>
+
+                            </div>
+                            <div class="right">
+                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224356.85923380102!2d77.23701229782188!3d28.522404035645135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5a43173357b%3A0x37ffce30c87cc03f!2sNoida%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1753856491373!5m2!1sen!2sin" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>

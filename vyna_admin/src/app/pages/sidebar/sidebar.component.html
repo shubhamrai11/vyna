@@ -1,0 +1,179 @@
+<div class="sticky">
+  <div class="main-menu main-sidebar main-sidebar-sticky side-menu">
+    <div class="main-sidebar-header main-container-1 active">
+      <div class="sidemenu-logo">
+        <a class="main-logo" [routerLink]="['/pages/dashboard']" routerLinkActive="active">
+          <img src="./assets/images/Logo-2Vyna.png" class="header-brand-img desktop-logo" alt="logo">
+        </a>
+      </div>
+
+
+      <div class="main-sidebar-body main-body-1">
+        <div class="slide-left disabled" id="slide-left"><i class="fe fe-chevron-left"></i></div>
+        <ul class="menu-nav nav d-block">
+          <li class="nav-item menu" routerLinkActive="active">
+            <div class="nav-link" [routerLink]="['/pages/dashboard'] ">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-home sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">Dashboard</span>
+            </div>
+          </li>
+
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRoutebanner }">
+            <div class="nav-link" [routerLink]="['/pages/banner']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-image sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">Banner</span>
+
+            </div>
+          </li>
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRouteCMSbanner }">
+            <div class="nav-link" [routerLink]="['/pages/cms-banner']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-image sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">CMS Banner</span>
+
+            </div>
+          </li>
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRouteabout }">
+            <div class="nav-link" [routerLink]="['/pages/about']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-user  sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">About US</span>
+            </div>
+          </li>
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRouteWhoWeAre }">
+            <div class="nav-link" [routerLink]="['/pages/who-we-are']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-user  sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">Who we are</span>
+            </div>
+          </li>
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRoutevision }">
+            <div class="nav-link" [routerLink]="['/pages/vision']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-eye sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">Our Vision Value</span>
+            </div>
+          </li>
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRoutepromise }">
+            <div class="nav-link" [routerLink]="['/pages/promise']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-hand-open sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">Our Philospy</span>
+            </div>
+          </li>
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRoutesustainability }">
+            <div class="nav-link" [routerLink]="['/pages/sustanbility']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-hand-open sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">Sustain/Innov</span>
+            </div>
+          </li>
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRoutecategory }">
+            <div class="nav-link" [routerLink]="['/pages/category']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-menu-alt sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">Category</span>
+            </div>
+          </li>
+
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRoutesubcategory }">
+            <div class="nav-link" [routerLink]="['/pages/subcategory']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-layout sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">Sub Category</span>
+            </div>
+          </li>
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRouteproduct }">
+            <div class="nav-link" [routerLink]="['/pages/product']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-package sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">Product</span>
+            </div>
+          </li>
+
+
+
+
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRouteNews }">
+            <div class="nav-link" [routerLink]="['/pages/newsletter']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-email sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">News Letter Email</span>
+            </div>
+          </li>
+
+
+
+
+
+
+
+          <!-- <li class="nav-item menu" [ngClass]="{ 'active': currentRouteAwards }">
+            <div class="nav-link" [routerLink]="['/pages/award']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-crown sidemenu-icon menu-icon"></i>
+
+              <span class="sidemenu-label">Awards & Recognisation</span>
+            </div>
+          </li> -->
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRoutefaq }">
+            <div class="nav-link" [routerLink]="['/pages/faq']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-help sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">FAQ</span>
+            </div>
+          </li>
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRouteContact }">
+            <div class="nav-link" [routerLink]="['/pages/contact']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-email sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">Contact Us</span>
+            </div>
+          </li>
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRouteInquery }">
+            <div class="nav-link" [routerLink]="['/pages/inquery']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-comment-alt sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">Enquiry </span>
+            </div>
+          </li>
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRouteContent }">
+            <div class="nav-link" [routerLink]="['/pages/content']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-email sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">Content Management </span>
+            </div>
+          </li>
+          <li class="nav-item menu" [ngClass]="{ 'active': currentRouteContactUs }">
+            <div class="nav-link" [routerLink]="['/pages/contact-us-form']">
+              <span class="shape1"></span>
+              <span class="shape2"></span>
+              <i class="ti-email sidemenu-icon menu-icon"></i>
+              <span class="sidemenu-label">Contact Us Form </span>
+            </div>
+          </li>
+        </ul>
+        <div class="slide-right" id="slide-right"><i class="fe fe-chevron-right"></i></div>
+      </div>
+    </div>
+  </div>
+</div>

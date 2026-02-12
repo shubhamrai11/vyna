@@ -1,0 +1,22 @@
+/* Make sure dropdowns show when active */
+.dropdown-menu {
+    display: none;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item:hover {
+    display: block;
+    width: 100%;
+    clear: both;
+    font-weight: 400;
+    color: #fff;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: #406E63;
+    padding: 8px 15px;
+    font-size: 13px;
+    border: 0;
+}

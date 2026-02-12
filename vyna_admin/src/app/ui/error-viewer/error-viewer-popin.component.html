@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-6 alert alert-danger alert-dismissible fade show mt-2" style="margin: 0px 10px;" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        Une erreur est survenue lors du traitement demandée <br> <a href="#" data-toggle="modal" data-target="#danger-header-modal" class="alert-link">Cliquez ici pour réafficher le détails!</a>.
+    </div>
+</div>
+<div id="danger-header-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" >
+            <div class="alert alert-light" role="alert" style="margin: 0;overflow-wrap:break-word; word-wrap: break-word;">
+                <h4 _ngcontent-sin-c5="" class="alert-danger alert-heading p-2" style="border-radius: 5px;">  <i class="dripicons-wrong mr-2"></i> {{ errorContainer.errorMessage}}</h4>
+                <p *ngFor="let err of errorContainer?.errors" [innerHTML]="err | sanityzeHtml"></p>
+                <hr>
+                <p class="mb-0">Veuillez contacter l'admistrateur technique de l'application si l'erreur persiste, n'oubliez pas de noter l'erreur ou faire une copie d'écran pour la communiquer.</p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal --> 

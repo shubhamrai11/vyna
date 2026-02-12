@@ -1,0 +1,78 @@
+<!-- Loading Overlay -->
+
+
+<div class="page"
+	style="background-image: url('assets/images/new-image.png'); background-size: cover; display:flex; background-repeat: no-repeat; background-position: right;">
+	<!-- Row -->
+	<div class="row signin-new new" style="text-align: left;">
+		<div class="col-md-8">
+			<div class="card">
+				<div class="row row-sm">
+					<div>
+						<div class="main-container container-fluid">
+							<div class="row row-sm">
+								<div class="card-body mt-2 mb-2">
+									<img src="./assets/images/vyna.jpg"
+										class=" d-lg-none header-brand-img text-start float-start mb-4" alt="logo">
+									<div class="clearfix"></div>
+									<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+										<h3 class="text-start mb-2 text-center">Vyna Admin</h3>
+
+										<h5 class="text-start mb-2 text-center">Signin to Your Account</h5>
+
+										<div class="form-group text-start">
+											<label>Email</label>
+											<input class="form-control" formControlName="email"
+												placeholder="Enter your email" type="text">
+											<mat-error class="danger"
+												*ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
+												Email field is required.
+											</mat-error>
+											<mat-error class="danger"
+												*ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched">
+												Invalid email format.
+											</mat-error>
+										</div>
+
+										<div class="form-group text-start position-relative">
+											<label>Password</label>
+
+											<input class="form-control pe-5" formControlName="password"
+												[type]="fieldTextTypeone ? 'text' : 'password'"
+												placeholder="Enter your password" />
+
+											<i class="fa" [ngClass]="fieldTextTypeone ? 'fa-eye' : 'fa-eye-slash'"
+												(click)="toggleFieldTextTypeone()"
+												style="position: absolute; top: 38px; right: 15px; cursor: pointer;"></i>
+
+											<mat-error class="danger"
+												*ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+												Password field is required.
+											</mat-error>
+										</div>
+
+
+										<a class="btn ripple btn-main-primary btn-block text-white" (click)="onSubmit()"
+											[class.disabled]="isSubmited"
+											[style.pointer-events]="isSubmited ? 'none' : 'auto'">Sign In</a>
+									</form>
+									<div class="text-start mt-3 ms-0">
+										<div class="mb-1">
+  <div class="link-text" 
+       [routerLink]="'/forgot-password'" 
+       routerLinkActive="active">
+    Forgot password?
+  </div>
+</div>
+
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Row -->
+	</div>

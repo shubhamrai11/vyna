@@ -1,0 +1,168 @@
+
+<footer id="footer" class="footer">
+  <div class="footer-wrap">
+    <div class="footer-body">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="footer-infor">
+              <div class="footer-logo">
+                <a routerLink="">
+                  <img src="./assets/images/Logo-2.png" alt="" />
+                </a>
+              </div>
+
+              <div class="footer-address">
+                <p> <b>Head Office: </b> <br>  <b>VYNA ELECTRIC PVT. LTD. </b> <br> {{ contact?.address }}</p>
+              </div>
+
+              <ul class="footer-info">
+        
+                <li>
+                  <i class="icon-mail"></i>
+                  <p>
+                    <a [href]="'mailto:' + contact.email">{{
+                      contact.email
+                    }}</a>
+                  </p>
+                </li>
+
+                <li>
+                  <i class="icon-phone"></i>
+                  <p>
+                    <a [href]="'tel:' + contact.mobile_number">{{
+                      contact.mobile_number
+                    }}</a>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="footer-menu">
+              <div class="footer-col-block">
+                <div class="footer-heading text-button footer-heading-mobile">
+                  About Vyna
+                </div>
+                <div class="tf-collapse-content">
+                  <ul class="footer-menu-list">
+                    <li class="text-caption-1">
+                      <a routerLink="/about-us" class="footer-menu_item">
+                        <i class="icon-arrRight"></i> About Us</a
+                      >
+                    </li>
+                    <li class="text-caption-1">
+                      <a routerLink="/all-products" class="footer-menu_item">
+                        <i class="icon-arrRight"></i> Categories</a
+                      >
+                    </li>
+            
+                    <li class="text-caption-1">
+                      <a routerLink="/contact-us" class="footer-menu_item">
+                        <i class="icon-arrRight"></i> Contact us</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="footer-menu">
+              <div class="footer-col-block">
+                <div class="footer-heading text-button footer-heading-mobile">
+                  Usage & Privacy
+                </div>
+                <div class="tf-collapse-content">
+                  <ul class="footer-menu-list">
+                    <li class="text-caption-1">
+                      <a routerLink="/privacy-policy" class="footer-menu_item">
+                        <i class="icon-arrRight"></i> Privacy Policy</a
+                      >
+                    </li>
+                    <li class="text-caption-1">
+                      <a
+                        routerLink="/terms-conditions"
+                        class="footer-menu_item"
+                      >
+                        <i class="icon-arrRight"></i> Terms & Conditions</a
+                      >
+                    </li>
+                    <li class="text-caption-1">
+                      <a routerLink="/faq" class="footer-menu_item">
+                        <i class="icon-arrRight"></i> FAQs</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+                                       <div class="footer-col-block">
+  <div class="footer-heading text-button footer-heading-mobile">Newsletter</div>
+  <div class="tf-collapse-content">
+    <div class="footer-newsletter">
+      <p class="text-caption-1">Subscribe to our newsletter for latest updates, products and insights</p>
+    <form [formGroup]="newsletterForm" (ngSubmit)="onSubmit()" class="form-newsletter">
+  
+  <!-- Show success -->
+  <div *ngIf="successMessage" class="sib-form-message-panel sib-form-message-panel--success">
+    <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+      {{ successMessage }}
+    </div>
+  </div>
+
+  <!-- Show error -->
+  <div *ngIf="errorMessage" class="sib-form-message-panel sib-form-message-panel--error">
+    <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  <!-- Email Input -->
+  <div class="sib-form-block">
+    <input
+      type="email"
+      class="input radius-60"
+      formControlName="email"
+      placeholder="Enter your e-mail..."
+    />
+    <div *ngIf="f['email'].touched && f['email'].invalid" class="entry__error entry__error--primary">
+      <small *ngIf="f['email'].errors?.['required']">Email is required.</small>
+      <small *ngIf="f['email'].errors?.['email']">Invalid email format.</small>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="sib-form-block">
+    <button type="submit" class="subscribe-button radius-60">
+        <i class="icon icon-arrowUpRight"></i>
+    </button>
+  </div>
+</form>
+
+    </div>
+  </div>
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="footer-bottom-wrap">
+              <div class="center">
+                <p class="text-caption-1">
+                  Copyright © 2025 Vyna Electric All rights reserved.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

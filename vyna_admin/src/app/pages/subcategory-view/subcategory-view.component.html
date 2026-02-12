@@ -1,0 +1,141 @@
+<body class="ltr main-body leftmenu">
+    <!-- Page -->
+    <div class="page">
+        <!-- Main Header -->
+        <div class="main-header side-header sticky">
+            <div class="main-container container-fluid">
+                <div class="main-header-left">
+                    <a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
+                    <div class="hor-logo">
+
+                    </div>
+                </div>
+                <div class="main-header-center">
+                    <div class="responsive-logo">
+
+                    </div>
+                    <div class="input-group">
+                        <h3 *ngIf="!isEdit">View Sub-Category </h3>
+                        <h3 *ngIf="isEdit">View Sub-Category </h3>
+
+                    </div>
+                </div>
+                <div class="main-header-right">
+                    <button class="navbar-toggler navresponsive-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+                    </button>
+                    <div class="navbar navbar-expand-lg nav nav-item navbar-nav-right responsive-navbar navbar-dark">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                            <div class="d-flex order-lg-2 ms-auto">
+
+                                <app-header></app-header>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Header -->
+
+        <!-- Sidemenu -->
+        <app-sidebar></app-sidebar>
+        <!-- End Sidemenu -->
+
+        <!-- Main Content -->
+        <div class="main-content side-content pt-0">
+            <div class="main-container container-fluid">
+                <div class="inner-body">
+                    <!-- Page Header -->
+                    <div class="page-header d-flex align-items-center justify-content-between mt-3 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <button class="back-button" [routerLink]="['/pages/subcategory']">
+                                <i class="fe fe-arrow-left me-1"></i> Back
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+                    <form [formGroup]="userAddForm" (ngSubmit)="onSubmit()">
+                        <input type="hidden" formControlName="id" />
+                        <!-- Subcategory Detail & Product Count Section -->
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <div class="card custom-card shadow-sm">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Sub-Category Details</h5>
+                                    </div>
+                                    <div class="card-body">
+
+                                        <!-- Subcategory Info (from the first product) -->
+                                        <div class="mb-3" *ngIf="category ">
+                                            <p><strong>Category:</strong> {{ category?.category_name
+                                                }}</p>
+                                            <p><strong>Sub-Category:</strong> {{
+                                                subCategory?.subCategoryName }}</p>
+                                            <P *ngIf="subCategory?.image">
+                                                <td>
+                                                    <img [src]="subCategory?.image" alt="Product Image" width="60"
+                                                        class="img-thumbnail rounded shadow-sm" />
+                                                </td>
+                                            </P>
+                                        </div>
+
+                                        <!-- Product Count -->
+                                        <div class="mb-3">
+                                            <h6>Total Products: {{ productsList?.length }}</h6>
+                                        </div>
+
+                                        <!-- Product List Table -->
+                                        <div *ngIf="productsList?.length > 0">
+                                            <table class="table table-bordered table-striped">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>S NO</th>
+                                                        <th>Product Name</th>
+
+                                                        <th>Sub-Category</th>
+                                                        <th>Image</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let product of productsList; let i = index">
+                                                        <td>{{ i + 1 }}</td>
+                                                        <td (click)="goToProduct(product._id)"
+                                                            class="text-primary text-decoration-underline"
+                                                            style="cursor: pointer;">
+                                                            {{ product.productName }}
+                                                        </td>
+                                                        <td>{{ product.subCategoryId?.subCategoryName }}</td>
+                                                        <td>
+                                                            <img [src]="product.image[0]?.url" alt="Product Image"
+                                                                width="60" class="img-thumbnail rounded shadow-sm" />
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- No Product Message -->
+                                        <div *ngIf="!category" class="text-muted">
+                                            No data found
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                    <!-- End Form -->
+                </div>
+            </div>
+        </div>
+        <!-- End Main Content -->
+
+        <!-- Footer -->
+        <app-footer></app-footer>
+    </div>
+</body>

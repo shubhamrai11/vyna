@@ -1,0 +1,46 @@
+
+
+.badge-immo{
+  margin: 0; 
+  background: cadetblue; 
+  /*background: #406E63*/
+  padding: 10px 0; 
+  border-radius: 31px; 
+  color: #fff;
+}
+.signin-new.new {
+     margin-left: 30% !important;
+    width: 50% !important;
+    height: auto !important;
+    margin-top: 12% !important;
+
+}
+#ui-to-top {
+  display: none !important;
+}
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+.page {
+  min-height: 100vh;
+}
+
+
+
+input::placeholder {
+  color: #ccc !important; /* ya koi light color, jaise lightgray */
+  opacity: 1 !important;  /* browser ke liye placeholder opacity default low hoti hai */
+}
+
+.spec-input::placeholder {
+  color: #ccc !important; 
+  opacity: 1 !important;    /* Firefox ke liye */
+}
+
+
+.spec-input1::placeholder {
+  color: #ccc !important; 
+  opacity: 1 !important;    /* Firefox ke liye */
+}
+

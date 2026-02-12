@@ -1,0 +1,15 @@
+{
+    "HELLO": "Bonjour",
+    "WELCOME": "Bienvenue dans notre application",
+    "pages": {
+        "administration": {
+            "utilisateur": {
+                "nom": "Nom",
+                "email": "Email Address"
+            },
+            "boutons": {
+                "soumettre": "Submit"
+            }
+        }
+    }
+}

@@ -1,0 +1,324 @@
+  <div class="hide-on-mob">
+            <img src="./assets/images/aboutuscompreesed.png" width="100%" alt="">
+            <div class="container-full">
+                <div class="row">
+                    <div class="col-12">
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="hide-on-des">
+                            <img src="./assets/images/mobileAboutUs.png" width="100%" alt="light banner">
+                           
+                        </div>
+<section class="flat-spacing pt-0 pb-3" *ngIf="aboutUs">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <ul class="breadcrumbs py-5 d-flex align-items-center">
+          <li><a class="link" routerLink="/">Home</a></li>
+          <li><i class="icon-arrRight"></i></li>
+          <li>About Us</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="footer-cta-inner m-auto">
+        <h2 class="title color-black">
+          <span class="font-weght-100">About </span>Vyna Electric
+        </h2>
+        <div class="row">
+          <!-- Description -->
+          <div class="col-lg-6">
+                   <div class="philo-div">
+            <div class="text-animate puvi-lite position-relative">
+              <span [innerHTML]="aboutUs.description"></span>
+            </div>
+
+              <!-- <h2 class="mb-3 mt-4"> <span class="font-weght-100">Our Product </span> Philosophy </h2> -->
+               <h2 class="mb-3 mt-4"> <span class="font-weght-100 text-black">Our Product </span>Philosophy </h2>
+ 
+                    <ul class="philosphy-sectionul">
+                        <li>
+                            <div class="d-flex gap-3 align-items-center">
+<img src="assets/images/legacy.png">
+<div>
+ <h5 > Built on Legacy </h5> 
+ <p style="font-weight: 300;">Backed by over a decade of B2B expertise in mission-critical infrastructure. </p>
+ </div>
+</div>
+                         
+
+
+</li>
+ 
+ <li>
+ <div class="d-flex gap-3 align-items-center">
+<img src="assets/images/market-intelligence.png">
+<div>
+<h5 > Driven by Intelligence</h5> 
+
+<p style="font-weight: 300;">Powered by smart technology that adapts to modern needs. </p>
+</div>
+</div>
+</li>
+ 
+ <li>
+    
+
+ <div class="d-flex gap-3 align-items-center">
+<img src="assets/images/group.png">
+<div>
+<h5 > Made for People </h5>  
+
+<p style="font-weight: 300;">Intuitive design that simplifies daily life for everyone in the household. </p>
+</div>
+</div>
+</li>
+ 
+ <li>
+ <div class="d-flex gap-3 align-items-center">
+<img src="assets/images/reliability-icon.png">
+<div>
+<h5 > Engineered for Reliability </h5> 
+<p style="font-weight: 300;">Tested for performance, safety, and durability in Indian conditions. </p>
+</div>
+</div>
+
+</li>
+
+  <li class="pb-0">
+    <div class="d-flex gap-3 align-items-center">
+<img src="assets/images/integration-icon.png">
+<div>
+<h5>  Seamless Integration </h5> 
+
+<p style="font-weight: 300;">A complete range that works together in harmony. </p>
+</div>
+</div>
+                        </li>
+                    </ul>
+          </div>
+          </div>
+
+          <!-- Images -->
+<div class="col-lg-6">
+  <div class="tf-product-media-wrap sticky-top text-center">
+    <div class="watch-grid wow fadeInUp">
+      <div
+        class="item box-image_category hover-img"
+        *ngFor="let img of imageList.slice(0, 3); let i = index"
+        [ngClass]="getClass(i)"
+      >
+        <a class="box-image_image img-style">
+          <img [src]="img.url" loading="lazy" alt="About Image" />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+   
+   
+                              </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="flat-spacing pt-0" *ngIf="aboutUs?.aboutValues?.length || vision?.length">
+  <div class="container-fluid">
+<div class="row work-process-wrapper style-2">
+  <!-- Vision -->
+  <div
+    class="col-xl-6 col-lg-6 col-md-6 wow fadeInUp"
+    *ngIf="aboutUs?.aboutValues?.[0]"
+  >
+    <div class="work-process-items-2">
+      <div class="work-process-content">
+        <div class="work">
+          <div class="collection-position style-lg hover-img">
+            <a class="img-style">
+              <img
+                [src]="aboutUs.aboutValues[0].icon"
+                    loading="lazy"
+                alt="Vision Icon"
+              />
+            </a>
+            <div class="content">
+              <h3 class="title wow fadeInUp text-white">
+                {{ aboutUs.aboutValues[0].title }}
+              </h3>
+              <p class="desc text-white wow fadeInUp" data-wow-delay="0.1s">
+                {{ aboutUs.aboutValues[0].subtitle }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mission -->
+  <div
+    class="col-xl-6 col-lg-6 col-md-6 wow fadeInUp"
+    *ngIf="aboutUs?.aboutValues?.[1]"
+  >
+    <div class="work-process-items-2">
+      <div class="work-process-content">
+        <div class="work">
+          <div class="collection-position style-lg hover-img">
+            <a class="img-style">
+              <img
+                [src]="aboutUs.aboutValues[1].icon"
+                alt="Mission Icon"
+              />
+            </a>
+            <div class="content">
+              <h3 class="title wow fadeInUp text-white">
+                {{ aboutUs.aboutValues[1].title }}
+              </h3>
+              <p class="desc text-white wow fadeInUp" data-wow-delay="0.1s">
+                {{ aboutUs.aboutValues[1].subtitle }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row values-comm-sec hide-on-mob" *ngIf="vision?.length">
+  <div
+    class="work-process-items-2 lastsectionnew"
+    [style.background-image]="'url(assets/images/last-sec.png)'"
+  >
+    <h2 class="title color-black">
+      <span class="font-weght-100">Our Values </span>& Commitments
+    </h2>
+
+    <div class="row justify-content-center">
+      <div
+        class="col-lg-4"
+        *ngFor="let val of vision; let i = index"
+        [ngClass]="{
+          'top-2-div': i === 1,
+          'bottom-2-div': i > 2
+        }"
+      >
+        <!-- i === 1 me title upar -->
+        <h2
+          *ngIf="i === 1"
+          class="value-title text-center"
+        >
+          {{ val.title }}
+        </h2>
+
+        <div class="value-card">
+          <img
+            [src]="val.icon"
+            [alt]="val.title"
+            class="value-image"
+          />
+          <div class="overlay">
+            <p
+              class="value-description"
+              [innerHTML]="val.content"
+            ></p>
+          </div>
+        </div>
+
+        <!-- Baaki me title neeche -->
+        <h2
+          *ngIf="i !== 1"
+          class="value-title"
+          [ngClass]="{ 'text-right': i === 2 }"
+        >
+          {{ val.title }}
+        </h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row values-comm-sec hide-on-des" *ngIf="vision?.length">
+  <div
+    class="work-process-items-2 lastsectionnew"
+    [style.background-image]="'url(assets/images/last-sec.png)'"
+  >
+    <h2 class="title color-black">
+      <span class="font-weght-100">Our Values </span>& Commitments
+    </h2>
+
+    <div class="row justify-content-center">
+      <div
+        class="col-lg-4"
+        *ngFor="let val of vision; let i = index"
+        [ngClass]="{
+          'top-2-div': i === 1,
+          'bottom-2-div': i > 2
+        }"
+      >
+        <!-- Mobile me pehle title, phir image -->
+        <h2
+          class="value-title"
+          [ngClass]="{
+            'text-center': i === 1,
+            'text-right': i === 2
+          }"
+        >
+          {{ val.title }}
+        </h2>
+
+        <div class="value-card">
+          <img
+            [src]="val.icon"
+            [alt]="val.title"
+            class="value-image"
+          />
+          <div class="overlay">
+            <p
+              class="value-description"
+              [innerHTML]="val.content"
+            ></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row new-sustain-sec" *ngIf="sustain?.length">
+  <ng-container *ngFor="let item of sustain; let i = index">
+    <!-- Image Left, Text Right -->
+    <div class="col-lg-6 p-0" *ngIf="i % 2 === 0">
+      <div class="sustainbility-img">
+        <img [src]="item.image" [alt]="item.title">
+      </div>
+    </div>
+    <div class="col-lg-6 p-0" *ngIf="i % 2 === 0">
+      <div class="sustainbility-content">
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.description }}</p>
+      </div>
+    </div>
+
+    <!-- Text Left, Image Right -->
+    <div class="col-lg-6 p-0" *ngIf="i % 2 !== 0">
+      <div class="sustainbility-content">
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.description }}</p>
+      </div>
+    </div>
+    <div class="col-lg-6 p-0" *ngIf="i % 2 !== 0">
+      <div class="sustainbility-img">
+        <img [src]="item.image" [alt]="item.title">
+      </div>
+    </div>
+  </ng-container>
+</div>
+  
+</div>
+</section>

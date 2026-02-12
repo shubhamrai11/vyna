@@ -1,0 +1,401 @@
+<header id="header" class="header-default header-fullwidth header-style-7">
+  <div class="container-fluid">
+    <div class="row wrapper-header align-items-center">
+      <div class="col-md-4 col-3 d-xl-none">
+        <a
+          href="#mobileMenu"
+          class="mobile-menu"
+          data-bs-toggle="offcanvas"
+          aria-controls="mobileMenu"
+        >
+          <i class="icon icon-categories"></i>
+        </a>
+      </div>
+      <div class="col-xl-3 col-md-3 col-6">
+        <div
+          class="d-xl-flex justify-content-between align-items-xl-center gap-xl-60"
+        >
+          <a routerLink="/" class="logo-header">
+            <img src="./assets/images/Logo-2.png" alt="logo" class="logo" />
+          </a>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 col-3">
+        <div class="d-none d-xl-block">
+          <nav class="box-navigation text-center">
+            <ul
+              class="nav box-nav-ul d-flex align-items-center justify-content-center"
+            >
+
+              <li
+                class="menu-item"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <a routerLink="/" class="item-link">Home</a>
+              </li>
+
+              <li class="menu-item" routerLinkActive="active">
+                <a routerLink="/about-us" class="item-link">About Us</a>
+              </li>
+
+              <li 
+  class="big-nav" 
+  routerLinkActive="active"
+  (mouseenter)="openMenuDropdown()" 
+>
+  <a routerLink="/all-products">Categories</a>
+
+  <ul *ngIf="isMenuDropdownOpen">
+    <li
+      class="show"
+      *ngFor="let cat of category; let i = index"
+      [ngClass]="{ 'active-menu': activeCategoryId === cat._id }"
+      (mouseenter)="setActiveCategory(cat._id)"
+      [ngStyle]="{
+        'background-color': i % 2 === 0 ? '#ffe39e' : '#e2e2e2'
+      }"
+    >
+      <a
+        [routerLink]="['/products', cat?._id]"
+        [queryParams]="{ categoryId: cat._id }"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: false }"
+        (click)="closeMenuDropdown()" 
+      >
+        <img [src]="cat.category_logo" alt="{{ cat.category_name }}" />
+        <p>{{ cat.category_name }}</p>
+      </a>
+
+      <!-- Subcategories -->
+      <ul *ngIf="activeCategoryId === cat._id">
+        <li class="col3" *ngFor="let sub of subCategories[cat._id] || []">
+          <a
+            [routerLink]="['/subcategory-product', sub?._id]"
+            [queryParams]="{ subcategoryId: sub._id }"
+            (click)="closeMenuDropdown()" 
+          >
+            <img [src]="sub.image" alt="{{ sub.subCategoryName }}" />
+            <p class="d-block">{{ sub.subCategoryName }}</p>
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+
+              <li class="menu-item" routerLinkActive="active">
+                <a routerLink="/catalogue" class="item-link">Catalogue</a>
+              </li>
+
+              <li class="menu-item" routerLinkActive="active">
+                <a routerLink="/e-catalogue" class="item-link">E-Catalogue</a>
+              </li>
+
+              <!-- <li class="menu-item" routerLinkActive="active">
+                <a routerLink="/pr" class="item-link">PR</a>
+              </li> -->
+
+              <li class="menu-item" routerLinkActive="active">
+                <a routerLink="/contact-us" class="item-link">Contact Us</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+<div class="col-xl-3 col-md-3 col-3">
+  <div class="d-none d-xl-block justify-content-end align-items-center gap-16 gap-xl-24">
+    <div class="search-wrapper position-relative w-100">
+    <form
+      class="form-search d-xl-flex d-none position-relative"
+      (ngSubmit)="onSearch()"
+    >
+      <!-- SEARCH INPUT -->
+      <fieldset class="text w-100">
+<input
+  type="text"
+  [ngModel]="searchText"
+  (ngModelChange)="onSearchChange($event)"
+  name="searchText"
+  class="style-line-bottom"
+  placeholder="Search products..."
+/>
+      </fieldset>
+
+      <!-- SEARCH BUTTON -->
+      <button type="submit" class="search-btn">
+      <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_19494_2214)">
+                  <path
+                    d="M10.5 18C14.6421 18 18 14.6421 18 10.5C18 6.35786 14.6421 3 10.5 3C6.35786 3 3 6.35786 3 10.5C3 14.6421 6.35786 18 10.5 18Z"
+                    stroke="#181818"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M15.8047 15.8037L21.0012 21.0003"
+                    stroke="#181818"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_19494_2214">
+                    <rect width="24" height="24" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+      </button>
+    </form>
+
+    <!-- 🔽 DROPDOWN SEARCH RESULTS -->
+<ul *ngIf="searched && products.length" class="search-dropdown">
+  <!-- <li *ngFor="let product of products" (click)="closeDropdown()">
+    <a [routerLink]="['/product-details', product._id]">
+      <img *ngIf="product.image?.length"
+           [src]="product.image[0].url"
+           alt="{{ product.productName }}"
+           width="40"
+           height="40"
+           style="margin-right:8px; border-radius:4px;" />
+      {{ product.productName }}
+    </a>
+  </li> -->
+<li *ngFor="let product of products" (click)="navigateToProduct(product._id)">
+  <a>
+    <img *ngIf="product.image?.length"
+         [src]="product.image[0].url"
+         alt="{{ product.productName }}"
+         width="40"
+         height="40"
+         style="margin-right:8px; border-radius:4px;" />
+    {{ product.productName }}
+  </a>
+</li>
+</ul>
+
+
+
+<!-- NO RESULT -->
+<div *ngIf="searched && !products.length" class="no-result">
+  No products found
+</div>
+</div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</header>
+
+
+
+
+<div class="offcanvas offcanvas-start canvas-mb" id="mobileMenu" tabindex="-1">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title"></h5>
+       <a routerLink="/" class="logo-header">
+            <img src="./assets/images/Logo-2.png" alt="logo" class="logo" />
+          </a>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <!-- 🔍 Search bar -->
+<!-- 🔍 Search bar (MOBILE) -->
+<form class="form-search" (ngSubmit)="onSearch()">
+  <fieldset class="text">
+    <input
+      type="text"
+      [ngModel]="searchText"
+      (ngModelChange)="onSearchChange($event)"
+      name="searchText"
+      placeholder="Search Products"
+      required
+    />
+  </fieldset>
+      <button type="submit" class="search-btn">
+      <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_19494_2214)">
+                  <path
+                    d="M10.5 18C14.6421 18 18 14.6421 18 10.5C18 6.35786 14.6421 3 10.5 3C6.35786 3 3 6.35786 3 10.5C3 14.6421 6.35786 18 10.5 18Z"
+                    stroke="#181818"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M15.8047 15.8037L21.0012 21.0003"
+                    stroke="#181818"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_19494_2214">
+                    <rect width="24" height="24" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+      </button>
+</form>
+
+<!-- 🔽 DROPDOWN SEARCH RESULTS -->
+<!-- <ul *ngIf="searched && products.length" class="search-dropdown">
+  <li *ngFor="let product of products" (click)="closeDropdown()">
+    <a [routerLink]="['/product-details', product._id]" data-bs-dismiss="offcanvas">
+      <img *ngIf="product.image?.length"
+           [src]="product.image[0].url"
+           alt="{{ product.productName }}"
+           width="40"
+           height="40"
+           style="margin-right:8px; border-radius:4px;" />
+      {{ product.productName }}
+    </a>
+  </li>
+</ul> -->
+
+<ul *ngIf="searched && products.length" class="search-dropdown">
+  <li *ngFor="let product of products" (click)="closeDropdown()">
+    <a [routerLink]="['/product-details', product._id]" data-bs-dismiss="offcanvas" >
+      <img *ngIf="product.image?.length"
+           [src]="product.image[0].url"
+           alt="{{ product.productName }}"
+           width="40"
+           height="40"
+           style="margin-right:8px; border-radius:4px;" />
+      {{ product.productName }}
+    </a>
+  </li>
+</ul>
+
+<!-- ❌ NO RESULT -->
+<div *ngIf="searched && !products.length" class="no-result">
+  No products found
+</div>
+
+
+
+    <!-- 🔗 Mobile nav links -->
+    <ul class="nav-ul-mb">
+      <li class="nav-mb-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/" class="mb-menu-link" data-bs-dismiss="offcanvas">Home</a>
+      </li>
+      <li class="nav-mb-item" routerLinkActive="active">
+        <a routerLink="/about-us" class="mb-menu-link" data-bs-dismiss="offcanvas">About Us</a>
+      </li>
+
+      <li class="nav-mb-item">
+  <a
+    href="javascript:void(0)"
+    class="mb-menu-link"
+    (click)="parentOpen = !parentOpen"
+    [attr.aria-expanded]="parentOpen"
+    aria-controls="mobile-categories"
+  >
+    <a routerLink="/all-products"
+        data-bs-dismiss="offcanvas">Categories</a>
+    <span class="btn-open-sub-" [class.open]="parentOpen"></span>
+  </a>
+
+  <div id="mobile-categories" class="collapse" [class.show]="parentOpen">
+    <ul class="sub-nav-menu sub-menu-level-2">
+  <li *ngFor="let cat of category; let i = index">
+     <div class="sub-nav-link d-flex justify-content-between align-items-center">
+  <!-- Category Toggle -->
+  <a
+          [routerLink]="['/products', cat?._id]"
+        [queryParams]="{ categoryId: cat._id }"
+    class="sub-nav-link"
+    (click)="toggle(i, cat._id)" 
+    [attr.aria-controls]="'sub-' + i"
+    [attr.aria-expanded]="isOpen(i)"
+    data-bs-dismiss="offcanvas"
+  >
+  
+    <span>{{ cat.category_name }}</span>
+     </a>
+    <span 
+      class="btn-open-sub-" 
+      [class.open]="isOpen(i)" 
+      (click)="toggle(i, cat._id); $event.stopPropagation()"
+    ></span>
+ 
+  </div>
+
+  <!-- Sub Category Panel -->
+  <div [id]="'sub-' + i" class="collapse" [class.show]="isOpen(i)">
+    <ul class="sub-nav-menu sub-menu-level-2">
+      <!-- Show loader until data comes -->
+      <ng-container *ngIf="subCategories[cat._id] !== undefined; else loading">
+        <ng-container *ngIf="subCategories[cat._id].length > 0; else empty">
+          <li *ngFor="let sub of subCategories[cat._id]">
+            <a
+              [routerLink]="['/subcategory-product', sub?._id]"
+              [queryParams]="{ subcategoryId: sub._id }"
+              class="sub-nav-link"
+              data-bs-dismiss="offcanvas"
+            >
+              {{ sub.subCategoryName }}
+            </a>
+          </li>
+        </ng-container>
+      </ng-container>
+
+      <!-- Loader Template -->
+      <ng-template #loading>
+        <li class="px-3 py-2 text-muted">Loading...</li>
+      </ng-template>
+
+      <!-- Empty Template -->
+      <ng-template #empty>
+        <li class="px-3 py-2 text-muted">No subcategories</li>
+      </ng-template>
+    </ul>
+  </div>
+</li>
+    </ul>
+  </div>
+</li>
+
+
+
+
+
+
+
+      <li class="nav-mb-item" routerLinkActive="active">
+        <a routerLink="/catalogue" class="mb-menu-link" data-bs-dismiss="offcanvas">Catalogue</a>
+      </li>
+      <li class="nav-mb-item" routerLinkActive="active">
+        <a routerLink="/e-catalogue" class="mb-menu-link" data-bs-dismiss="offcanvas">E-Catalogue</a>
+      </li>
+      <!-- <li class="nav-mb-item" routerLinkActive="active">
+        <a routerLink="/pr" class="mb-menu-link" data-bs-dismiss="offcanvas">PR</a>
+      </li> -->
+      <li class="nav-mb-item" routerLinkActive="active">
+        <a routerLink="/contact-us" class="mb-menu-link" data-bs-dismiss="offcanvas">Contact Us</a>
+      </li>
+    </ul>
+  </div>
+</div>

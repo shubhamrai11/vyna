@@ -1,0 +1,65 @@
+<!-- <div class="page-title" style="background-image: url(assets/images/faq.png);" *ngIf="terms">
+  <div class="container-full">
+    <div class="row">
+      <div class="col-12">
+        <h3 class="heading text-center text-white">{{ terms.title }}</h3>
+        <ul class="breadcrumbs d-flex align-items-center justify-content-center">
+          <li>
+            <a class="link text-white" routerLink="">Home</a>
+          </li>
+          <li class="text-white">
+            <i class="icon-arrRight"></i>
+          </li>
+          <li class="text-white">
+            {{ terms.role }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+    <div class="" >
+        <img src="./assets/images/terms-and-condition-banner.png" width="100%" alt="">
+            <div class="container-full">
+                <div class="row">
+                    <div class="col-12">
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<section class="flat-spacing pt-0 " *ngIf="terms">
+  <div class="container-fluid">
+     <div class="row">
+                    <div class="col-12">
+                       
+                        <ul class="breadcrumbs py-5 d-flex align-items-center">
+                            <li>
+                                <a class="link" routerLink="/">Home</a>
+                            </li>
+                          
+                            <li class="">
+                                <i class="icon-arrRight"></i>
+                            </li>
+                            <li class="">
+                            Terms & Conditions
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+    <!-- <h4 class="mb-4">{{ terms.title }}</h4> -->
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Bind HTML content dynamically -->
+        <div [innerHTML]="terms.content"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Show message if not found -->
+<div *ngIf="!terms" class="text-center py-5">
+  <p>No Terms and Conditions found.</p>
+</div>

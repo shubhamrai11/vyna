@@ -1,0 +1,917 @@
+/* ===========================
+   HERO SECTION
+   =========================== */
+.catalogue-hero {
+  background: linear-gradient(135deg, #181818 0%, #2d2d2d 50%, #181818 100%);
+  padding: 60px 0 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.catalogue-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(237, 28, 36, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.catalogue-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(237, 28, 36, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title .font-light {
+  font-weight: 300;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  color: #a0a0a0;
+  max-width: 600px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px 36px;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ed1c24;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #a0a0a0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ===========================
+   QUICK NAVIGATION TABS
+   =========================== */
+.catalogue-nav-section {
+  background: #ffffff;
+  border-bottom: 1px solid #e9e9e9;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.catalogue-nav-wrapper {
+  padding: 0;
+}
+
+.catalogue-nav-scroll {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding: 14px 0;
+}
+
+.catalogue-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border: 1px solid #e9e9e9;
+  border-radius: 50px;
+  background: #ffffff;
+  color: #181818;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.catalogue-nav-btn:hover {
+  background: #f7f7f7;
+  border-color: #181818;
+}
+
+.catalogue-nav-btn.active {
+  background: #ed1c24;
+  border-color: #ed1c24;
+  color: #ffffff;
+}
+
+.catalogue-nav-btn.active .nav-icon {
+  color: #ffffff;
+}
+
+.nav-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #a0a0a0;
+  transition: color 0.25s ease;
+}
+
+.catalogue-nav-btn:hover .nav-icon {
+  color: #181818;
+}
+
+/* ===========================
+   LOADING STATE
+   =========================== */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+  gap: 16px;
+  color: #a0a0a0;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e9e9e9;
+  border-top-color: #ed1c24;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===========================
+   CATALOGUE SECTIONS
+   =========================== */
+.catalogue-sections {
+  padding: 0;
+}
+
+.catalogue-section {
+  padding: 48px 0;
+}
+
+.catalogue-section.alt-bg {
+  background: #ffffff;
+}
+
+.catalogue-section.alt-bg .catalogue-card {
+  border-color: #e2e2e2;
+}
+
+/* Section Header */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+.section-header-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  flex: 1;
+}
+
+.section-icon-wrapper {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #ed1c24 0%, #c41219 100%);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.section-icon {
+  font-size: 26px;
+  width: 26px;
+  height: 26px;
+  color: #ffffff;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #181818;
+  margin: 0 0 4px;
+  line-height: 1.25;
+}
+
+.section-subtitle {
+  font-size: 14px;
+  color: #a0a0a0;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.section-count {
+  font-size: 13px;
+  font-weight: 500;
+  color: #a0a0a0;
+  background: #f0f0f0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+/* ===========================
+   CATALOGUE CARDS GRID
+   =========================== */
+.catalogue-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.catalogue-card {
+  display: flex;
+  align-items: stretch;
+  background: #ffffff;
+  border: 1px solid #e9e9e9;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.catalogue-card:hover {
+  border-color: #ed1c24;
+  box-shadow: 0 8px 30px rgba(237, 28, 36, 0.1);
+  transform: translateY(-2px);
+}
+
+.catalogue-card:focus-visible {
+  outline: 2px solid #ed1c24;
+  outline-offset: 2px;
+}
+
+/* Card Icon Area */
+.card-icon-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: #fafafa;
+  border-right: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.pdf-icon-wrapper {
+  width: 50px;
+  height: 50px;
+}
+
+.pdf-svg-icon {
+  width: 100%;
+  height: 100%;
+}
+
+/* Card Content */
+.card-content {
+  flex: 1;
+  padding: 16px 14px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #181818;
+  margin: 0 0 4px;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-description {
+  font-size: 13px;
+  color: #a0a0a0;
+  margin: 0;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card Action */
+.card-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  flex-shrink: 0;
+}
+
+.download-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: #f7f7f7;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+
+.catalogue-card:hover .download-btn {
+  background: #ed1c24;
+}
+
+.download-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #181818;
+  transition: color 0.25s ease;
+}
+
+.catalogue-card:hover .download-icon {
+  color: #ffffff;
+}
+
+.download-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #181818;
+  transition: color 0.25s ease;
+  white-space: nowrap;
+}
+
+.catalogue-card:hover .download-text {
+  color: #ffffff;
+}
+
+/* ===========================
+   CTA SECTION
+   =========================== */
+.catalogue-cta {
+  padding: 60px 0;
+  background: #f7f7f7;
+}
+
+.cta-inner {
+  text-align: center;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #181818;
+  margin-bottom: 12px;
+}
+
+.cta-subtitle {
+  font-size: 15px;
+  color: #a0a0a0;
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 14px 36px;
+  background: #ed1c24;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  border: 2px solid #ed1c24;
+}
+
+.cta-button:hover {
+  background: transparent;
+  color: #ed1c24;
+}
+
+/* ===========================
+   DESKTOP XL (≥1400px)
+   =========================== */
+@media (min-width: 1400px) {
+  .catalogue-hero {
+    padding: 70px 0 60px;
+  }
+
+  .hero-title {
+    font-size: 48px;
+  }
+
+  .hero-subtitle {
+    font-size: 17px;
+    max-width: 650px;
+  }
+
+  .catalogue-section {
+    padding: 56px 0;
+  }
+
+  .catalogue-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .card-title {
+    font-size: 15px;
+    white-space: normal;
+  }
+
+  .section-title {
+    font-size: 26px;
+  }
+
+  .catalogue-nav-scroll {
+    gap: 10px;
+    padding: 16px 0;
+  }
+
+  .catalogue-nav-btn {
+    padding: 11px 26px;
+    font-size: 14.5px;
+  }
+}
+
+/* ===========================
+   DESKTOP LG (1200px–1399px)
+   =========================== */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .catalogue-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .card-title {
+    white-space: normal;
+  }
+}
+
+/* ===========================
+   DESKTOP MD (1024px–1199px)
+   =========================== */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .catalogue-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .hero-title {
+    font-size: 38px;
+  }
+
+  .download-text {
+    display: none;
+  }
+
+  .card-action {
+    padding: 0 14px;
+  }
+}
+
+/* ===========================
+   TABLET (768px–1023px)
+   =========================== */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .catalogue-hero {
+    padding: 48px 0 40px;
+  }
+
+  .hero-title {
+    font-size: 34px;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+    max-width: 500px;
+    margin-bottom: 26px;
+  }
+
+  .hero-stats {
+    padding: 14px 28px;
+    gap: 22px;
+  }
+
+  .stat-number {
+    font-size: 24px;
+  }
+
+  .catalogue-nav-scroll {
+    gap: 6px;
+    padding: 12px 0;
+  }
+
+  .catalogue-nav-btn {
+    padding: 9px 16px;
+    font-size: 13px;
+    gap: 6px;
+  }
+
+  .nav-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .catalogue-section {
+    padding: 40px 0;
+  }
+
+  .section-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+  }
+
+  .section-icon-wrapper {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+  }
+
+  .section-icon {
+    font-size: 23px;
+    width: 23px;
+    height: 23px;
+  }
+
+  .section-title {
+    font-size: 20px;
+  }
+
+  .section-subtitle {
+    font-size: 13px;
+  }
+
+  .catalogue-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .card-icon-area {
+    padding: 14px;
+  }
+
+  .pdf-icon-wrapper {
+    width: 44px;
+    height: 44px;
+  }
+
+  .card-content {
+    padding: 14px 12px;
+  }
+
+  .card-title {
+    font-size: 13px;
+  }
+
+  .card-description {
+    font-size: 12px;
+    -webkit-line-clamp: 1;
+  }
+
+  .card-action {
+    padding: 0 12px;
+  }
+
+  .download-btn {
+    padding: 7px 12px;
+  }
+
+  .download-text {
+    display: none;
+  }
+
+  .catalogue-cta {
+    padding: 48px 0;
+  }
+
+  .cta-title {
+    font-size: 22px;
+  }
+}
+
+/* ===========================
+   MOBILE (≤767px)
+   =========================== */
+@media (max-width: 767px) {
+
+  /* --- Hero --- */
+  .catalogue-hero {
+    padding: 36px 0 28px;
+  }
+
+  .hero-title {
+    font-size: 26px;
+    margin-bottom: 12px;
+  }
+
+  .hero-subtitle {
+    font-size: 13px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    padding: 0 8px;
+  }
+
+  .hero-stats {
+    padding: 10px 20px;
+    gap: 16px;
+    border-radius: 10px;
+  }
+
+  .stat-number {
+    font-size: 20px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .stat-divider {
+    height: 28px;
+  }
+
+  /* --- Navigation Tabs ---
+     Wrapping grid: all buttons visible, no horizontal scroll
+  */
+  .catalogue-nav-section {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .catalogue-nav-scroll {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 0;
+    overflow: visible;
+  }
+
+  .catalogue-nav-btn {
+    padding: 7px 12px;
+    font-size: 12px;
+    gap: 4px;
+    border-radius: 20px;
+  }
+
+  .nav-icon {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+  }
+
+  /* --- Section Headers --- */
+  .catalogue-section {
+    padding: 28px 0;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+  }
+
+  .section-header-content {
+    gap: 12px;
+  }
+
+  .section-count {
+    margin-left: 0;
+    font-size: 12px;
+    padding: 4px 12px;
+  }
+
+  .section-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .section-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .section-title {
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+
+  .section-subtitle {
+    font-size: 12px;
+  }
+
+  /* --- Card Grid: single column --- */
+  .catalogue-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .catalogue-card {
+    border-radius: 12px;
+  }
+
+  .card-icon-area {
+    padding: 12px;
+  }
+
+  .pdf-icon-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-content {
+    padding: 12px 10px;
+  }
+
+  .card-title {
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+
+  .card-description {
+    font-size: 11px;
+    -webkit-line-clamp: 1;
+  }
+
+  .card-action {
+    padding: 0 10px;
+  }
+
+  .download-btn {
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+
+  .download-text {
+    display: none;
+  }
+
+  .download-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  /* --- CTA --- */
+  .catalogue-cta {
+    padding: 36px 0;
+  }
+
+  .cta-inner {
+    padding: 0 8px;
+  }
+
+  .cta-title {
+    font-size: 19px;
+  }
+
+  .cta-subtitle {
+    font-size: 13px;
+    margin-bottom: 22px;
+  }
+
+  .cta-button {
+    padding: 11px 26px;
+    font-size: 13px;
+  }
+}
+
+/* ===========================
+   SMALL MOBILE (≤400px)
+   =========================== */
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: 22px;
+  }
+
+  .hero-subtitle {
+    font-size: 12px;
+  }
+
+  .hero-stats {
+    padding: 8px 14px;
+    gap: 12px;
+  }
+
+  .stat-number {
+    font-size: 18px;
+  }
+
+  .stat-label {
+    font-size: 9px;
+  }
+
+  .stat-divider {
+    height: 24px;
+  }
+
+  .catalogue-nav-btn {
+    padding: 6px 10px;
+    font-size: 11px;
+    gap: 3px;
+  }
+
+  .nav-icon {
+    font-size: 12px;
+    width: 12px;
+    height: 12px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+
+  .card-title {
+    font-size: 12px;
+  }
+
+  .card-description {
+    display: none;
+  }
+
+  .card-icon-area {
+    padding: 10px;
+  }
+
+  .pdf-icon-wrapper {
+    width: 36px;
+    height: 36px;
+  }
+
+  .card-content {
+    padding: 10px 8px;
+  }
+
+  .cta-title {
+    font-size: 17px;
+  }
+}

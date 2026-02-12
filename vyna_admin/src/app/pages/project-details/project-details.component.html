@@ -1,0 +1,214 @@
+<body class="ltr main-body leftmenu">
+
+
+	<!-- Page -->
+	<div class="page">
+
+
+		<div class="main-header side-header sticky">
+			<div class="main-container container-fluid">
+				<div class="main-header-left">
+					<a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
+					<div class="hor-logo">
+						<a class="main-logo" [routerLink]="['/pages/dashboard']">
+							<img src="./assets/img/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
+							<img src="./assets/img/brand/logo-light.png" class="header-brand-img desktop-logo-dark"
+								alt="logo">
+						</a>
+					</div>
+				</div>
+				<div class="main-header-center">
+					<div class="responsive-logo">
+						<a [routerLink]="['/pages/dashboard']"><img src="./assets/img/brand/logo.png"
+								class="mobile-logo" alt="logo"></a>
+						<a [routerLink]="['/pages/dashboard']"><img src="./assets/img/brand/logo-light.png"
+								class="mobile-logo-dark" alt="logo"></a>
+					</div>
+					<div class="input-group">
+						<h5><i>Projects / Details</i> </h5>
+					</div>
+				</div>
+				<div class="main-header-right">
+					<button class="navbar-toggler navresponsive-toggler" type="button" data-bs-toggle="collapse"
+						data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+					</button><!-- Navresponsive closed -->
+					<div
+						class="navbar navbar-expand-lg  nav nav-item  navbar-nav-right responsive-navbar navbar-dark  ">
+						<div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+							<div class="d-flex order-lg-2 ms-auto">
+								<!-- Search -->
+
+								<app-header></app-header>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Sidemenu -->
+		<app-sidebar></app-sidebar>
+		<!-- End Sidemenu -->
+
+		<!-- Main Content-->
+		<div class="main-content side-content pt-0">
+
+			<div class="main-container container-fluid">
+				<div class="inner-body">
+					<!-- Page Header -->
+					<div class="page-header d-flex mt-1">
+						<div>
+
+						</div>
+						<div class="d-flex">
+							<div class="d-flex justify-content-center gap-3 align-items-center">
+								<div class="text-center btn-list">
+									<a [routerLink]="['/pages/project']" class="btn ripple btn-primary"><i
+											class="ion-md-arrow-back" aria-hidden="true"></i> Retour liste des
+										projets</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row row-sm">
+						<div class="col-lg-12 col-md-12">
+							<div class="card custom-card productdesc">
+								<div class="card-body h-100">
+									<div class="row">
+										<div class="col-xl-6 col-lg-12 col-md-12">
+											<div class="row">
+												<!-- Thumbnails Section -->
+												<div class="col-2">
+													<div class="clearfix carousel-slider">
+														<div id="thumbcarousel" class="carousel slide"
+															data-bs-interval="false">
+															<div class="carousel-inner">
+																<!-- Single carousel-item with all thumbnails -->
+																<div class="carousel-item active">
+																	<div *ngFor="let image of imageList; let i = index"
+																		data-bs-target="#carousel"
+																		[attr.data-bs-slide-to]="i" class="thumb my-2">
+																		<img [src]="image.data ? ('data:image/jpeg;base64,' + image.data) : './assets/images/featured-properties-15-480x287.jpg'"
+																			alt="img" class="img-fluid mx-auto d-block">
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<!-- Main Carousel Section -->
+												<div class="col-md-10 col-sm-9 col-8">
+													<div class="product-carousel">
+														<div id="carousel" class="carousel slide"
+															data-bs-ride="carousel">
+															<div class="carousel-inner">
+																<!-- Loop through images for main display -->
+																<div *ngFor="let image of imageList; let i = index"
+																	class="carousel-item"
+																	[ngClass]="{'active': i === 0}">
+																	<img [src]="image.data ? ('data:image/jpeg;base64,' + image.data) : './assets/images/featured-properties-15-480x287.jpg'"
+																		alt="img" class="img-fluid mx-auto d-block">
+																</div>
+															</div>
+														</div>
+														<div class="text-center mt-4 mb-4 btn-list">
+															<div [routerLink]="['/pages/import-well', projectData?.id]"
+																class="btn ripple btn-primary">
+																<i class="fe fe-download-cloud me-2 fs-14"></i> Importer
+																bien
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+										<div class="col-xl-6 col-lg-12 col-md-12">
+											<div class="d-flex justify-content-between align-items-center mb-4">
+												<h4 class="">{{projectData?.nom}}</h4>
+												<div [routerLink]="['/pages/add-well',projectData?.id]"
+													class="btn ripple btn-primary"><i class="fe fe-plus me-2 fs-14"></i>
+													Ajouter bien </div>
+											</div>
+											<div class="start-end-date">
+												<p class="text-muted  ">
+													<b>Start Date :</b> {{projectData?.dateDebut}}
+												</p>
+												<p class="text-muted mb-4">
+													<b>End Date :</b>{{projectData?.dateFinPrevue}}
+												</p>
+											</div>
+											<h5 class="text-muted mb-4"><b>Surface Area :</b>
+												{{projectData?.nbreBienParDossier}}
+											</h5>
+											<h6 class="mt-4 fs-16">Description</h6>
+											<p>{{projectData?.description}}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-12 col-md-12">
+						<div class="card custom-card">
+							<div class="card-body h-100">
+								<div class="d-flex justify-content-between align-items-center mb-4">
+									<h6 class="main-content-label mb-0">Associated properties</h6>
+									<div [routerLink]="['/pages/project-list', projectData?.id]"
+										class="btn ripple btn-primary"><i class="fe fe-list me-2 fs-14"></i> Liste des
+										biens </div>
+								</div>
+
+								<div #owlCarousel id="owl-demo2" class="owl-carousel owl-carousel-icons2">
+									<div class="item" *ngFor="let property of associateProperty ; let i = index">
+										<div class="card custom-card">
+											<div class="p-0 ht-100p">
+												<div class="product-grid">
+													<div class="product-image">
+														<div [routerLink]="['/pages/project-details', projectData?.id]"
+															class="image">
+															<!-- <img class="pic-1" alt="product-image-1"
+																src="./assets/images/featured-properties-33-480x287.jpg"> -->
+															<img [src]="imageList && imageList.length > 0 
+                    ? ('data:image/jpeg;base64,' + imageList[i % imageList.length].data)
+                    : './assets/images/featured-properties-15-480x287.jpg'" alt="img" class="img-fluid mx-auto d-block">
+														</div>
+														<span class="product-discount-label">{{property?.projet?.statut
+															}}</span>
+													</div>
+													<div class="product-content border">
+														<h3 class="title">
+															<div
+																[routerLink]="['/pages/project-details', projectData?.id]">
+																{{ property?.projet?.nom }}</div>
+														</h3>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- End Row -->
+			</div>
+		</div>
+		<!-- End Main Content-->
+
+		<!-- Main Footer-->
+		<app-footer></app-footer>
+		<!--End Footer-->
+
+
+
+	</div>
+	<!-- End Page -->

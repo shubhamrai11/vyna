@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html xml:lang="en-US" lang="en-US">
+
+
+<head>
+    <meta charset="utf-8">
+    <title> VYNA Electric</title>
+    <base href="/">
+    <meta name="author" content="themesflat.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="./assets/fonts/fonts.css">
+    <link rel="stylesheet" href="./assets/fonts/font-icons.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/image-compare-viewer.min.css">
+    <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="./assets/css/drift-basic.min.css">
+    <link rel="stylesheet" href="./assets/css/photoswipe.css">
+    <link rel="stylesheet" href="./assets/css/animate.css">
+    <link rel="stylesheet" href="./assets/css/sib-styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/font/flaticon.css" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&a… rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Favicon and Touch Icons  -->
+    <link rel="shortcut icon" href="./assets/images/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="./assets/images/favicon.png">
+
+</head>
+
+<body>
+
+
+
+    <!-- Scroll Top -->
+    <button id="scroll-top">
+        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_15741_24194)">
+                <path
+                    d="M3 11.9175L12 2.91748L21 11.9175H16.5V20.1675C16.5 20.3664 16.421 20.5572 16.2803 20.6978C16.1397 20.8385 15.9489 20.9175 15.75 20.9175H8.25C8.05109 20.9175 7.86032 20.8385 7.71967 20.6978C7.57902 20.5572 7.5 20.3664 7.5 20.1675V11.9175H3Z"
+                    stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+            <defs>
+                <clipPath id="clip0_15741_24194">
+                    <rect width="24" height="24" fill="white" transform="translate(0 0.66748)" />
+                </clipPath>
+            </defs>
+        </svg>
+    </button>
+
+
+
+
+
+
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="./assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="./assets/js/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="./assets/js/carousel.js"></script>
+    <script type="text/javascript" src="./assets/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="./assets/js/lazysize.min.js"></script>
+    <script type="text/javascript" src="./assets/js/count-down.js"></script>
+    <script type="text/javascript" src="./assets/js/wow.min.js"></script>
+    <script type="text/javascript" src="./assets/js/multiple-modal.js"></script>
+    <script type="text/javascript" src="./assets/js/drift.min.js"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="./assets/js/nouislider.min.js"></script>
+    <script type="text/javascript" src="./assets/js/shop.js"></script>
+    <script type="module" src="./assets/js/model-viewer.min.js"></script>
+    <script type="module" src="./assets/js/zoom.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.6/dist/js/splide.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+
+
+    <script>
+        // Initialize map
+        const map = L.map('dealerMap').setView([28.6139, 77.2090], 11);
+
+        // Add tile layer (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Custom icon
+        const dealerIcon = L.icon({
+            iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        });
+
+        // Add markers for each dealer
+        document.querySelectorAll('.dealer-card').forEach(card => {
+            const lat = parseFloat(card.dataset.lat);
+            const lng = parseFloat(card.dataset.lng);
+            const name = card.querySelector('.dealer-name').textContent;
+            const address = card.querySelector('.dealer-address').textContent.trim().replace(/\n/g, '<br>');
+
+            const marker = L.marker([lat, lng], { icon: dealerIcon }).addTo(map)
+                .bindPopup(`<b>${name}</b><br>${address}`);
+
+            // Highlight card when marker is clicked
+            marker.on('click', function () {
+                document.querySelectorAll('.dealer-card').forEach(c => c.style.backgroundColor = '');
+                card.style.backgroundColor = '#f0f7ff';
+                card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+
+            // Highlight marker when card is clicked
+            card.addEventListener('click', function () {
+                map.setView([lat, lng], 15);
+                marker.openPopup();
+            });
+        });
+
+        // Form submission handler
+        document.getElementById('dealerSearchForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // In a real implementation, you would filter dealers based on search criteria
+            alert('Search functionality would filter dealers based on your criteria in a real implementation');
+        });
+    </script>
+    <script>
+
+        gsap.registerPlugin(ScrollTrigger);
+
+
+        // Media query helper function
+        function isAboveMinWidth() {
+            return window.innerWidth > 500;
+        }
+
+        // Initialize stacking navigation
+        function initStackingNav() {
+            const cards = document.querySelectorAll(".stack_card-copy");
+            if (!cards) return;
+
+            cards.forEach((card, index) => {
+                let previousCard = card.previousElementSibling;
+
+                // Create the timeline but pause it initially
+                let tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 65%",
+                        end: "top top",
+                        scrub: 1,
+                        onUpdate: (self) => {
+                            // Only apply animation if screen width is above 500px
+                            if (!isAboveMinWidth()) {
+                                // Reset the card to its original state
+                                gsap.set(previousCard, {
+                                    scale: 1,
+                                    filter: "blur(0px)",
+                                    y: 0
+                                });
+                            }
+                        }
+                    }
+                });
+
+                // Add the animation
+                tl.fromTo(previousCard,
+                    {
+                        scale: 1,
+                        filter: "blur(0px)",
+                        y: 0
+                    },
+                    {
+                        scale: () => isAboveMinWidth() ? 0.85 : 1,
+                        filter: "blur(0px)",
+                        y: () => isAboveMinWidth() ? -80 + (index * 20) : 0
+                    }
+                );
+            });
+        }
+
+        // Initialize animation
+        initStackingNav();
+
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                // Refresh ScrollTrigger and reinitialize on resize
+                ScrollTrigger.refresh();
+                initStackingNav();
+            }, 250);
+        });
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var thumbsSwiper = new Swiper('.tf-product-media-thumbs', {
+                direction: 'vertical',
+                spaceBetween: 10,
+                slidesPerView: 4,
+                watchSlidesProgress: true,
+            });
+
+            var mainSwiper = new Swiper('.tf-product-media-main', {
+                spaceBetween: 10,
+                thumbs: {
+                    swiper: thumbsSwiper
+                }
+            });
+        });
+
+
+
+
+    </script>
+    <app-root></app-root>
+</body>
+
+
+</html>

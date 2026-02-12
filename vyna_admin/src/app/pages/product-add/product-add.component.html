@@ -1,0 +1,749 @@
+<body class="ltr main-body leftmenu">
+    <div class="page">
+        <!-- Main Header -->
+        <div class="main-header side-header sticky">
+            <div class="main-container container-fluid">
+                <div class="main-header-left">
+                    <a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
+                    <div class="hor-logo">
+
+                    </div>
+                </div>
+                <div class="main-header-center">
+                    <div class="responsive-logo">
+
+                    </div>
+                    <div class="input-group">
+                        <h3 *ngIf="!isEdit">Add Product</h3>
+                        <h3 *ngIf="isEdit">Edit Product</h3>
+                    </div>
+                </div>
+                <div class="main-header-right">
+                    <button class="navbar-toggler navresponsive-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fe fe-more-vertical header-icons navbar-toggler-icon"></i>
+                    </button>
+                    <div class="navbar navbar-expand-lg nav nav-item navbar-nav-right responsive-navbar navbar-dark">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                            <div class="d-flex order-lg-2 ms-auto">
+                                <app-header></app-header>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Header -->
+
+        <!-- Sidemenu -->
+        <app-sidebar></app-sidebar>
+        <!-- End Sidemenu -->
+
+        <!-- Main Content -->
+        <div class="main-content side-content pt-0">
+            <div class="main-container container-fluid">
+                <div class="inner-body">
+
+                    <!-- Page Header -->
+                    <div class="page-header d-flex align-items-center justify-content-between mt-3 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <button class="back-button" [routerLink]="['/pages/product']">
+                                <i class="fe fe-arrow-left me-1"></i> Back
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <!-- Product Form -->
+                    <div class="container mt-4" #formElement>
+                        <form [formGroup]="addAdditionalService"
+                            (ngSubmit)="isEdit ? updateAdditionalService() : addAdditionalServices()">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card custom-card shadow-sm">
+                                        <div class="card-body">
+                                            <div class="row">
+
+                                                <!-- Category Name -->
+                                                <div class="col-md-12 mb-3">
+                                                    <!-- Product Name -->
+
+                                                    <label>Product Name<span class="text-danger">*</span></label>
+                                                    <input class="form-control" placeholder="Enter Product Name"
+                                                        formControlName="productName" />
+                                                    <div class="text-danger"
+                                                        *ngIf="addAdditionalService.get('productName')?.touched && addAdditionalService.get('productName')?.invalid">
+                                                        Product name is required
+                                                    </div>
+                                                </div>
+
+                                                <!-- Description -->
+                                                <div class="col-md-12 mb-3">
+                                                    <label>Short Description</label>
+                                                    <angular-editor formControlName="short_description"
+                                                        [config]="config"></angular-editor>
+                                                    <div class="text-danger"
+                                                        *ngIf="addAdditionalService.get('short_description')?.touched && addAdditionalService.get('short_description')?.invalid">
+                                                        Short description is required
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 mb-3">
+                                                    <label>Description<span class="text-danger">*</span></label>
+                                                    <angular-editor formControlName="description"
+                                                        [config]="config"></angular-editor>
+                                                    <div class="text-danger"
+                                                        *ngIf="addAdditionalService.get('description')?.touched && addAdditionalService.get('description')?.invalid">
+                                                        Description is required
+                                                    </div>
+                                                </div>
+
+                                                <!-- Category -->
+                                                <div class="col-md-12 mb-3">
+                                                    <label>Category<span class="text-danger">*</span></label>
+                                                    <select class="form-control" formControlName="categoryId"
+                                                        (change)="getSubCategories($event)">
+                                                        <option value="" selected>Select Category</option>
+                                                        <option *ngFor="let cat of categoryList" [value]="cat._id"
+                                                            [hidden]="cat._id === addAdditionalService.get('categoryId')?.value">
+                                                            {{
+                                                            cat.category_name }}</option>
+                                                    </select>
+
+
+                                                    <div class="text-danger"
+                                                        *ngIf="addAdditionalService.get('categoryId')?.touched && addAdditionalService.get('categoryId')?.invalid">
+                                                        Category is required
+                                                    </div>
+                                                </div>
+
+                                                <!-- Subcategory -->
+                                                <div class="col-md-12 mb-3">
+                                                    <label>Subcategory<span class="text-danger">*</span></label>
+                                                    <select class="form-control" formControlName="subCategoryId">
+                                                        <option value="" disabled>Select Subcategory</option>
+                                                        <option *ngFor="let sub of subCategoryList" [value]="sub._id"
+                                                            [hidden]="sub._id === addAdditionalService.get('subCategoryId')?.value">
+                                                            {{
+                                                            sub.subCategoryName }}</option>
+                                                    </select>
+                                                    <div class="text-danger"
+                                                        *ngIf="addAdditionalService.get('subCategoryId')?.touched && addAdditionalService.get('subCategoryId')?.invalid">
+                                                        Subcategory is required
+                                                    </div>
+                                                    <div *ngIf="errorMessage" class="text-danger">
+                                                        {{errorMessage}}
+                                                    </div>
+
+                                                </div>
+                                                <!-- <div class="col-md-12 mb-3">
+                                                    <label>key Features<span class="text-danger">*</span></label>
+                                                    <angular-editor formControlName="keyFeatures"
+                                                        [config]="config"></angular-editor>
+                                                    <div class="text-danger"
+                                                        *ngIf="addAdditionalService.get('keyFeatures')?.touched && addAdditionalService.get('keyFeatures')?.invalid">
+                                                        Key features is required
+                                                    </div>
+                                                </div> -->
+                                                <!-- Specifications Table -->
+                                                <h4>Specifications</h4>
+                                                <div class="table-responsive">
+
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead class="table-primary">
+                                                            <tr>
+                                                                <th *ngIf="categoryName !== 'Switchgear'">Rated Wattage
+                                                                </th>
+                                                                <th *ngIf="categoryName !== 'Switchgear'">Lumen</th>
+                                                                <th *ngIf="categoryName !== 'Switchgear'">Shape</th>
+                                                                <th *ngIf="categoryName !== 'Switchgear'">Cut Out Size
+                                                                </th>
+                                                                <th *ngIf="categoryName !== 'Switchgear'">Power Factor
+                                                                </th>
+                                                                <th *ngIf="categoryName !== 'Switchgear'">Colour Temp
+                                                                </th>
+                                                                <th *ngIf="categoryName !== 'Switchgear'">Housing</th>
+                                                                <th *ngIf="categoryName !== 'Switchgear'">Beam Angle
+                                                                </th>
+                                                                <!-- <th>Swivel</th> -->
+                                                                <!-- <th>Price</th>
+                                                            <th>Qty</th> -->
+                                                                <th *ngIf="categoryName !== 'Switchgear'">Length (mm)
+                                                                </th>
+                                                                <th *ngIf="categoryName !== 'Switchgear'">Width (mm)
+                                                                </th>
+                                                                <th *ngIf="categoryName !== 'Switchgear'"> Protection
+                                                                    Class</th>
+                                                                <th *ngIf="categoryName !== 'Switchgear'">CRI</th>
+                                                                <th>Base</th>
+                                                                <th *ngIf="categoryName !== 'Switchgear'">Lumen (AC)
+                                                                </th>
+                                                                <th *ngIf="categoryName !== 'Switchgear'">Lumen(DC)</th>
+                                                                <th *ngIf="categoryName !== 'Switchgear'">Std Pkg</th>
+                                                                <th>Breaking Capacity</th>
+                                                                <th>MCB Type</th>
+                                                                <th>Curve</th>
+                                                                <th>Pole</th>
+                                                                <th>Ampere</th>
+                                                                <th>Sensitivity</th>
+                                                                <th>Door Type</th>
+                                                                <th>DB Type</th>
+                                                                <th>Phase</th>
+                                                                <th>Number of Way</th>
+                                                                <th>Module</th>
+                                                                <th>Type</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Standard
+                                                                    Conformity</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">No. of Pole</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Magnetic Release
+                                                                    Setting</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Method of
+                                                                    Mounting</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Rated
+                                                                    Operational Voltage</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Rated Current
+                                                                </th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Rated Frequency
+                                                                </th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Rated Short
+                                                                    Circuit Capacity</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Max Value of I²t
+                                                                </th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Rated Insulation
+                                                                    Voltage</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Rated Impulse
+                                                                    Withstands Voltage</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Material Group
+                                                                </th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">IP Category</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Ambient Temp
+                                                                </th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Tightening
+                                                                    Torque</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Dielectric Test
+                                                                    Voltage</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Energy Limiting
+                                                                    Class</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Vibration</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Installation
+                                                                    Position</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Bi-Connect
+                                                                    Terminal</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Line & Load
+                                                                    Terminal Capacity</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Resistance to
+                                                                    Shock</th>
+                                                                <th *ngIf="categoryName !== 'Lighting'">Endurance
+                                                                    (Mechanical/Electrical Cycles)</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody formArrayName="specification">
+                                                            <tr *ngFor="let spec of specifications.controls; let i = index"
+                                                                [formGroupName]="i">
+
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="ratedWattage"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                    <div class="text-danger"
+                                                                        *ngIf="spec.get('ratedWattage')?.touched && spec.get('ratedWattage')?.invalid">
+                                                                        Required
+                                                                    </div>
+                                                                </td>
+
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="lumen"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="shape"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                    <div class="text-danger"
+                                                                        *ngIf="spec.get('shape')?.touched && spec.get('shape')?.invalid">
+                                                                        Required
+                                                                    </div>
+                                                                </td>
+
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="cutOutSizeInmm"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="powerFactor"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="colourTemperature"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                    <div class="text-danger"
+                                                                        *ngIf="spec.get('colourTemperature')?.touched && spec.get('colourTemperature')?.invalid">
+                                                                        Required
+                                                                    </div>
+                                                                </td>
+
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="housing"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="beamAngle"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                    <div class="text-danger"
+                                                                        *ngIf="spec.get('beamAngle')?.touched && spec.get('beamAngle')?.invalid">
+                                                                        Required
+                                                                    </div>
+                                                                </td>
+
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="lengthInMm"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                    <div class="text-danger"
+                                                                        *ngIf="spec.get('lengthInMm')?.touched && spec.get('lengthInMm')?.invalid">
+                                                                        Required
+                                                                    </div>
+                                                                </td>
+
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="widthInMm"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                    <div class="text-danger"
+                                                                        *ngIf="spec.get('widthInMm')?.touched && spec.get('widthInMm')?.invalid">
+                                                                        Required
+                                                                    </div>
+                                                                </td>
+
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="protectionClass"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="cri" placeholder="Enter Value"
+                                                                        rows="2"></textarea>
+                                                                </td>
+
+                                                                <td>
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="base" placeholder="Enter Value"
+                                                                        rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="lumenAC"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="lumenDC"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td *ngIf="categoryName !== 'Switchgear'">
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="stdPkg"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                    <div class="text-danger"
+                                                                        *ngIf="spec.get('stdPkg')?.touched && spec.get('stdPkg')?.invalid">
+                                                                        Required
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="breaking_capacity"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td>
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="MCB_type"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td>
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="curve"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td>
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="pole" placeholder="Enter Value"
+                                                                        rows="2"></textarea>
+                                                                </td>
+
+                                                                <td>
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="ampere"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td>
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="sensitivity"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td>
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="door_type"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td>
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="DB_type"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td>
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="phase"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td>
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="number_of_way"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td>
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="module"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+
+                                                                <td>
+                                                                    <textarea class="form-control spec-input"
+                                                                        formControlName="type" placeholder="Enter Value"
+                                                                        rows="2"></textarea>
+                                                                </td>
+
+
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="standardConformity"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="noOfPole"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="magneticReleaseSetting"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="methodOfMounting"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="ratedOperationalVoltage"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="ratedCurrent"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="ratedFrequency"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="ratedShortCircuitCapacity"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="maxValueOfI2t"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="ratedInsulationVoltage"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="ratedImpulseWithstandsVoltage"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="materialGroup"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="ipCategory"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="ambientTemp"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="tighteningTorque"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="dielectricTestVoltage"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="energyLimitingClass"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="vibration"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="installationPosition"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="biConnectTerminal"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input1"
+                                                                        formControlName="lineAndLoadTerminalCapacity"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input"
+                                                                        formControlName="resistanceToShock"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td *ngIf="categoryName !== 'Lighting'"><textarea
+                                                                        class="form-control spec-input1"
+                                                                        formControlName="enduranceMechanicalElectricalCycles"
+                                                                        placeholder="Enter Value" rows="2"></textarea>
+                                                                </td>
+                                                                <td>
+                                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                                        (click)="removeSpecification(i)">Remove</button>
+                                                                </td>
+
+                                                            </tr>
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+
+                                                <button type="button" class="btn btn-primary mb-3"
+                                                    (click)="addSpecification()">+ Add Specification</button>
+
+
+                                                <!-- Color Temperature Table -->
+                                                <h4>Color Temperature</h4>
+                                                <table class="table table-bordered table-striped">
+                                                    <thead class="table-info">
+                                                        <tr>
+                                                            <th>
+                                                                {{ categoryName === 'Lighting' ? 'Watt' :
+                                                                categoryName === 'Switchgear' ? 'Ampere' : 'Watt' }}
+                                                            </th>
+                                                            <th>Image</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody formArrayName="colorTemperature">
+                                                        <tr *ngFor="let ct of colorTemperature.controls; let i = index"
+                                                            [formGroupName]="i">
+                                                            <td>
+                                                                <input type="text" class="form-control"
+                                                                    formControlName="watt" placeholder="Enter Watt" />
+                                                                <div class="text-danger"
+                                                                    *ngIf="ct.get('watt')?.touched && ct.get('watt')?.invalid">
+                                                                    Watt is required
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <input type="file" accept="image/*" class="form-control"
+                                                                    (change)="onIconUpload($event, i)" />
+                                                                <div class="text-danger"
+                                                                    *ngIf="ct.get('image')?.touched && ct.get('image')?.invalid">
+                                                                    Image is required
+                                                                </div>
+                                                                <div *ngIf="ct.get('image')?.value" class="mt-1">
+                                                                    <img [src]="ct.get('image')?.value" alt="Preview"
+                                                                        width="60" height="60" class="border rounded" />
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-danger btn-sm"
+                                                                    (click)="colorTemperature.removeAt(i)">Remove</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary mb-3"
+                                                    (click)="addColorTempature()">+ Add Color Temperature</button>
+
+
+
+                                                <!-- Color Table -->
+                                                <h4>Colors</h4>
+                                                <table class="table table-bordered table-striped">
+                                                    <thead class="table-warning">
+                                                        <tr>
+                                                            <th>Color Name</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody formArrayName="color">
+                                                        <tr *ngFor="let clr of color.controls; let i = index"
+                                                            [formGroupName]="i">
+                                                            <td>
+                                                                <input type="color" class="form-control"
+                                                                    formControlName="name" />
+                                                                <div class="text-danger"
+                                                                    *ngIf="clr.get('name')?.touched && clr.get('name')?.invalid">
+                                                                    Color is required
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-danger btn-sm"
+                                                                    (click)="color.removeAt(i)">Remove</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-primary mb-3"
+                                                    (click)="addColor()">+ Add Color</button>
+
+                                                <!-- Upload Images -->
+                                                <div class="mb-3">
+                                                    <label>Upload Images<span class="text-danger">*</span></label>
+                                                    <input type="file" accept="image/*" class="form-control"
+                                                        (change)="onImageSelected($event)" multiple />
+                                                    <div class="text-danger"
+                                                        *ngIf="(!uploadedFiles.length && !imagesPreview.length) && addAdditionalService.touched">
+                                                        At least one product image is required
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- Selected Previews -->
+                                                <div class="mb-3">
+                                                    <label class="form-label">Selected Images Preview</label>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <div *ngFor="let img of selectedImages"
+                                                            class="position-relative">
+                                                            <img [src]="img" class="rounded border shadow-sm"
+                                                                style="width: 100px; height: 100px; object-fit: cover;" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Uploaded Images -->
+                                                <div *ngIf="imagesPreview?.length" class="mb-3">
+                                                    <label class="form-label">Uploaded Images</label>
+                                                    <div class="d-flex overflow-auto gap-3"
+                                                        style="white-space: nowrap;">
+                                                        <div *ngFor="let img of imagesPreview"
+                                                            class="d-flex flex-column align-items-center">
+                                                            <img [src]="img.url" class="rounded border shadow-sm"
+                                                                style="width: 100px; height: 100px; object-fit: cover;" />
+                                                            <button type="button" (click)="removeImage(img)"
+                                                                class="btn btn-outline-danger btn-sm mt-1">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <div class="mb-3">
+                                                    <label>Upload Images 1<span class="text-danger">*</span></label>
+                                                    <input type="file" accept="image/*" class="form-control"
+                                                        (change)="onImageSelected1($event)" multiple />
+                                                    <div class="text-danger"
+                                                        *ngIf="(!uploadedFiles1.length && !imagesPreview1.length) && addAdditionalService.touched">
+                                                        At least one product image is required
+                                                    </div>
+
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Selected Images Preview 1</label>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <div *ngFor="let img of selectedImages1"
+                                                            class="position-relative">
+                                                            <img [src]="img" class="rounded border shadow-sm"
+                                                                style="width: 100px; height: 100px; object-fit: cover;" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="imagesPreview1?.length" class="mb-3">
+                                                    <label class="form-label">Uploaded Images 1</label>
+                                                    <div class="d-flex overflow-auto gap-3"
+                                                        style="white-space: nowrap;">
+                                                        <div *ngFor="let img of imagesPreview1"
+                                                            class="d-flex flex-column align-items-center">
+                                                            <img [src]="img.url" class="rounded border shadow-sm"
+                                                                style="width: 100px; height: 100px; object-fit: cover;" />
+                                                            <button type="button" (click)="removeImage1(img)"
+                                                                class="btn btn-outline-danger btn-sm mt-1">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+
+                                                <!-- Submit Buttons -->
+                                                <div class="d-flex justify-content-end pt-3">
+                                                    <button type="submit" class="btn btn-outline-primary"
+                                                        [disabled]="isSubmitting">
+                                                        <i class="fe fe-save me-1"></i> {{ isEdit ? 'Update ' : 'Add' }}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <!-- End Form -->
+                </div>
+            </div>
+        </div>
+        <!-- End Main Content -->
+
+        <!-- Footer -->
+        <app-footer></app-footer>
+    </div>
+</body>
